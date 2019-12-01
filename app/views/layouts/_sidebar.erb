@@ -1,0 +1,69 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+  <a href="index3.html" class="brand-link">
+    <span class="brand-text font-weight-light"><%= image_tag("cargomind.jpeg", height: '65',class:"mx-auto d-block") %></span>
+    
+  </a>
+<!-- Sidebar -->
+  <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 652px;"><div class="sidebar" style="min-height: 652px; overflow: hidden; width: auto; height: 652px;">
+    <!-- Sidebar user panel (optional) -->
+<!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
+        <% if current_admin %>
+        <li class="nav-item has-treeview menu-open">
+          <%= link_to(admins_path, class:"nav-link active") do %>
+            <i class="nav-icon fas fa-home"></i>
+            <p>Dashboard</p>
+          <% end %>
+        </li>
+        <li class="nav-item has-treeview menu-open">
+          <%= link_to(admins_path, class:"nav-link active") do %>
+            <i class="nav-icon fas fa-truck"></i>
+            <p>Shipment<i class="right fas fa-angle-left"></i></p>
+          <% end %>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <%= link_to(admins_manage_shipments_path, class:"nav-link active") do %>
+                <i class="far fa-file nav-icon"></i>
+                <p>Order Listing</i></p>
+              <% end %>
+            </li>
+          </ul>
+        </li>
+        <% elsif current_user %>
+        <li class="nav-item has-treeview menu-open">
+          <%= link_to(users_path, class:"nav-link active") do %>
+            <i class="nav-icon fas fa-home"></i>
+            <p>Dashboard</p>
+          <% end %>
+        </li>
+        <li class="nav-item has-treeview menu-open">
+          <%= link_to(users_path, class:"nav-link active") do %>
+            <i class="nav-icon fas fa-truck"></i>
+            <p>Shipment<i class="right fas fa-angle-left"></i></p>
+          <% end %>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <%= link_to(new_users_manage_shipment_path, class:"nav-link active") do %>
+                <i class="far fa-plus-square nav-icon"></i>
+                <p>Create RFQ</i></p>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to(users_manage_shipments_path, class:"nav-link active") do %>
+                <i class="far fa-file nav-icon"></i>
+                <p>Order Listing</i></p>
+              <% end %>
+            </li>
+          </ul>
+        </li>
+        <% end %>
+      </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>

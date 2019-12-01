@@ -1,0 +1,206 @@
+<section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Shipments</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><%= link_to "Dashboard" , users_path %></li>
+              <li class="breadcrumb-item"><%= link_to "Shipments" , users_manage_shipments_path %></li>
+              <li class="breadcrumb-item active">Order 1</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <section class="content">
+    
+        <div class="row">
+            <div class="col-9">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Details Shipments</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fas fa-minus"></i></button>
+                    </div>
+                    </div>
+                    <div class="card-body">
+                    <form role="form-horizontal ">
+                      <div class="form-group row">
+                        <label for="date" class="col-sm-2 col-form-label">Date :</label>
+                         <div class="col-sm-10">
+                        <input type="date" class="form-control" id="date" placeholder="Enter Date">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="port_of_discharge" class="col-sm-2 col-form-label">To :</label>
+                         <div class="col-sm-10">
+                        <input type="input" class="form-control" id="port_of_discharge" placeholder="Enter To">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="port_of_discharge" class="col-sm-2 col-form-label">Attn :</label>
+                        <div class="col-sm-10">
+                        <input type="input" class="form-control" id="port_of_discharge" placeholder="Enter Attn">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="port_of_discharge" class="col-sm-2 col-form-label">Booking No :</label>
+                        <div class="col-sm-10">
+                        <input type="input" class="form-control" id="port_of_discharge" placeholder="Enter Booking No">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="shipper" class="col-sm-2 col-form-label">Shipper :</label>
+                        <div class="col-sm-10">
+                        <textarea class="form-control" rows="5" id="shipper"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="consignee" class="col-sm-2 col-form-label">Consignee :</label>
+                        <div class="col-sm-10">
+                        <textarea class="form-control" rows="5" id="consignee"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="port_of_loading" class="col-sm-2 col-form-label">Port Of Loading :</label>
+                        <div class="col-sm-10">
+                        <input type="input" class="form-control" id="port_of_loading" placeholder="Enter Port Of Loading">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="port_of_discharge" class="col-sm-2 col-form-label">Port Of Discharge :</label>
+                        <div class="col-sm-10">
+                        <input type="input" class="form-control" id="port_of_discharge" placeholder="Enter Port Of Discharge">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="final_destination" class="col-sm-2 col-form-label">Final Destination :</label>
+                        <div class="col-sm-10">
+                        <input type="input" class="form-control" id="final_destination" placeholder="Enter Final Destination">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="cargo_type_export" class="col-sm-2 col-form-label">Cargo Type :</label>
+                        <div class="col-sm-10">
+                        <select class="form-control" id="cargo_type_export">
+                          <option value="null"selected hidden disable>Please Select..</option> 
+                          <option value="sea">Sea</option>
+                          <option value="air">Air</option>
+                        </select>
+                        </div>
+                      </div>
+                      <div class="form-group row" id="form_weight_type_export">
+                        <label for="weight_type_export" class="col-sm-2 col-form-label">Weight Type :</label>
+                        <div class="col-sm-10">
+                        <select class="form-control" id="weight_type_export">
+                          <option value="null"selected hidden disable>Please Select..</option> 
+                          <option value="flc">FLC</option>
+                          <option value="lcl">LCL</option>
+                        </select>
+                        </div>
+                      </div>
+                      <div class="form-group row" id="form_fcl_export">
+                        <label for="fcl_export" class="col-sm-2 col-form-label">FCL :</label>
+                        <div class="col-sm-10">
+                        <select class="form-control" id="fcl_export">
+                          <option value="null"selected hidden disable>Please Select..</option> 
+                          <option value="20">20'</option>
+                          <option value="40">40'</option>
+                          <option value="40HC">40'HC</option>
+                        </select>
+                        </div>
+                      </div>
+                      <div class="form-group row" id="form_lcl_export">
+                        <label for="lcl_export" class="col-sm-2 col-form-label">Weight, Dimension (LxWxH) in Meter :</label>
+                        <div class="col-sm-10">
+                        <input type="input" class="form-control" id="lcl_export">
+                        </div>
+                      </div>
+                      <div class="form-group row" id="form_air_export">
+                        <label for="air_export" class="col-sm-2 col-form-label">Weight, Dimension (LxWxH) in Centimeter :</label>
+                        <div class="col-sm-10">
+                        <input type="input" class="form-control" id="air_export">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="commodity" class="col-sm-2 col-form-label">Commodity :</label>
+                        <div class="col-sm-10">
+                        <input type="input" class="form-control" id="commodity" placeholder="Enter Commodity">
+                        </div>
+                      </div>
+                      <div class="justify-content-center text-center">
+                        <button type="button" class="btn btn-default mx-4">Request Amendment</button>
+                      </div>
+                  </form>
+                    </div>
+                 </div>
+            </div>
+            <div class="col-3">
+                <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Progress Tracking</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fas fa-minus"></i></button>
+                    </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-md-12">
+                            <!-- The time line -->
+                            <div class="timeline">
+                                <!-- timeline time label -->
+                                <div class="time-label">
+                                    <span class="bg-red">10 Feb. 2014</span>
+                                </div>
+                    
+
+                                <div>
+                                    <i class="fas fa-user bg-green"></i>
+                                    <div class="timeline-item">
+                                    <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
+                                    <h3 class="timeline-header no-border"><%= link_to "Booking", booking_users_manage_shipments_path %> Your Booking Confirmation is ready</h3>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <i class="fas fa-user bg-green"></i>
+                                    <div class="timeline-item">
+                                    <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
+                                    <h3 class="timeline-header no-border"><%= link_to "Bill Of Lading", bill_of_lading_users_manage_shipments_path %> Your Bill Of Lading is ready</h3>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <i class="fas fa-user bg-green"></i>
+                                    <div class="timeline-item">
+                                    <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
+                                    <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request</h3>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <i class="fas fa-user bg-green"></i>
+                                    <div class="timeline-item">
+                                    <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
+                                    <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request</h3>
+                                    </div>
+                                </div>
+
+
+                                <div>
+                                    <i class="fas fa-clock bg-gray"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+    </section>

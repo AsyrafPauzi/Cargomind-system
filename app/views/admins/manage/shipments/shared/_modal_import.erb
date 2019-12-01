@@ -1,0 +1,127 @@
+  <div class="modal fade" id="modal-import" aria-hidden="true" style="display: none;">
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Confirm Order</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form role="form-horizontal ">
+                      <div class="form-group row">
+                        <label for="date" class="col-sm-2 col-form-label">Date :</label>
+                         <div class="col-sm-10">
+                        <input type="date" class="form-control" id="date" placeholder="Enter Date">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="port_of_discharge" class="col-sm-2 col-form-label">To :</label>
+                         <div class="col-sm-10">
+                        <input type="input" class="form-control" id="port_of_discharge" placeholder="Enter To">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="port_of_discharge" class="col-sm-2 col-form-label">Attn :</label>
+                        <div class="col-sm-10">
+                        <input type="input" class="form-control" id="port_of_discharge" placeholder="Enter Attn">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="port_of_discharge" class="col-sm-2 col-form-label">Booking No :</label>
+                        <div class="col-sm-10">
+                        <input type="input" class="form-control" id="port_of_discharge" placeholder="Enter Booking No">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="shipper" class="col-sm-2 col-form-label">Shipper :</label>
+                        <div class="col-sm-10">
+                        <textarea class="form-control" rows="5" id="shipper"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="consignee" class="col-sm-2 col-form-label">Consignee :</label>
+                        <div class="col-sm-10">
+                        <textarea class="form-control" rows="5" id="consignee"></textarea>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="port_of_loading" class="col-sm-2 col-form-label">Port Of Loading :</label>
+                        <div class="col-sm-10">
+                        <input type="input" class="form-control" id="port_of_loading" placeholder="Enter Port Of Loading">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="port_of_discharge" class="col-sm-2 col-form-label">Port Of Discharge :</label>
+                        <div class="col-sm-10">
+                        <input type="input" class="form-control" id="port_of_discharge" placeholder="Enter Port Of Discharge">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="final_destination" class="col-sm-2 col-form-label">Final Destination :</label>
+                        <div class="col-sm-10">
+                        <input type="input" class="form-control" id="final_destination" placeholder="Enter Final Destination">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="cargo_type_import" class="col-sm-2 col-form-label">Cargo Type :</label>
+                        <div class="col-sm-10">
+                        <select class="form-control" id="cargo_type_import">
+                          <option value="null"selected hidden disable>Please Select..</option> 
+                          <option value="sea">Sea</option>
+                          <option value="air">Air</option>
+                        </select>
+                        </div>
+                      </div>
+                      <div class="form-group row" id="form_weight_type_import">
+                        <label for="weight_type_import" class="col-sm-2 col-form-label">Weight Type :</label>
+                        <div class="col-sm-10">
+                        <select class="form-control" id="weight_type_import">
+                          <option value="null"selected hidden disable>Please Select..</option> 
+                          <option value="flc">FLC</option>
+                          <option value="lcl">LCL</option>
+                        </select>
+                        </div>
+                      </div>
+                      <div class="form-group row" id="form_fcl_import">
+                        <label for="fcl_import" class="col-sm-2 col-form-label">FCL :</label>
+                        <div class="col-sm-10">
+                        <select class="form-control" id="fcl_import">
+                          <option value="null"selected hidden disable>Please Select..</option> 
+                          <option value="20">20'</option>
+                          <option value="40">40'</option>
+                          <option value="40HC">40'HC</option>
+                        </select>
+                        </div>
+                      </div>
+                      <div class="form-group row" id="form_lcl_import">
+                        <label for="lcl_import" class="col-sm-2 col-form-label">Weight, Dimension (LxWxH) in Meter :</label>
+                        <div class="col-sm-10">
+                        <input type="input" class="form-control" id="lcl_import">
+                        </div>
+                      </div>
+                      <div class="form-group row" id="form_air_import">
+                        <label for="air_import" class="col-sm-2 col-form-label">Weight, Dimension (LxWxH) in Centimeter :</label>
+                        <div class="col-sm-10">
+                        <input type="input" class="form-control" id="air_import">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="commodity" class="col-sm-2 col-form-label">Commodity :</label>
+                        <div class="col-sm-10">
+                        <input type="input" class="form-control" id="commodity" placeholder="Enter Commodity">
+                        </div>
+                      </div>
+                  </form>
+              </div>
+              <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-default btn-block mt-0">Draft</button>
+                <button type="button" class="btn btn-default btn-block mt-0">Send RFQ</button>
+                <button type="button" class="btn btn-default btn-block mt-0">Confirm Order</button>
+                <button type="button" class="btn btn-default btn-block mt-0" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
