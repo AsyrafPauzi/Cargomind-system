@@ -4,7 +4,7 @@ class UsersController < Users::BaseController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @quotation = Quotation.where(user_id: current_user).limit(10).order(created_at: :desc)
   end
 
   private

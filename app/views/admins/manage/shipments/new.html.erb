@@ -78,25 +78,25 @@
                         <label for="cargo_type_import">Cargo Type :</label>
                         <select class="form-control" id="cargo_type_import">
                           <option value="null"selected hidden disable>Please Select..</option> 
-                          <option value="sea">Sea</option>
-                          <option value="air">Air</option>
+                          <option value="Sea">Sea</option>
+                          <option value="Air">Air</option>
                         </select>
                       </div>
                       <div class="form-group" id="form_weight_type_import">
                         <label for="weight_type_import">Weight Type :</label>
                         <select class="form-control" id="weight_type_import">
                           <option value="null"selected hidden disable>Please Select..</option> 
-                          <option value="flc">FLC</option>
-                          <option value="lcl">LCL</option>
+                          <option value="FCL">FCL</option>
+                          <option value="LCL">LCL</option>
                         </select>
                       </div>
                       <div class="form-group" id="form_fcl_import">
                         <label for="fcl_import">FCL :</label>
                         <select class="form-control" id="fcl_import">
                           <option value="null"selected hidden disable>Please Select..</option> 
-                          <option value="20">20'</option>
-                          <option value="40">40'</option>
-                          <option value="40HC">40'HC</option>
+                          <option value="20'">20'</option>
+                          <option value="40'">40'</option>
+                          <option value="40'HC">40'HC</option>
                         </select>
                       </div>
                       <div class="form-group" id="form_lcl_import">
@@ -159,25 +159,25 @@
                         <label for="cargo_type_export">Cargo Type :</label>
                         <select class="form-control" id="cargo_type_export">
                           <option value="null"selected hidden disable>Please Select..</option> 
-                          <option value="sea">Sea</option>
-                          <option value="air">Air</option>
+                          <option value="Sea">Sea</option>
+                          <option value="Air">Air</option>
                         </select>
                       </div>
                       <div class="form-group" id="form_weight_type_export">
                         <label for="weight_type_export">Weight Type :</label>
                         <select class="form-control" id="weight_type_export">
                           <option value="null"selected hidden disable>Please Select..</option> 
-                          <option value="flc">FLC</option>
-                          <option value="lcl">LCL</option>
+                          <option value="FCL">FCL</option>
+                          <option value="LCL">LCL</option>
                         </select>
                       </div>
                       <div class="form-group" id="form_fcl_export">
                         <label for="fcl_export">FCL :</label>
                         <select class="form-control" id="fcl_export">
                           <option value="null"selected hidden disable>Please Select..</option> 
-                          <option value="20">20'</option>
-                          <option value="40">40'</option>
-                          <option value="40HC">40'HC</option>
+                          <option value="20'">20'</option>
+                          <option value="40'">40'</option>
+                          <option value="40'HC">40'HC</option>
                         </select>
                       </div>
                       <div class="form-group" id="form_lcl_export">
@@ -219,7 +219,7 @@
     $('#form_lcl_import').hide(); 
     $('#form_air_import').hide(); 
     $('#cargo_type_import').change(function(){
-        if($('#cargo_type_import').val() == 'sea') {
+        if($('#cargo_type_import').val() == 'Sea') {
             $('#form_weight_type_import').show(); 
             $('#form_air_import').hide();
             
@@ -233,7 +233,7 @@
     });
 
     $('#weight_type_import').change(function(){
-        if($('#weight_type_import').val() == 'flc') {
+        if($('#weight_type_import').val() == 'FCL') {
             $('#form_air_import').hide(); 
             $('#form_fcl_import').show(); 
             $('#form_lcl_import').hide(); 
@@ -249,7 +249,7 @@
     $('#form_lcl_export').hide(); 
     $('#form_air_export').hide(); 
     $('#cargo_type_export').change(function(){
-        if($('#cargo_type_export').val() == 'sea') {
+        if($('#cargo_type_export').val() == 'Sea') {
             $('#form_weight_type_export').show(); 
             $('#form_air_export').hide();
             
@@ -263,7 +263,7 @@
     });
 
     $('#weight_type_export').change(function(){
-        if($('#weight_type_export').val() == 'flc') {
+        if($('#weight_type_export').val() == 'FCL') {
             $('#form_air_export').hide(); 
             $('#form_fcl_export').show(); 
             $('#form_lcl_export').hide(); 

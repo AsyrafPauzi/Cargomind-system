@@ -1,0 +1,60 @@
+
+    $('#form_weight_type_import').hide();
+    $('#form_fcl_import').hide(); 
+    $('#form_lcl_import').hide(); 
+    $('#form_air_import').hide(); 
+    $('#cargo_type_import').change(function(){
+        if($('#cargo_type_import').val() == 'Sea') {
+            $('#form_weight_type_import').show(); 
+            $('#form_air_import').hide();
+            
+            
+        } else {
+            $('#form_air_import').show(); 
+            $('#form_weight_type_import').hide();
+            $('#form_lcl_import').hide();
+            $('#form_fcl_import').hide();
+        } 
+    });
+
+    $('#weight_type_import').change(function(){
+        if($('#weight_type_import').val() == 'FCL') {
+            $('#form_air_import').hide(); 
+            $('#form_fcl_import').show(); 
+            $('#form_lcl_import').hide(); 
+        } else {
+            $('#form_air_import').hide();
+            $('#form_fcl_import').hide(); 
+            $('#form_lcl_import').show(); 
+        } 
+    });
+
+    $('#form_weight_type_export').hide();
+    $('#form_fcl_export').hide(); 
+    $('#form_lcl_export').hide(); 
+    $('#form_air_export').hide(); 
+    $('#cargo_type_export').change(function(){
+        if($('#cargo_type_export').val() == 'Sea') {
+            $('#form_weight_type_export').show(); 
+            $('#form_air_export').hide();
+            
+            
+        } else {
+            $('#form_air_export').show(); 
+            $('#form_weight_type_export').hide();
+            $('#form_lcl_export').hide();
+            $('#form_fcl_export').hide();
+        } 
+    });
+
+    $('#weight_type_export').change(function(){
+        if($('#weight_type_export').val() == 'FCL') {
+            $('#form_air_export').hide(); 
+            $('#form_fcl_export').show(); 
+            $('#form_lcl_export').hide(); 
+        } else {
+            $('#form_air_export').hide();
+            $('#form_fcl_export').hide(); 
+            $('#form_lcl_export').show(); 
+        } 
+    });

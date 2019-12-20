@@ -37,66 +37,65 @@
                 </ul>
                 <div class="tab-content" id="custom-content-below-tabContent">
                   <div class="tab-pane fade show active" id="custom-content-below-home" role="tabpanel" aria-labelledby="custom-content-below-home-tab">
-                    <form role="form ">
                       <div class="form-group my-3">
-                        <label for="date">Date :</label>
-                        <input type="date" class="form-control" id="date" placeholder="Enter Date">
+                        <label for="date_import">Date :</label>
+                        <input type="date" class="form-control" id="date_import" placeholder="Enter Date">
                       </div>
                       <div class="form-group">
-                        <label for="port_of_discharge">To :</label>
-                        <input type="input" class="form-control" id="port_of_discharge" placeholder="Enter To">
+                        <label for="to_import">To :</label>
+                        <input type="input" class="form-control" id="to_import" placeholder="Enter To">
                       </div>
                       <div class="form-group">
-                        <label for="port_of_discharge">Attn :</label>
-                        <input type="input" class="form-control" id="port_of_discharge" placeholder="Enter Attn">
+                        <label for="attn_import">Attn :</label>
+                        <input type="input" class="form-control" id="attn_import" placeholder="Enter Attn">
                       </div>
                       <div class="form-group">
-                        <label for="port_of_discharge">Booking No :</label>
-                        <input type="input" class="form-control" id="port_of_discharge" placeholder="Enter Booking No">
+                        <label for="booking_no_import">Booking No :</label>
+                        <input type="input" class="form-control" id="booking_no_import" placeholder="Enter Booking No">
                       </div>
                       <div class="form-group">
-                        <label for="shipper">Shipper :</label>
-                        <textarea class="form-control" rows="5" id="shipper"></textarea>
+                        <label for="shipper_import">Shipper :</label>
+                        <textarea class="form-control" rows="5" id="shipper_import"></textarea>
                       </div>
                       <div class="form-group">
-                        <label for="consignee">Consignee :</label>
-                        <textarea class="form-control" rows="5" id="consignee"></textarea>
+                        <label for="consignee_import">Consignee :</label>
+                        <textarea class="form-control" rows="5" id="consignee_import"></textarea>
                       </div>
                       <div class="form-group">
-                        <label for="port_of_loading">Port Of Loading :</label>
-                        <input type="input" class="form-control" id="port_of_loading" placeholder="Enter Port Of Loading">
+                        <label for="port_of_loading_import">Port Of Loading :</label>
+                        <input type="input" class="form-control" id="port_of_loading_import" placeholder="Enter Port Of Loading">
                       </div>
                       <div class="form-group">
-                        <label for="port_of_discharge">Port Of Discharge :</label>
-                        <input type="input" class="form-control" id="port_of_discharge" placeholder="Enter Port Of Discharge">
+                        <label for="port_of_discharge_import">Port Of Discharge :</label>
+                        <input type="input" class="form-control" id="port_of_discharge_import" placeholder="Enter Port Of Discharge">
                       </div>
                       <div class="form-group">
-                        <label for="final_destination">Final Destination :</label>
-                        <input type="input" class="form-control" id="final_destination" placeholder="Enter Final Destination">
+                        <label for="final_destination_import">Final Destination :</label>
+                        <input type="input" class="form-control" id="final_destination_import" placeholder="Enter Final Destination">
                       </div>
                       <div class="form-group">
                         <label for="cargo_type_import">Cargo Type :</label>
                         <select class="form-control" id="cargo_type_import">
                           <option value="null"selected hidden disable>Please Select..</option> 
-                          <option value="sea">Sea</option>
-                          <option value="air">Air</option>
+                          <option value="Sea">Sea</option>
+                          <option value="Air">Air</option>
                         </select>
                       </div>
                       <div class="form-group" id="form_weight_type_import">
                         <label for="weight_type_import">Weight Type :</label>
                         <select class="form-control" id="weight_type_import">
                           <option value="null"selected hidden disable>Please Select..</option> 
-                          <option value="flc">FLC</option>
-                          <option value="lcl">LCL</option>
+                          <option value="FCL">FCL</option>
+                          <option value="LCL">LCL</option>
                         </select>
                       </div>
                       <div class="form-group" id="form_fcl_import">
                         <label for="fcl_import">FCL :</label>
                         <select class="form-control" id="fcl_import">
                           <option value="null"selected hidden disable>Please Select..</option> 
-                          <option value="20">20'</option>
-                          <option value="40">40'</option>
-                          <option value="40HC">40'HC</option>
+                          <option value="20'">20'</option>
+                          <option value="40'">40'</option>
+                          <option value="40'HC">40'HC</option>
                         </select>
                       </div>
                       <div class="form-group" id="form_lcl_import">
@@ -108,76 +107,75 @@
                         <input type="input" class="form-control" id="air_import">
                       </div>
                       <div class="form-group">
-                        <label for="commodity">Commodity :</label>
-                        <input type="input" class="form-control" id="commodity" placeholder="Enter Commodity">
+                        <label for="commodity_import">Commodity :</label>
+                        <input type="input" class="form-control" id="commodity_import" placeholder="Enter Commodity">
                       </div>
                     <!-- /.card-body -->
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-import">
                           Create
                         </button>
-                  </form>
                   </div>
                   <div class="tab-pane fade" id="custom-content-below-profile" role="tabpanel" aria-labelledby="custom-content-below-profile-tab">
-                    <form role="form">
+                    <%= form_for(:quotation, url: new_users_manage_shipment_path) do |f|%>
                         <div class="form-group my-3"">
-                          <label for="date">Date :</label>
-                          <input type="date" class="form-control" id="date" placeholder="Enter Date">
+                          <label for="date_export">Date :</label>
+                          <input type="date" class="form-control" id="date_export" placeholder="Enter Date">
                         </div>
                         <div class="form-group">
-                          <label for="port_of_discharge">To :</label>
-                          <input type="input" class="form-control" id="port_of_discharge" placeholder="Enter To">
+                          <label for="to_export">To :</label>
+                          <input type="input" class="form-control" id="to_export" placeholder="Enter To">
                         </div>
                         <div class="form-group">
-                          <label for="port_of_discharge">Attn :</label>
-                          <input type="input" class="form-control" id="port_of_discharge" placeholder="Enter Attn">
+                          <label for="attn_export">Attn :</label>
+                          <input type="input" class="form-control" id="attn_export" placeholder="Enter Attn">
                         </div>
                         <div class="form-group">
-                          <label for="port_of_discharge">Booking No :</label>
-                          <input type="input" class="form-control" id="port_of_discharge" placeholder="Enter Booking No">
+                          <label for="booking_no_export">Booking No :</label>
+                          <input type="input" class="form-control" id="booking_no_export" placeholder="Enter Booking No">
                         </div>
                         <div class="form-group">
-                          <label for="shipper">Shipper :</label>
-                          <textarea class="form-control" rows="5" id="shipper"></textarea>
+                          <label for="shipper_export">Shipper :</label>
+                          <textarea class="form-control" rows="5" id="shipper_export"></textarea>
                         </div>
                         <div class="form-group">
-                          <label for="consignee">Consignee :</label>
-                          <textarea class="form-control" rows="5" id="consignee"></textarea>
+                          <label for="consignee_export">Consignee :</label>
+                          <textarea class="form-control" rows="5" id="consignee_export"></textarea>
                         </div>
                         <div class="form-group">
-                          <label for="port_of_loading">Port Of Loading :</label>
-                          <input type="input" class="form-control" id="port_of_loading" placeholder="Enter Port Of Loading">
+                          <label for="port_of_loading_export">Port Of Loading :</label>
+                          <input type="input" class="form-control" id="port_of_loading_export" placeholder="Enter Port Of Loading">
                         </div>
                         <div class="form-group">
-                          <label for="port_of_discharge">Port Of Discharge :</label>
-                          <input type="input" class="form-control" id="port_of_discharge" placeholder="Enter Port Of Discharge">
+                          <label for="port_of_discharge_export">Port Of Discharge :</label>
+                          <input type="input" class="form-control" id="port_of_discharge_export" placeholder="Enter Port Of Discharge">
                         </div>
                         <div class="form-group">
-                          <label for="final_destination">Final Destination :</label>
-                          <input type="input" class="form-control" id="final_destination" placeholder="Enter Final Destination">
+                          <label for="final_destination_export">Final Destination :</label>
+                          <input type="input" class="form-control" id="final_destination_export" placeholder="Enter Final Destination">
                         </div>
                         <div class="form-group">
                         <label for="cargo_type_export">Cargo Type :</label>
                         <select class="form-control" id="cargo_type_export">
                           <option value="null"selected hidden disable>Please Select..</option> 
-                          <option value="sea">Sea</option>
-                          <option value="air">Air</option>
+                          <option value="Sea">Sea</option>
+                          <option value="Air">Air</option>
                         </select>
                       </div>
                       <div class="form-group" id="form_weight_type_export">
                         <label for="weight_type_export">Weight Type :</label>
                         <select class="form-control" id="weight_type_export">
                           <option value="null"selected hidden disable>Please Select..</option> 
-                          <option value="flc">FLC</option>
-                          <option value="lcl">LCL</option>
+                          <option value="FCL">FCL</option>
+                          <option value="LCL">LCL</option>
                         </select>
                       </div>
                       <div class="form-group" id="form_fcl_export">
                         <label for="fcl_export">FCL :</label>
                         <select class="form-control" id="fcl_export">
                           <option value="null"selected hidden disable>Please Select..</option> 
-                          <option value="20">20'</option>
-                          <option value="40">40'</option>
-                          <option value="40HC">40'HC</option>
+                          <option value="20'">20'</option>
+                          <option value="40'">40'</option>
+                          <option value="40'HC">40'HC</option>
                         </select>
                       </div>
                       <div class="form-group" id="form_lcl_export">
@@ -189,14 +187,14 @@
                         <input type="input" class="form-control" id="air_export">
                       </div>
                         <div class="form-group">
-                          <label for="commodity">Commodity :</label>
-                          <input type="input" class="form-control" id="commodity" placeholder="Enter Commodity">
+                          <label for="commodity_export">Commodity :</label>
+                          <input type="input" class="form-control" id="commodity_export" placeholder="Enter Commodity">
                         </div>
                       <!-- /.card-body -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-export">
                           Create
                         </button>
-                    </form>
+                    <% end %>
                   </div>
                 </div>
           </div>
@@ -208,71 +206,11 @@
       </div><!-- /.container-fluid -->
     <%= render partial: "users/manage/shipments/shared/modal_export" %>
     <%= render partial: "users/manage/shipments/shared/modal_import" %>
+
     </section>
     
-
-<script>
-  $(document).ready(function() { 
-
-    $('#form_weight_type_import').hide();
-    $('#form_fcl_import').hide(); 
-    $('#form_lcl_import').hide(); 
-    $('#form_air_import').hide(); 
-    $('#cargo_type_import').change(function(){
-        if($('#cargo_type_import').val() == 'sea') {
-            $('#form_weight_type_import').show(); 
-            $('#form_air_import').hide();
-            
-            
-        } else {
-            $('#form_air_import').show(); 
-            $('#form_weight_type_import').hide();
-            $('#form_lcl_import').hide();
-            $('#form_fcl_import').hide();
-        } 
-    });
-
-    $('#weight_type_import').change(function(){
-        if($('#weight_type_import').val() == 'flc') {
-            $('#form_air_import').hide(); 
-            $('#form_fcl_import').show(); 
-            $('#form_lcl_import').hide(); 
-        } else {
-            $('#form_air_import').hide();
-            $('#form_fcl_import').hide(); 
-            $('#form_lcl_import').show(); 
-        } 
-    });
-
-    $('#form_weight_type_export').hide();
-    $('#form_fcl_export').hide(); 
-    $('#form_lcl_export').hide(); 
-    $('#form_air_export').hide(); 
-    $('#cargo_type_export').change(function(){
-        if($('#cargo_type_export').val() == 'sea') {
-            $('#form_weight_type_export').show(); 
-            $('#form_air_export').hide();
-            
-            
-        } else {
-            $('#form_air_export').show(); 
-            $('#form_weight_type_export').hide();
-            $('#form_lcl_export').hide();
-            $('#form_fcl_export').hide();
-        } 
-    });
-
-    $('#weight_type_export').change(function(){
-        if($('#weight_type_export').val() == 'flc') {
-            $('#form_air_export').hide(); 
-            $('#form_fcl_export').show(); 
-            $('#form_lcl_export').hide(); 
-        } else {
-            $('#form_air_export').hide();
-            $('#form_fcl_export').hide(); 
-            $('#form_lcl_export').show(); 
-        } 
-    });
-
-});
-</script>
+    <script>
+    <%= render partial: "users/manage/shipments/shared/new.js" %>
+    <%= render partial: "users/manage/shipments/shared/new_import.js" %>
+    <%= render partial: "users/manage/shipments/shared/new_export.js" %>
+    </script>

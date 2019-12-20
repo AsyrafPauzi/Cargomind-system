@@ -12,8 +12,8 @@
 <!-- SEARCH FORM -->
 <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item d-none d-sm-inline-block">
-        <%= link_to "Profile" , users_path, class:"btn btn-block btn-default" %>   
+       <li class="nav-item d-none d-sm-inline-block">
+        <%= link_to "Profile" , users_manage_profiles_path, class:"btn btn-block btn-default" %>   
       </li>
       <li class="nav-item d-none d-sm-inline-block ml-3">
         <%= link_to('Logout', destroy_user_session_path, method: :delete, class:"btn btn-block btn-default") %>    

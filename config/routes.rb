@@ -19,6 +19,10 @@ Rails.application.routes.draw do
           get '/bill_of_lading/', to: 'shipments#bill_of_lading', as: 'bill_of_lading'
         end
       end
+      resources :profiles do
+        collection do
+        end
+      end
     end
   end
   resources :admins, only: [:index]

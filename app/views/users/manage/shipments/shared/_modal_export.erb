@@ -8,119 +8,108 @@
                 </button>
               </div>
               <div class="modal-body">
-                 <form role="form-horizontal ">
+                <%= form_for(:quotation_export, url: users_manage_shipments_path, role:"form-horizontal") do |f|%>
+                      <%= f.hidden_field :type_quotation, value: "Export"%>
+                      <%= f.hidden_field :user_id, value: current_user.id%>
                       <div class="form-group row">
                         <label for="date" class="col-sm-2 col-form-label">Date :</label>
                          <div class="col-sm-10">
-                        <input type="date" class="form-control" id="date" placeholder="Enter Date">
+                         <%= f.date_field :date, class: 'form-control', required: true %>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="port_of_discharge" class="col-sm-2 col-form-label">To :</label>
                          <div class="col-sm-10">
-                        <input type="input" class="form-control" id="port_of_discharge" placeholder="Enter To">
+                         <%= f.text_field :to, class: 'form-control', required: true %>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="port_of_discharge" class="col-sm-2 col-form-label">Attn :</label>
                         <div class="col-sm-10">
-                        <input type="input" class="form-control" id="port_of_discharge" placeholder="Enter Attn">
+                        <%= f.text_field :attn, class: 'form-control' , required: true %>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="port_of_discharge" class="col-sm-2 col-form-label">Booking No :</label>
                         <div class="col-sm-10">
-                        <input type="input" class="form-control" id="port_of_discharge" placeholder="Enter Booking No">
+                        <%= f.text_field :booking_no, class: 'form-control' , required: true %>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="shipper" class="col-sm-2 col-form-label">Shipper :</label>
                         <div class="col-sm-10">
-                        <textarea class="form-control" rows="5" id="shipper"></textarea>
+                        <%= f.text_area :shipper, :rows => 5,class: "form-control"  , required: true%>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="consignee" class="col-sm-2 col-form-label">Consignee :</label>
                         <div class="col-sm-10">
-                        <textarea class="form-control" rows="5" id="consignee"></textarea>
+                        <%= f.text_area :consignee, :rows => 5,class: "form-control" , required: true %>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="port_of_loading" class="col-sm-2 col-form-label">Port Of Loading :</label>
                         <div class="col-sm-10">
-                        <input type="input" class="form-control" id="port_of_loading" placeholder="Enter Port Of Loading">
+                        <%= f.text_field :port_of_loading, class: 'form-control' , required: true%>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="port_of_discharge" class="col-sm-2 col-form-label">Port Of Discharge :</label>
                         <div class="col-sm-10">
-                        <input type="input" class="form-control" id="port_of_discharge" placeholder="Enter Port Of Discharge">
+                        <%= f.text_field :port_of_discharge, class: 'form-control' , required: true%>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="final_destination" class="col-sm-2 col-form-label">Final Destination :</label>
                         <div class="col-sm-10">
-                        <input type="input" class="form-control" id="final_destination" placeholder="Enter Final Destination">
+                        <%= f.text_field :final_destination, class: 'form-control' , required: true%>
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="cargo_type_export" class="col-sm-2 col-form-label">Cargo Type :</label>
+                        <label for="cargo_type_import" class="col-sm-2 col-form-label">Cargo Type :</label>
                         <div class="col-sm-10">
-                        <select class="form-control" id="cargo_type_export">
-                          <option value="null"selected hidden disable>Please Select..</option> 
-                          <option value="sea">Sea</option>
-                          <option value="air">Air</option>
-                        </select>
+                        <%= f.text_field :cargo_type, class: 'form-control' , required: true%>
                         </div>
                       </div>
-                      <div class="form-group row" id="form_weight_type_export">
-                        <label for="weight_type_export" class="col-sm-2 col-form-label">Weight Type :</label>
+                      <div class="form-group row" id="form_weight_type_import">
+                        <label for="weight_type_import" class="col-sm-2 col-form-label">Weight Type :</label>
                         <div class="col-sm-10">
-                        <select class="form-control" id="weight_type_export">
-                          <option value="null"selected hidden disable>Please Select..</option> 
-                          <option value="flc">FLC</option>
-                          <option value="lcl">LCL</option>
-                        </select>
+                        <%= f.text_field :weight_type, class: 'form-control'%>
                         </div>
                       </div>
-                      <div class="form-group row" id="form_fcl_export">
-                        <label for="fcl_export" class="col-sm-2 col-form-label">FCL :</label>
+                      <div class="form-group row" id="form_fcl_import">
+                        <label for="fcl_import" class="col-sm-2 col-form-label">FCL :</label>
                         <div class="col-sm-10">
-                        <select class="form-control" id="fcl_export">
-                          <option value="null"selected hidden disable>Please Select..</option> 
-                          <option value="20">20'</option>
-                          <option value="40">40'</option>
-                          <option value="40HC">40'HC</option>
-                        </select>
+                        <%= f.text_field :weight_fcl, class: 'form-control' %>
                         </div>
                       </div>
-                      <div class="form-group row" id="form_lcl_export">
-                        <label for="lcl_export" class="col-sm-2 col-form-label">Weight, Dimension (LxWxH) in Meter :</label>
+                      <div class="form-group row" id="form_lcl_import">
+                        <label for="lcl_import" class="col-sm-2 col-form-label">Weight, Dimension (LxWxH) in Meter :</label>
                         <div class="col-sm-10">
-                        <input type="input" class="form-control" id="lcl_export">
+                        <%= f.text_field :weight_lcl, class: 'form-control' %>
                         </div>
                       </div>
-                      <div class="form-group row" id="form_air_export">
-                        <label for="air_export" class="col-sm-2 col-form-label">Weight, Dimension (LxWxH) in Centimeter :</label>
+                      <div class="form-group row" id="form_air_import">
+                        <label for="air_import" class="col-sm-2 col-form-label">Weight, Dimension (LxWxH) in Centimeter :</label>
                         <div class="col-sm-10">
-                        <input type="input" class="form-control" id="air_export">
+                        <%= f.text_field :weight_air, class: 'form-control' %>
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="commodity" class="col-sm-2 col-form-label">Commodity :</label>
                         <div class="col-sm-10">
-                        <input type="input" class="form-control" id="commodity" placeholder="Enter Commodity">
+                        <%= f.text_field :commodity, class: 'form-control' , required: true%>
                         </div>
                       </div>
-                  </form>
               </div>
               <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-default btn-block mt-0">Draft</button>
-                <button type="button" class="btn btn-default btn-block mt-0">Send RFQ</button>
-                <button type="button" class="btn btn-default btn-block mt-0">Confirm Order</button>
+                <%= f.submit 'Draft', class: 'btn btn-default btn-block mt-0'%>
+                <%= f.submit 'Send RFQ', class: 'btn btn-default btn-block mt-0'%>
+                <%= f.submit 'Confirm Order', class: 'btn btn-default btn-block mt-0'%>
                 <button type="button" class="btn btn-default btn-block mt-0" data-dismiss="modal">Close</button>
               </div>
             </div>
+             <% end %>
             <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
