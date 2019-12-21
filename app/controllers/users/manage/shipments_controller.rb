@@ -62,7 +62,7 @@ class Users::Manage::ShipmentsController < Users::BaseController
            redirect_to request.referrer
        end
       elsif params[:commit] == "Send RFQ"
-        if @quotation.update(status: "Request For Quotation")
+        if @quotation.update_attributes(status: "Request For Quotation")
           respond_to do |format|
               format.html { redirect_to request.referrer, :flash => {:success => 'Successful Request For Quotation.'}}
               format.json { render :json => @quotation }
@@ -72,7 +72,7 @@ class Users::Manage::ShipmentsController < Users::BaseController
             redirect_to request.referrer
         end
       elsif params[:commit] == "Confirm Order"
-        if @quotation.update(status: "Confirm Order")
+        if @quotation.update_attributes(status: "Confirm Order")
           respond_to do |format|
               format.html { redirect_to request.referrer, :flash => {:success => 'Successful Send Quotation.'}}
               format.json { render :json => @quotation }
@@ -82,7 +82,7 @@ class Users::Manage::ShipmentsController < Users::BaseController
             redirect_to request.referrer
         end
       elsif params[:commit] == "Request Amendment"
-        if @quotation.update(status: "Request Amendment")
+        if @quotation.update_attributes(status: "Request Amendment")
           respond_to do |format|
               format.html { redirect_to request.referrer, :flash => {:success => "Successful Request Amendment For Quotation #{@quotation.quotation_id}"}}
               format.json { render :json => @quotation }
