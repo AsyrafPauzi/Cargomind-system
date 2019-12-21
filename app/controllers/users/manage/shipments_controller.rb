@@ -58,7 +58,7 @@ class Users::Manage::ShipmentsController < Users::BaseController
                format.json { render :json => @quotation }
            end
        else
-           flash[:danger] = @company.errors.full_messages.first
+        format.json { render json: @quotation.errors, status: :unprocessable_entity }
            redirect_to request.referrer
        end
       elsif params[:commit] == "Send RFQ"
@@ -68,7 +68,7 @@ class Users::Manage::ShipmentsController < Users::BaseController
               format.json { render :json => @quotation }
           end
         else
-            flash[:danger] = @company.errors.full_messages.first
+          format.json { render json: @quotation.errors, status: :unprocessable_entity }
             redirect_to request.referrer
         end
       elsif params[:commit] == "Confirm Order"
@@ -78,7 +78,7 @@ class Users::Manage::ShipmentsController < Users::BaseController
               format.json { render :json => @quotation }
           end
         else
-            flash[:danger] = @company.errors.full_messages.first
+          format.json { render json: @quotation.errors, status: :unprocessable_entity }
             redirect_to request.referrer
         end
       elsif params[:commit] == "Request Amendment"
@@ -88,7 +88,7 @@ class Users::Manage::ShipmentsController < Users::BaseController
               format.json { render :json => @quotation }
           end
         else
-            flash[:danger] = @company.errors.full_messages.first
+          format.json { render json: @quotation.errors, status: :unprocessable_entity }
             redirect_to request.referrer
         end
       end
