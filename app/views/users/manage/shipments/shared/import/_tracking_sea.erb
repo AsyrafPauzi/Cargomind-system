@@ -1,0 +1,161 @@
+<div class="col-md-3">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Progress Tracking</h3>
+
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+          <i class="fas fa-minus"></i></button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="col-md-12">
+        <!-- The time line -->
+        <div class="timeline">
+          <!-- timeline time label -->
+          <div class="time-label">
+            <span class="bg-red"><%= @quotation.created_at.strftime("%Y-%m-%d") %></span>
+          </div>
+
+          <% if @quotation.weight_type == "LCL" %>
+              <div>
+            <i class="fas fa-check bg-green"></i>
+            <div class="timeline-item">
+                <span class="time"><i class=""></i></span>
+              <h3 class="timeline-header no-border">Booking</h3>
+            </div>
+          </div>
+
+          <div>
+            <i class="fas fa-times bg-red"></i>
+            <div class="timeline-item">
+                
+              <h3 class="timeline-header no-border">Cargo Declaration</h3>
+            </div>
+          </div>
+
+          <div>
+            <i class="fas fa-times bg-red"></i>
+            <div class="timeline-item">
+                
+              <h3 class="timeline-header no-border">BL Confirmation</h3>
+            </div>
+          </div>
+
+          <div>
+            <i class="fas fa-times bg-red"></i>
+            <div class="timeline-item">
+                
+              <h3 class="timeline-header no-border">Vessel Depart</h3>
+            </div>
+          </div>
+
+          <div>
+            <i class="fas fa-times bg-red"></i>
+            <div class="timeline-item">
+                
+              <h3 class="timeline-header no-border">Pre Alert Attach</h3>
+            </div>
+          </div>
+
+          <div>
+            <i class="fas fa-times bg-red"></i>
+            <div class="timeline-item">
+                
+              <h3 class="timeline-header no-border">Billing</h3>
+            </div>
+          </div>
+
+          <div>
+            <i class="fas fa-times bg-red"></i>
+            <div class="timeline-item">
+                
+              <h3 class="timeline-header no-border">Insurance</h3>
+            </div>
+          </div>
+          <% else %>
+            <div>
+            <i class="fas fa-check bg-green"></i>
+            <div class="timeline-item">
+              <h3 class="timeline-header no-border">Booking</h3>
+            </div>
+          </div>
+
+          <div>
+            <i class="fas fa-times bg-red"></i>
+            <div class="timeline-item">
+                
+              <h3 class="timeline-header no-border">ROT</h3>
+            </div>
+          </div>
+
+          <div>
+            <i class="fas fa-times bg-red"></i>
+            <div class="timeline-item">
+                
+              <h3 class="timeline-header no-border">MT</h3>
+            </div>
+          </div>
+
+          <div>
+            <i class="fas fa-times bg-red"></i>
+            <div class="timeline-item">
+                
+              <h3 class="timeline-header no-border">Loading Collect</h3>
+            </div>
+          </div>
+
+          <div>
+            <i class="fas fa-times bg-red"></i>
+            <div class="timeline-item">
+                
+              <h3 class="timeline-header no-border">Cargo Declaration</h3>
+            </div>
+          </div>
+
+          <div>
+            <i class="fas fa-times bg-red"></i>
+            <div class="timeline-item">
+                
+              <h3 class="timeline-header no-border">SL/BL Confirmation</h3>
+            </div>
+          </div>
+
+          <div>
+            <i class="fas fa-times bg-red"></i>
+            <div class="timeline-item">
+                
+              <h3 class="timeline-header no-border">Attached Pre Dent</h3>
+            </div>
+          </div>
+
+          <div>
+            <i class="fas fa-times bg-red"></i>
+            <div class="timeline-item">
+                
+              <h3 class="timeline-header no-border">Billing</h3>
+            </div>
+          </div>
+
+          <div>
+            <i class="fas fa-times bg-red"></i>
+            <div class="timeline-item">
+                
+              <h3 class="timeline-header no-border">Insurance</h3>
+            </div>
+          </div>
+          <% end %>
+ 
+            
+            
+            
+
+          <div class="time-label">
+            <span class="bg-green">Complete</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

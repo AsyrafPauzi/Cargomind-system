@@ -1,304 +1,37 @@
 <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Shipments</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><%= link_to "Dashboard" , users_path %></li>
-              <li class="breadcrumb-item"><%= link_to "Shipments" , users_manage_shipments_path %></li>
-              <li class="breadcrumb-item active"><%= @quotation.quotation_id %></li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Shipments</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><%= link_to "Dashboard" , users_path %></li>
+          <li class="breadcrumb-item"><%= link_to "Shipments" , users_manage_shipments_path %></li>
+          <li class="breadcrumb-item active"><%= @quotation.quotation_id %></li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
 
-    <section class="content">
+<section class="content">
+
+  <div class="row">
+  <div class="col-md-12">
+      <p id="error"><%= flash[:danger] %></p>
+      <p id="notice"><%= flash[:success] %></p>
+  </div>
+    <% if @quotation.status == "Request Amendment" %>
+      <%= render partial: "users/manage/shipments/shared/amendment" %>
+    <% else %>
+      <% if @quotation.type_quotation == "Export" %>
+        <%= render partial: "users/manage/shipments/shared/export/order" %>
+      <% else %>
+        <%= render partial: "users/manage/shipments/shared/import/order" %>
+      <% end %>
+    <% end %>
     
-        <div class="row">
-            <div class="col-9">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Details Shipments</h3>
+    
 
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                        <i class="fas fa-minus"></i></button>
-                    </div>
-                    </div>
-                    <div class="card-body">
-                    <p id="error"><%= flash[:danger] %></p>
-                    <p id="notice"><%= flash[:success] %></p>
-                    <%= form_for(@quotation, url: users_manage_shipment_path, role:"form-horizontal", method: :patch) do |f|%>
-                      <div class="form-group row">
-                        <label for="date" class="col-sm-2 col-form-label">Status :</label>
-                         <div class="col-sm-10">
-                        <%= f.text_field :status, class: 'form-control',readonly: true%>
-                        </div>
-                      </div>
-                    <% if @quotation.status == "Draft" %>
-                      <div class="form-group row">
-                        <label for="date" class="col-sm-2 col-form-label">Date :</label>
-                         <div class="col-sm-10">
-                        <%= f.date_field :date, class: 'form-control', required: true %>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="port_of_discharge" class="col-sm-2 col-form-label">To :</label>
-                         <div class="col-sm-10">
-                        <%= f.text_field :to, class: 'form-control', required: true %>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="port_of_discharge" class="col-sm-2 col-form-label">Attn :</label>
-                        <div class="col-sm-10">
-                        <%= f.text_field :attn, class: 'form-control', required: true %>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="port_of_discharge" class="col-sm-2 col-form-label">Booking No :</label>
-                        <div class="col-sm-10">
-                        <%= f.text_field :booking_no, class: 'form-control', required: true %>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="shipper" class="col-sm-2 col-form-label">Shipper :</label>
-                        <div class="col-sm-10">
-                        <%= f.text_area :shipper, :rows => 5,class: "form-control"  , required: true%>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="consignee" class="col-sm-2 col-form-label">Consignee :</label>
-                        <div class="col-sm-10">
-                        <%= f.text_area :consignee, :rows => 5,class: "form-control"  , required: true%>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="port_of_loading" class="col-sm-2 col-form-label">Port Of Loading :</label>
-                        <div class="col-sm-10">
-                        <%= f.text_field :port_of_loading, class: 'form-control', required: true %>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="port_of_discharge" class="col-sm-2 col-form-label">Port Of Discharge :</label>
-                        <div class="col-sm-10">
-                        <%= f.text_field :port_of_discharge, class: 'form-control', required: true %>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="final_destination" class="col-sm-2 col-form-label">Final Destination :</label>
-                        <div class="col-sm-10">
-                        <%= f.text_field :final_destination, class: 'form-control', required: true %>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="cargo_type_export" class="col-sm-2 col-form-label">Cargo Type :</label>
-                        <div class="col-sm-10">
-                        <%= f.select :cargo_type, ['Sea', 'Air'], {}, { :class => 'form-control'} %>
-                        </div>
-                      </div>
-                      <div class="form-group row" id="form_weight_type_export">
-                        <label for="weight_type_export" class="col-sm-2 col-form-label">Weight Type :</label>
-                        <div class="col-sm-10">
-                        <%= f.select :weight_type, ['FCL', 'LCL'], {}, { :class => 'form-control'} %>
-                        </div>
-                      </div>
-                      <div class="form-group row" id="form_fcl_export">
-                        <label for="fcl_export" class="col-sm-2 col-form-label">FCL :</label>
-                        <div class="col-sm-10">
-                        <%= f.select :weight_fcl, ["20'", "40'", "40'HC"], {}, { :class => 'form-control'} %>
-                        </div>
-                      </div>
-                      <div class="form-group row" id="form_lcl_export">
-                        <label for="weight_lcl" class="col-sm-2 col-form-label">Weight, Dimension (LxWxH) in Meter :</label>
-                        <div class="col-sm-10">
-                        <%= f.text_field :weight_lcl, class: 'form-control'%>
-                        </div>
-                      </div>
-                      <div class="form-group row" id="form_air_export">
-                        <label for="weight_air" class="col-sm-2 col-form-label">Weight, Dimension (LxWxH) in Centimeter :</label>
-                        <div class="col-sm-10">
-                        <%= f.text_field :weight_air, class: 'form-control'%>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="commodity" class="col-sm-2 col-form-label">Commodity :</label>
-                        <div class="col-sm-10">
-                        <%= f.text_field :commodity, class: 'form-control', required: true %>
-                        </div>
-                      </div>
-                    <% else %>
-                      <div class="form-group row">
-                        <label for="date" class="col-sm-2 col-form-label">Date :</label>
-                         <div class="col-sm-10">
-                        <%= f.date_field :date, class: 'form-control', readonly: true %>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="port_of_discharge" class="col-sm-2 col-form-label">To :</label>
-                         <div class="col-sm-10">
-                        <%= f.text_field :to, class: 'form-control', readonly: true %>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="port_of_discharge" class="col-sm-2 col-form-label">Attn :</label>
-                        <div class="col-sm-10">
-                        <%= f.text_field :attn, class: 'form-control', readonly: true %>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="port_of_discharge" class="col-sm-2 col-form-label">Booking No :</label>
-                        <div class="col-sm-10">
-                        <%= f.text_field :booking_no, class: 'form-control', readonly: true %>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="shipper" class="col-sm-2 col-form-label">Shipper :</label>
-                        <div class="col-sm-10">
-                        <%= f.text_area :shipper, :rows => 5,class: "form-control", readonly: true%>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="consignee" class="col-sm-2 col-form-label">Consignee :</label>
-                        <div class="col-sm-10">
-                        <%= f.text_area :consignee, :rows => 5,class: "form-control", readonly: true%>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="port_of_loading" class="col-sm-2 col-form-label">Port Of Loading :</label>
-                        <div class="col-sm-10">
-                        <%= f.text_field :port_of_loading, class: 'form-control', readonly: true %>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="port_of_discharge" class="col-sm-2 col-form-label">Port Of Discharge :</label>
-                        <div class="col-sm-10">
-                        <%= f.text_field :port_of_discharge, class: 'form-control', readonly: true%>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="final_destination" class="col-sm-2 col-form-label">Final Destination :</label>
-                        <div class="col-sm-10">
-                        <%= f.text_field :final_destination, class: 'form-control', readonly: true %>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="cargo_type_export" class="col-sm-2 col-form-label">Cargo Type :</label>
-                        <div class="col-sm-10">
-                        <%= f.select :cargo_type, ['Sea', 'Air'], {}, { :class => 'form-control' , readonly: true} %>
-                        </div>
-                      </div>
-                      <div class="form-group row" id="form_weight_type_export">
-                        <label for="weight_type_export" class="col-sm-2 col-form-label">Weight Type :</label>
-                        <div class="col-sm-10">
-                        <%= f.select :weight_type, ['FCL', 'LCL'], {}, { :class => 'form-control', readonly: true } %>
-                        </div>
-                      </div>
-                      <div class="form-group row" id="form_fcl_export">
-                        <label for="fcl_export" class="col-sm-2 col-form-label">FCL :</label>
-                        <div class="col-sm-10">
-                        <%= f.select :weight_fcl, ["20'", "40'", "40'HC"], {}, { :class => 'form-control' , readonly: true} %>
-                        </div>
-                      </div>
-                      <div class="form-group row" id="form_lcl_export">
-                        <label for="weight_lcl" class="col-sm-2 col-form-label">Weight, Dimension (LxWxH) in Meter :</label>
-                        <div class="col-sm-10">
-                        <%= f.text_field :weight_lcl, class: 'form-control', readonly: true%>
-                        </div>
-                      </div>
-                      <div class="form-group row" id="form_air_export">
-                        <label for="weight_air" class="col-sm-2 col-form-label">Weight, Dimension (LxWxH) in Centimeter :</label>
-                        <div class="col-sm-10">
-                        <%= f.text_field :weight_air, class: 'form-control', readonly: true%>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="commodity" class="col-sm-2 col-form-label">Commodity :</label>
-                        <div class="col-sm-10">
-                        <%= f.text_field :commodity, class: 'form-control', readonly: true %>
-                        </div>
-                      </div>
-                    <% end %>
-
-                      <% if @quotation.status == "Draft" %>
-                        <div class="modal-footer justify-content-center">
-                          <%= f.submit 'Save', class: 'btn btn-default btn-block mt-0'%>
-                          <%= f.submit 'Send RFQ', class: 'btn btn-default btn-block mt-0'%>
-                          <%= f.submit 'Confirm Order', class: 'btn btn-default btn-block mt-0'%>
-                        </div>
-                      <% else %>
-                        <div class="justify-content-center text-center">
-                          <%= f.submit 'Request Amendment', class: 'btn btn-default btn-block'%>
-                        </div>
-                      <% end %>
-                     
-                  <% end %>
-                    </div>
-                 </div>
-            </div>
-            <div class="col-3">
-                <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Progress Tracking</h3>
-
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                        <i class="fas fa-minus"></i></button>
-                    </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="col-md-12">
-                            <!-- The time line -->
-                            <div class="timeline">
-                                <!-- timeline time label -->
-                                <div class="time-label">
-                                    <span class="bg-red">10 Feb. 2014</span>
-                                </div>
-                    
-
-                                <div>
-                                    <i class="fas fa-user bg-green"></i>
-                                    <div class="timeline-item">
-                                    <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
-                                    <h3 class="timeline-header no-border"><%= link_to "Booking", booking_users_manage_shipments_path %> Your Booking Confirmation is ready</h3>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <i class="fas fa-user bg-green"></i>
-                                    <div class="timeline-item">
-                                    <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
-                                    <h3 class="timeline-header no-border"><%= link_to "Bill Of Lading", bill_of_lading_users_manage_shipments_path %> Your Bill Of Lading is ready</h3>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <i class="fas fa-user bg-green"></i>
-                                    <div class="timeline-item">
-                                    <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
-                                    <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request</h3>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <i class="fas fa-user bg-green"></i>
-                                    <div class="timeline-item">
-                                    <span class="time"><i class="fas fa-clock"></i> 5 mins ago</span>
-                                    <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request</h3>
-                                    </div>
-                                </div>
-
-
-                                <div>
-                                    <i class="fas fa-clock bg-gray"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-    </section>
+</section>

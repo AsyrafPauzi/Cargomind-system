@@ -4,7 +4,9 @@ class AdminsController < Admins::BaseController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @user = User.all.limit(5).order(created_at: :desc)
+    @client = Client.all.limit(5).order(created_at: :desc)
+    @quotation = Quotation.all.limit(5).order(created_at: :desc)
   end
 
   private
@@ -12,6 +14,4 @@ class AdminsController < Admins::BaseController
     def set_admin
       @admin = current_admin
     end
-
-
 end

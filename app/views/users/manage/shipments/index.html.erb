@@ -17,11 +17,10 @@
 
     <!-- Main content -->
     <section class="content">
-      <%= link_to "Create RFQ" , new_users_manage_shipment_path, class:"btn btn-default my-3" %> 
       <!-- Default box -->
       <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Listing Jobs</h3>
+              <h3 class="card-title">Listing Quotations</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -48,8 +47,7 @@
                                         <td><%= quotations.status %></td>
                                         <td> 
                                         <p class="buttons">
-                                            <%= link_to '<span class="icon is-small"><i class="fa fa-cog"></i></span>'.html_safe, users_manage_shipment_path(quotations.quotation_id), data: {turbolinks: false}, class: 'btn btn-primary'%>
-                                            <%= link_to '<span class="icon is-small"><i class="fa fa-times"></i></span>'.html_safe, users_manage_shipment_path(quotations.quotation_id), :method => :delete, class: 'btn btn-danger'%>
+                                            <%= link_to '<span>View</span>'.html_safe, users_manage_shipment_path(quotations.quotation_id), data: {turbolinks: false}, class: 'btn btn-primary'%>
                                         </p>
                                         </td>
                                     </tr>

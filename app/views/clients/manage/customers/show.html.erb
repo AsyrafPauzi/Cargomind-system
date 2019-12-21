@@ -1,0 +1,72 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Shipments</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><%= link_to "Dashboard" ,  clients_path %></li>
+                    <li class="breadcrumb-item"><%= link_to "Shipments" ,  clients_manage_shipments_path %></li>
+                    <li class="breadcrumb-item active"><%= @customer.name %></li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Details Shipments</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                            title="Collapse">
+                            <i class="fas fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p id="error"><%= flash[:danger] %></p>
+                    <p id="notice"><%= flash[:success] %></p>
+                    <%= form_for(@customer, url:  clients_manage_customer_path(@customer.id), role:"form-horizontal", method: :patch) do |f|%>
+                    <%= f.hidden_field :client_id, value: current_client.id %>
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-2 col-form-label">Name :</label>
+                        <div class="col-sm-10">
+                            <%= f.text_field :name, class: 'form-control'%>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="company" class="col-sm-2 col-form-label">Company :</label>
+                        <div class="col-sm-10">
+                            <%= f.text_field :company, class: 'form-control'%>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="no_tel" class="col-sm-2 col-form-label">No Telephone :</label>
+                        <div class="col-sm-10">
+                            <%= f.text_field :no_tel, class: 'form-control'%>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="date" class="col-sm-2 col-form-label">Address :</label>
+                        <div class="col-sm-10">
+                            <%= f.text_area :address, :rows => 5,class: "form-control"%>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer justify-content-center">
+                        <%= f.submit 'Save', class: 'btn btn-default btn-block'%>
+
+                    </div>
+
+                    <% end %>
+                </div>
+            </div>
+        </div>
+
+</section>

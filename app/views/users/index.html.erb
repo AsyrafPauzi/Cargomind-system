@@ -19,10 +19,90 @@
       <div class="container-fluid">
         <!-- /.row -->
         <div class="row">
-          <div class="col-12">
+          <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Recents 10 Jobs</h3>
+                <h3 class="card-title">Recents 5 Request Amendment</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Quotation ID</th>
+                                    <th>Date Request</th>
+                                    <th>To</th>
+                                    <th>Attn</th>
+                                    <th>Logistic Type</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @quotation_1.each do |quotations|%>
+                                    <tr>
+                                        <td><%= quotations.quotation_id %></td>
+                                        <td><%= quotations.updated_at.strftime("%Y-%m-%d") %></td>
+                                        <td><%= quotations.to %></td>
+                                        <td><%= quotations.attn %></td>
+                                        <td><%= quotations.type_quotation %></td>
+                                        <td> 
+                                        <div class="btn-group">
+                                            <%= link_to '<span>View</span>'.html_safe, users_manage_shipment_path(quotations.quotation_id), data: {turbolinks: false}, class: 'btn btn-primary'%>
+                                        </div>
+                                        </td>
+                                    </tr>
+                                <% end %>
+                            </tbody>
+              </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Recents 5 Request For Quotation</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Quotation ID</th>
+                                    <th>Date Request</th>
+                                    <th>To</th>
+                                    <th>Attn</th>
+                                    <th>Logistic Type</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @quotation_3.each do |quotations|%>
+                                    <tr>
+                                        <td><%= quotations.quotation_id %></td>
+                                        <td><%= quotations.updated_at.strftime("%Y-%m-%d") %></td>
+                                        <td><%= quotations.to %></td>
+                                        <td><%= quotations.attn %></td>
+                                        <td><%= quotations.type_quotation %></td>
+                                        <td> 
+                                        <div class="btn-group">
+                                            <%= link_to '<span>View</span>'.html_safe, users_manage_shipment_path(quotations.quotation_id), data: {turbolinks: false}, class: 'btn btn-primary'%>
+                                        </div>
+                                        </td>
+                                    </tr>
+                                <% end %>
+                            </tbody>
+              </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Recents 5 Order</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
@@ -33,13 +113,13 @@
                                     <th>Date Create</th>
                                     <th>To</th>
                                     <th>Attn</th>
-                                    <th>Quotation Type</th>
+                                    <th>Logistic Type</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <% @quotation.each do |quotations|%>
+                                <% @quotation_2.each do |quotations|%>
                                     <tr>
                                         <td><%= quotations.quotation_id %></td>
                                         <td><%= quotations.created_at.strftime("%Y-%m-%d") %></td>
@@ -48,10 +128,9 @@
                                         <td><%= quotations.type_quotation %></td>
                                         <td><%= quotations.status %></td>
                                         <td> 
-                                        <p class="buttons">
-                                            <%= link_to '<span class="icon is-small"><i class="fa fa-cog"></i></span>'.html_safe, users_manage_shipment_path(quotations.quotation_id), data: {turbolinks: false}, class: 'btn btn-primary'%>
-                                            <%= link_to '<span class="icon is-small"><i class="fa fa-times"></i></span>'.html_safe, users_manage_shipment_path(quotations.quotation_id), :method => :delete, class: 'btn btn-danger'%>
-                                        </p>
+                                        <div class="btn-group">
+                                            <%= link_to '<span>View</span>'.html_safe, users_manage_shipment_path(quotations.quotation_id), data: {turbolinks: false}, class: 'btn btn-primary'%>
+                                        </div>
                                         </td>
                                     </tr>
                                 <% end %>

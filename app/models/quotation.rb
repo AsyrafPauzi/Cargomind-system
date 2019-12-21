@@ -1,7 +1,7 @@
   class Quotation < ApplicationRecord
     validates :date, presence: true
     before_create :generate_random_id
-    belongs_to :user
+    belongs_to :client
 
 
     private 
