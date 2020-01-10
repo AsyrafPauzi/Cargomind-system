@@ -1,0 +1,38 @@
+  <div class="modal fade" id="modal-declaration-reject" aria-hidden="true" style="display: none;">
+          <div class="modal-dialog modal-l">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Reject Declaration</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <%= form_for(:cargo_declaration, url: client_update_users_manage_cargo_declarations_path, role:"form-horizontal", method: :patch) do |f|%>
+                        <div class="form-group row">
+                                <label for="file_draft" class="col-sm-3 col-form-label">Upload File :</label>
+                                <div class="col-sm-9">
+                                    <div class="custom-file">
+                                        <%= f.file_field :file_client_draft, class: 'custom-file-input'%>
+                                        <label class="custom-file-label"
+                                            for="customFile"><%= @quotation.cargo_declaration.file_client_draft.present? ? @quotation.cargo_declaration.file_client_draft.file.filename  : "Choose file" %></label>
+                                    </div>
+                                </div>
+                        </div>
+                      <div class="form-group row">
+                        <label for="shipper" class="col-sm-3 col-form-label">Remarks :</label>
+                        <div class="col-sm-9">
+                        <%= f.text_area :remarks, :rows => 5,class: "form-control"%>
+                        </div>
+                      </div>
+              </div>
+              <div class="modal-footer justify-content-center">
+                <%= f.submit 'Submit', class: 'btn btn-default btn-block mt-0'%>
+                <button type="button" class="btn btn-default btn-block mt-0" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+             <% end %>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>

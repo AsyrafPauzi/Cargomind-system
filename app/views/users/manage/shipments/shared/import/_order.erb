@@ -1,15 +1,15 @@
 <div class="col-md-9">
-  <% if @quotation.cargo_type == "Sea"%>
-  <%= render partial: "users/manage/shipments/shared/export/sea" %>
+  <% if @quotation.mode_of_shipment == "Sea"%>
+  <%= render partial: "users/manage/shipments/shared/import/sea" %>
   <% else %>
-  <%= render partial: "users/manage/shipments/shared/export/air" %>
+  <%= render partial: "users/manage/shipments/shared/import/air" %>
   <% end %>
 
 </div>
 
 
-  <% if @quotation.cargo_type == "Sea"%>
-  <%= render partial: "users/manage/shipments/shared/export/tracking_sea" %>
+  <% if @quotation.mode_of_shipment == "Sea"%>
+  <%= render partial: "users/manage/shipments/shared/import/tracking_sea" %>
   <% else %>
-  <%= render partial: "users/manage/shipments/shared/export/tracking_air" %>
+  <%= render partial: "users/manage/shipments/shared/import/tracking_air" %>
   <% end %>

@@ -4,9 +4,9 @@ class UsersController < Users::BaseController
   # GET /users
   # GET /users.json
   def index
-    @quotation_1 = Quotation.where(status: "Request Amendment").limit(5).order(created_at: :desc)
-    @quotation_2 = Quotation.where(status: "Confirm Order").limit(5).order(created_at: :desc)
-    @quotation_3 = Quotation.where(status: "Request For Quotation").limit(5).order(created_at: :desc)
+    @quotation_1 = Quotation.where(status: "Request Amendment").where(user_id: nil).or(Quotation.where(status: "Request Amendment").where(user_id: current_user.id)).limit(5).order(created_at: :desc)
+    @quotation_2 = Quotation.where(status: "Confirm Order").where(user_id: nil).or(Quotation.where(status: "Confirm Order").where(user_id: current_user.id)).limit(5).order(created_at: :desc)
+    @quotation_3 = Quotation.where(status: "Request For Quotation").where(user_id: nil).or(Quotation.where(status: "Request For Quotation").where(user_id: current_user.id)).limit(5).order(created_at: :desc)
   end
 
   private

@@ -17,11 +17,12 @@ class Clients::Manage::ShipmentsController < Clients::BaseController
         respond_to do |format|
           if @quotation.save
               if params[:commit] == "Draft"
-                @quotation.update_attributes(status: "Draft")
+                @quotation.update(status: "Draft")
               elsif params[:commit] == "Send RFQ"
-                @quotation.update_attributes(status: "Request For Quotation")
+                @quotation.update(status: "Request For Quotation",quotation_status: "Pending")
               elsif params[:commit] == "Confirm Order"
-                @quotation.update_attributes(status: "Confirm Order")
+                @quotation.update(status: "Confirm Order",quotation_status: "Delivered")
+                Booking.create!(quotation_id: @quotation.id)                
               end
             format.html { redirect_to clients_manage_shipments_path, notice: 'Quotation was successfully created.' }
           else
@@ -34,11 +35,12 @@ class Clients::Manage::ShipmentsController < Clients::BaseController
         respond_to do |format|
           if @quotation.save
               if params[:commit] == "Draft"
-                @quotation.update_attributes(status: "Draft")
+                @quotation.update(status: "Draft")
               elsif params[:commit] == "Send RFQ"
-                @quotation.update_attributes(status: "Request For Quotation")
+                @quotation.update(status: "Request For Quotation",quotation_status: "Pending")
               elsif params[:commit] == "Confirm Order"
-                @quotation.update_attributes(status: "Confirm Order")
+                @quotation.update(status: "Confirm Order",quotation_status: "Delivered")
+                Booking.create!(quotation_id: @quotation.id)
               end
             format.html { redirect_to clients_manage_shipments_path, notice: 'Quotation was successfully created.' }
           else
@@ -52,7 +54,7 @@ class Clients::Manage::ShipmentsController < Clients::BaseController
  
      def update
         if params[:commit] == "Save"
-         if @quotation.update_attributes(quotation_params)
+         if @quotation.update(quotation_params)
              respond_to do |format|
                  format.html { redirect_to request.referrer, :flash => {:success => 'Successful updated Quotation.'}}
                  format.json { render :json => @quotation }
@@ -62,7 +64,7 @@ class Clients::Manage::ShipmentsController < Clients::BaseController
              redirect_to request.referrer
          end
         elsif params[:commit] == "Send RFQ"
-          if @quotation.update(status: "Request For Quotation")
+          if @quotation.update(status: "Request For Quotation",quotation_status: "Pending")
             respond_to do |format|
                 format.html { redirect_to request.referrer, :flash => {:success => 'Successful Request For Quotation.'}}
                 format.json { render :json => @quotation }
@@ -72,7 +74,7 @@ class Clients::Manage::ShipmentsController < Clients::BaseController
               redirect_to request.referrer
           end
         elsif params[:commit] == "Confirm Order"
-          if @quotation.update(status: "Confirm Order")
+          if @quotation.update(status: "Confirm Order",quotation_status: "Delivered")
             respond_to do |format|
                 format.html { redirect_to request.referrer, :flash => {:success => 'Successful Send Quotation.'}}
                 format.json { render :json => @quotation }
@@ -123,15 +125,15 @@ class Clients::Manage::ShipmentsController < Clients::BaseController
      private
  
     def quotation_import_params
-      params.require(:quotation_import).permit(:quotation_id, :type_quotation, :to, :date,:attn, :booking_no, :shipper, :consignee,:port_of_loading, :port_of_discharge, :final_destination, :cargo_type,:weight_type, :commodity, :client_id, :weight_fcl, :weight_air, :weight_lcl)
+      params.require(:quotation_import).permit(:quotation_id, :type_quotation, :date, :shipper, :consignee,:port_of_loading, :port_of_discharge, :final_destination, :mode_of_shipment,:weight_type, :commodity, :client_id, :weight_fcl, :weight_air, :weight_lcl)
     end
 
     def quotation_export_params
-      params.require(:quotation_export).permit(:quotation_id, :type_quotation, :to, :date,:attn, :booking_no, :shipper, :consignee,:port_of_loading, :port_of_discharge, :final_destination, :cargo_type,:weight_type, :commodity, :client_id, :weight_fcl, :weight_air, :weight_lcl)
+      params.require(:quotation_export).permit(:quotation_id, :type_quotation, :date, :shipper, :consignee,:port_of_loading, :port_of_discharge, :final_destination, :mode_of_shipment,:weight_type, :commodity, :client_id, :weight_fcl, :weight_air, :weight_lcl)
     end
 
     def quotation_params
-      params.require(:quotation).permit(:status,:quotation_id, :type_quotation, :to, :date,:attn, :booking_no, :shipper, :consignee,:port_of_loading, :port_of_discharge, :final_destination, :cargo_type,:weight_type, :commodity, :weight_fcl, :weight_air, :weight_lcl)
+      params.require(:quotation).permit(:status,:quotation_id, :type_quotation, :date, :shipper, :consignee,:port_of_loading, :port_of_discharge, :final_destination, :mode_of_shipment,:weight_type, :commodity, :weight_fcl, :weight_air, :weight_lcl)
     end
  
  end
