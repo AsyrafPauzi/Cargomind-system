@@ -312,15 +312,15 @@
                 <%= form_for(:cargo_declaration, url: users_manage_cargo_declaration_path, role:"form-horizontal", method: :patch) do |f|%>
                         <div class="form-group row">
                             <% if @quotation.cargo_declaration.status == "Confirmed" %>
-                                <label for="file_draft" class="col-sm-3 col-form-label">Upload Final Customs Form:</label>
+                                <label for="file_declaration" class="col-sm-3 col-form-label">Upload Final Customs Form:</label>
                             <% else %>
-                                <label for="file_draft" class="col-sm-3 col-form-label">Upload Draft :</label>
+                                <label for="file_declaration" class="col-sm-3 col-form-label">Upload Draft :</label>
                             <% end %>
                                 <div class="col-sm-9">
                                     <div class="custom-file">
-                                        <%= f.file_field :file_draft, class: 'custom-file-input'%>
+                                        <%= f.file_field :file_declaration, class: 'custom-file-input'%>
                                         <label class="custom-file-label"
-                                            for="customFile"><%= @quotation.cargo_declaration.file_draft.present? ? @quotation.cargo_declaration.file_draft.file.filename  : "Choose file" %></label>
+                                            for="customFile"><%= @quotation.cargo_declaration.file_declaration.present? ? @quotation.cargo_declaration.file_declaration.file.filename  : "Choose file" %></label>
                                     </div>
                                 </div>
                         </div>
@@ -368,9 +368,9 @@
                 <%= form_for(:slbl_confirmation, url: users_manage_slbl_confirmation_path, role:"form-horizontal", method: :patch) do |f|%>
                         <div class="form-group row">
                             <% if @quotation.slbl_confirmation.status == "Confirmed" %>
-                                <label for="file_draft" class="col-sm-3 col-form-label">Upload Final Customs Form:</label>
+                                <label for="file_confirmation" class="col-sm-3 col-form-label">Upload Final Customs Form:</label>
                             <% else %>
-                                <label for="file_draft" class="col-sm-3 col-form-label">Upload Draft :</label>
+                                <label for="file_confirmation" class="col-sm-3 col-form-label">Upload Draft :</label>
                             <% end %>
                                 <div class="col-sm-9">
                                     <div class="custom-file">
@@ -444,7 +444,7 @@
             <div class="card-body">
                 <%= form_for(:attach_pre_alert, url: users_manage_attach_pre_alert_path, role:"form-horizontal", method: :patch) do |f|%>
                     <div class="form-group row">
-                                <label for="file_draft" class="col-sm-3 col-form-label">Upload Attach Pre Alert:</label>
+                                <label for="file_attach_pre_alert" class="col-sm-3 col-form-label">Upload Attach Pre Alert:</label>
                                 <div class="col-sm-9">
                                     <div class="custom-file">
                                         <%= f.file_field :file_attach_pre_alert, class: 'custom-file-input'%>

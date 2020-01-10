@@ -77,7 +77,7 @@ class Users::Manage::CargoDeclarationsController < ApplicationController
      private
  
         def cargo_declarations_with_params
-            params.require(:cargo_declaration).permit(:file_draft,:file_client_draft,:remarks)
+            params.require(:cargo_declaration).permit(:file_declaration,:file_client_draft,:remarks)
         end
   
    
