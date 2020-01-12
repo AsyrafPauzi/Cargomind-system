@@ -130,8 +130,8 @@
               </div>
             </div>
           <% end %>
-          <%= render partial: "clients/manage/shipments/shared/modal_declaration_reject" %>
           <% if @quotation.cargo_declaration.present? %>
+            <%= render partial: "clients/manage/shipments/shared/modal_declaration_reject" %>
             <% if @quotation.cargo_declaration.status == "Draft"%>
               <div>
                 <i class="fas fa-exclamation bg-yellow"></i>
@@ -192,6 +192,7 @@
           <% end %>
 
           <% if @quotation.slbl_confirmation.present? %>
+           <%= render partial: "clients/manage/shipments/shared/modal_slbl_reject" %>
             <% if @quotation.slbl_confirmation.status == "Draft"%>
               <div>
                 <i class="fas fa-exclamation bg-yellow"></i>
@@ -212,7 +213,6 @@
                     <% end %>
                 </div>
               </div>
-              <%= render partial: "clients/manage/shipments/shared/modal_slbl_reject" %>
             <% elsif @quotation.slbl_confirmation.status == "Rejected" %>
               <div>
                 <i class="fas fa-exclamation bg-yellow"></i>
