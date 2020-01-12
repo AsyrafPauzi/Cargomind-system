@@ -131,7 +131,7 @@
             </div>
           <% end %>
           <% if @quotation.cargo_declaration.present? %>
-            <%= render partial: "clients/manage/shipments/shared/modal_declaration_reject" %>
+          
             <% if @quotation.cargo_declaration.status == "Draft"%>
               <div>
                 <i class="fas fa-exclamation bg-yellow"></i>
@@ -192,7 +192,7 @@
           <% end %>
 
           <% if @quotation.slbl_confirmation.present? %>
-           <%= render partial: "clients/manage/shipments/shared/modal_slbl_reject" %>
+        
             <% if @quotation.slbl_confirmation.status == "Draft"%>
               <div>
                 <i class="fas fa-exclamation bg-yellow"></i>
@@ -367,7 +367,12 @@
 
   </div>
 </div>
-
+<% if @quotation.cargo_declaration.present? %>
+  <%= render partial: "clients/manage/shipments/shared/modal_declaration_reject" %>
+<% end %>
+<% if @quotation.slbl_confirmation.present? %>
+     <%= render partial: "clients/manage/shipments/shared/modal_slbl_reject" %>
+<% end %>
 
 <script>
     // Add the following code if you want the name of the file appear on select
