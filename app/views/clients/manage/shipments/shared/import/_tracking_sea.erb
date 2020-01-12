@@ -130,7 +130,7 @@
               </div>
             </div>
           <% end %>
-
+          <%= render partial: "clients/manage/shipments/shared/modal_declaration_reject" %>
           <% if @quotation.cargo_declaration.present? %>
             <% if @quotation.cargo_declaration.status == "Draft"%>
               <div>
@@ -145,14 +145,14 @@
                     <%= form_for(:cargo_declaration, url: client_update_users_manage_cargo_declarations_path, role:"form-horizontal", method: :patch) do |f|%>  
                         <div class="btn-group btn-block" role="group" aria-label="Basic example">
                         <%= f.submit 'Confirm', class: 'btn btn-success'%>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-slbl-reject">Reject</button>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-declaration-reject">Reject</button>
                       </div>
                     <% end %>
                   </div>
                     <% end %>
                 </div>
               </div>
-              <%= render partial: "clients/manage/shipments/shared/modal_declaration_reject" %>
+
             <% elsif @quotation.cargo_declaration.status == "Rejected" %>
               <div>
                 <i class="fas fa-exclamation bg-yellow"></i>
@@ -367,7 +367,6 @@
 
   </div>
 </div>
-
 
 
 <script>
