@@ -23,7 +23,10 @@ default: &default
 
 development:
   <<: *default
-  database: Cargomind_development
+  host: ec2-174-129-32-215.compute-1.amazonaws.com
+  database: d45oppof3vc1di
+  username: csnuoympwiyvbd
+  password: 034457f5a2a47ab41a19e9d2fb6f05bcb5cb1866a03b85e48b733671666b3f25
 
 
   # The specified database role being used to connect to postgres.

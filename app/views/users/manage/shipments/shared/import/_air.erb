@@ -49,7 +49,7 @@
         <div class="custom-file">
             <%= f.file_field :quotation_file, class: 'custom-file-input'%>
             <label class="custom-file-label"
-                for="customFile"><%= @quotation.file_quotation.present? ? @quotation.file_quotation.file.filename  : "Choose file" %></label>
+                for="customFile">Choose file</label>
         </div>
         <div class="m-2">
             <% if @quotation.file_quotation.present? %>
@@ -158,7 +158,7 @@
                     <div class="custom-file">
                         <%= f.file_field :file_booking, class: 'custom-file-input'%>
                         <label class="custom-file-label"
-                            for="customFile"><%= @quotation.booking.file_booking.present? ? @quotation.booking.file_booking.file.filename  : "Choose file" %></label>
+                            for="customFile">Choose file</label>
                     </div>
                 </div>
             </div>
@@ -262,7 +262,7 @@
                         <div class="custom-file">
                             <%= f.file_field :file_rot, class: 'custom-file-input'%>
                             <label class="custom-file-label"
-                                for="customFile"><%= @quotation.cargo_collection.file_rot.present? ? @quotation.cargo_collection.file_rot.file.filename  : "Choose file" %></label>
+                                for="customFile">Choose file</label>
                         </div>
                     </div>
                 </div>
@@ -316,7 +316,7 @@
                                 <div class="custom-file">
                                     <%= f.file_field :file_declaration, class: 'custom-file-input'%>
                                     <label class="custom-file-label"
-                                        for="customFile"><%= @quotation.cargo_declaration.file_declaration.present? ? @quotation.cargo_declaration.file_declaration.file.filename  : "Choose file" %></label>
+                                        for="customFile">Choose file</label>
                                 </div>
                             </div>
                     </div>
@@ -396,7 +396,7 @@
                                 <div class="custom-file">
                                     <%= f.file_field :file_attach_pre_alert, class: 'custom-file-input'%>
                                     <label class="custom-file-label"
-                                        for="customFile"><%= @quotation.attach_pre_alert.file_attach_pre_alert.present? ? @quotation.attach_pre_alert.file_attach_pre_alert.file.filename  : "Choose file" %></label>
+                                        for="customFile">Choose file</label>
                                 </div>
                             </div>
                     </div>
