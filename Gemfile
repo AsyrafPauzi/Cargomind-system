@@ -25,7 +25,7 @@ gem 'jbuilder', '~> 2.7'
   gem 'devise'
   gem 'carrierwave'
   gem 'wicked_pdf'
-  gem 'wkhtmltopdf-heroku', '2.12.5.0'
+  
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -41,6 +41,7 @@ end
 group :development, :production do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'bootstrap',  '~>4.3.1'
+  gem 'wkhtmltopdf-heroku', '2.12.5.0'
 
 end
 
