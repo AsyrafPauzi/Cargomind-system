@@ -25,7 +25,7 @@ gem 'jbuilder', '~> 2.7'
   gem 'devise'
   gem 'carrierwave'
   gem 'wicked_pdf'
-  gem 'wkhtmltopdf-binary'
+  gem 'wkhtmltopdf-heroku', '2.12.5.0'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
