@@ -21,8 +21,16 @@ class Clients::Manage::ShipmentsController < Clients::BaseController
               elsif params[:commit] == "Send RFQ"
                 @quotation.update(status: "Request For Quotation",quotation_status: "Pending")
               elsif params[:commit] == "Confirm Order"
-                @quotation.update(status: "Confirm Order",quotation_status: "Delivered")
-                Booking.create!(quotation_id: @quotation.id)                
+                @quotation.update(status: "Confirm Order",quotation_status: "Final Confirmed")
+                if Booking.find_by_quotation_id(@quotation.id).nil?
+                  Booking.create!(quotation_id: @quotation.id)
+              end
+                if SlblConfirmation.find_by_quotation_id(@quotation.id).nil?
+                  SlblConfirmation.create!(quotation_id: @quotation.id)
+              end
+              if AttachPreAlert.find_by_quotation_id(@quotation.id).nil?
+                AttachPreAlert.create!(quotation_id: @quotation.id)
+            end              
               end
             format.html { redirect_to clients_manage_shipments_path, notice: 'Quotation was successfully created.' }
           else
@@ -75,6 +83,21 @@ class Clients::Manage::ShipmentsController < Clients::BaseController
           end
         elsif params[:commit] == "Confirm Order"
           if @quotation.update(status: "Confirm Order",quotation_status: "Delivered")
+            if @quotation.type_quotation == "Export"
+              if Booking.find_by_quotation_id(@quotation.id).nil?
+                Booking.create!(quotation_id: @quotation.id)
+              end
+            else
+              if Booking.find_by_quotation_id(@quotation.id).nil?
+                Booking.create!(quotation_id: @quotation.id)
+            end
+              if SlblConfirmation.find_by_quotation_id(@quotation.id).nil?
+                SlblConfirmation.create!(quotation_id: @quotation.id)
+            end
+            if AttachPreAlert.find_by_quotation_id(@quotation.id).nil?
+              AttachPreAlert.create!(quotation_id: @quotation.id)
+          end
+            end
             respond_to do |format|
                 format.html { redirect_to request.referrer, :flash => {:success => 'Successful Send Quotation.'}}
                 format.json { render :json => @quotation }

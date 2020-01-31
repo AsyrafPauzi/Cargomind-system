@@ -4,10 +4,40 @@ class Users::Manage::BillingsController < ApplicationController
 
      def update
             @billing = Billing.find_by_quotation_id(@quotation.id)
-            if @billing.update(status: "Confirmed Billing")
-                if Insurance.find_by_quotation_id(@quotation.id).nil?
-                    Insurance.create!(quotation_id: @quotation.id)
+            if @billing.update(billings_with_params.merge(status: "Billing Confirmed"))
+                if BillingDetail.find_by_billing_id(@billing.id).nil?
+                    params[:billing][:title].each_with_index  do |data, index|
+
+                        profit = params[:billing][:profit]
+                        cost = params[:billing][:cost]
+                        bill = params[:billing][:bill]
+                        title = params[:billing][:title]
+
+                        BillingDetail.create!(billing_id: @billing.id,title: title[index], cost: cost[index], bill: bill[index], profit: profit[index])
+
+                    end
+                else    
+                        BillingDetail.where(billing_id: @billing.id).destroy_all
+                        params[:billing][:title].each_with_index  do |data, index|
+                        profit = params[:billing][:profit]
+                        cost = params[:billing][:cost]
+                        bill = params[:billing][:bill]
+                        title = params[:billing][:title]
+
+                        BillingDetail.create!(billing_id: @billing.id,title: title[index], cost: cost[index], bill: bill[index], profit: profit[index])
+
+                    end
                 end
+                if @quotation.type_quotation == "Export"
+                    if Insurance.find_by_quotation_id(@quotation.id).nil?
+                        Insurance.create!(quotation_id: @quotation.id)
+                    end
+                else
+                    if Insurance.find_by_quotation_id(@quotation.id).nil?
+                        Insurance.create!(quotation_id: @quotation.id)
+                    end
+                end
+                
                 respond_to do |format|
                     format.html { redirect_to users_manage_shipment_path(@quotation.quotation_id), :flash => {:success => 'Successful Update Billing.'}}
                     format.json { render :json => @quotation }
@@ -29,7 +59,7 @@ class Users::Manage::BillingsController < ApplicationController
      private
  
         def billings_with_params
-            params.require(:billing).permit()
+            params.require(:billing).permit(:invoice)
         end
   
    

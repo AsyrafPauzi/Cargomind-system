@@ -18,7 +18,7 @@
     <section class="content">
     
         <div class="row">
-            <div class="col-9">
+            <div class="col-8">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Details Shipments</h3>
@@ -202,10 +202,18 @@
                     </div>
                  </div>
             </div>
-            <% if @quotation.mode_of_shipment == "Sea"%>
-  <%= render partial: "clients/manage/shipments/shared/import/tracking_sea" %>
-  <% else %>
-  <%= render partial: "clients/manage/shipments/shared/import/tracking_air" %>
-  <% end %>
+            <% if @quotation.type_quotation == "Import" %>
+              <% if @quotation.mode_of_shipment == "Sea"%>
+              <%= render partial: "clients/manage/shipments/shared/import/tracking_sea" %>
+              <% else %>
+              <%= render partial: "clients/manage/shipments/shared/import/tracking_air" %>
+              <% end %>
+            <% else %>
+              <% if @quotation.mode_of_shipment == "Sea"%>
+              <%= render partial: "clients/manage/shipments/shared/export/tracking_sea" %>
+              <% else %>
+              <%= render partial: "clients/manage/shipments/shared/export/tracking_air" %>
+              <% end %>
+            <% end %>
 
     </section>

@@ -4,7 +4,7 @@ class Users::Manage::VesselDepartsController < ApplicationController
 
      def update
             @vessel_depart = VesselDepart.find_by_quotation_id(@quotation.id)
-            if @vessel_depart.update(status: "Confirmed Vessel Depart")
+            if @vessel_depart.update(status: "Vessel Depart Confirmed")
                 if AttachPreAlert.find_by_quotation_id(@quotation.id).nil?
                     AttachPreAlert.create!(quotation_id: @quotation.id)
                 end

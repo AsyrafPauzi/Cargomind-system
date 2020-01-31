@@ -14,38 +14,67 @@
         <div class="timeline">
           <!-- timeline time label -->
           <div class="time-label">
-            <span class="bg-red"><%= @quotation.created_at.strftime("%Y-%m-%d") %></span>
+            <span class="bg-green"><%= @quotation.created_at.strftime("%Y-%m-%d") %></span>
           </div>
+
           
-          <% if @quotation.quotation_status == "Pending"%>``
+          <% if @quotation.quotation_status == "Pending"%>
               <div>
                 <i class="fas fa-times bg-red"></i>
                 <div class="timeline-item">
                   <h3 class="timeline-header no-border">Quotation</h3>
                 </div>
               </div>
-          <% else %>
-                <div>
-                <i class="fas fa-check bg-green"></i>
+          <% elsif @quotation.quotation_status == "Draft"%>
+              <div>
+                <i class="fas fa-exclamation bg-yellow"></i>
                 <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Quotation</h3>
+                  <h3 class="timeline-header no-border">Quotation Sent</h3>
                 </div>
               </div>
+          <% elsif @quotation.quotation_status == "Client Feedback"%>
+              <div>
+                <i class="fas fa-exclamation bg-yellow"></i>
+                <div class="timeline-item">
+                  <h3 class="timeline-header no-border">Client Feedback</h3>
+                </div>
+              </div>
+          <% elsif @quotation.quotation_status == "Confirmed"%>
+              <div>
+                <i class="fas fa-exclamation bg-yellow"></i>
+                <div class="timeline-item">
+                  <h3 class="timeline-header no-border">Quotation Confirmed</h3>
+                </div>
+              </div>
+          <% elsif @quotation.quotation_status == "Final Confirmed"%>
+              <div>
+                <i class="fas fa-check bg-green"></i>
+                <div class="timeline-item">
+                  <h3 class="timeline-header no-border">Quotation Final Confirmed</h3>
+                </div>
+              </div>
+          <% else %>
+              <div>
+              <i class="fas fa-check bg-green"></i>
+              <div class="timeline-item">
+                <h3 class="timeline-header no-border">Quotation</h3>
+              </div>
+            </div>
           <% end %>
-
+          
           <% if @quotation.booking.present? %>
             <% if @quotation.booking.status == "Booking Confirmation"%>
               <div>
                 <i class="fas fa-check bg-green"></i>
                 <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Booking</h3>
+                  <h3 class="timeline-header no-border">Booking Confirmation</h3>
                 </div>
               </div>
             <% else %>
               <div>
                 <i class="fas fa-times bg-red"></i>
                 <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Booking</h3>
+                  <h3 class="timeline-header no-border">Booking Not Confirm</h3>
                 </div>
               </div>
             <% end %>
@@ -53,102 +82,12 @@
             <div>
                 <i class="fas fa-times bg-red"></i>
                 <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Booking</h3>
+                  <h3 class="timeline-header no-border">Booking Not Confirm</h3>
                 </div>
               </div>
           <% end %>
 
-          <% if @quotation.cargo_collection.present? %>
-            <% if @quotation.weight_type == "FCL" %>
-                <% if @quotation.cargo_collection.status == "Empty Send" %>
-                  <div>
-                    <i class="fas fa-exclamation bg-yellow"></i>
-                    <div class="timeline-item">
-                        
-                      <h3 class="timeline-header no-border">Empty Send</h3>
-                    </div>
-                  </div>
-                <% elsif @quotation.cargo_collection.status == "Laden Collected"%>
-                  <div>
-                    <i class="fas fa-check bg-green"></i>
-                    <div class="timeline-item">
-                        
-                      <h3 class="timeline-header no-border">Laden Collected</h3>
-                    </div>
-                  </div>
-                <% else %>
-                  <div>
-                    <i class="fas fa-times bg-red"></i>
-                    <div class="timeline-item">
-                        
-                      <h3 class="timeline-header no-border">Cargo Collection</h3>
-                    </div>
-                  </div>
-                <% end %>
-            <% else %>
-                <% if @quotation.cargo_collection.status == "On Plan" %>
-                  <div>
-                    <i class="fas fa-exclamation bg-yellow"></i>
-                    <div class="timeline-item">
-                        
-                      <h3 class="timeline-header no-border">On Plan</h3>
-                    </div>
-                  </div>
-                <% elsif @quotation.cargo_collection.status == "Collected"%>
-                  <div>
-                    <i class="fas fa-check bg-green"></i>
-                    <div class="timeline-item">
-                        
-                      <h3 class="timeline-header no-border">Collected</h3>
-                    </div>
-                  </div>
-                <% else %>
-                  <div>
-                    <i class="fas fa-times bg-red"></i>
-                    <div class="timeline-item">
-                        
-                      <h3 class="timeline-header no-border">Cargo Collection</h3>
-                    </div>
-                  </div>
-                <% end %>
-            <% end %>
-          <% else %>
-            <div>
-                <i class="fas fa-times bg-red"></i>
-                <div class="timeline-item">
-                    
-                  <h3 class="timeline-header no-border">Cargo Collection</h3>
-                </div>
-              </div>
-          <% end %>
 
-          <% if @quotation.cargo_declaration.present? %>
-            <% if @quotation.cargo_declaration.status == "Confirmed Cargo Declaration"%>
-              <div>
-                <i class="fas fa-check bg-green"></i>
-                <div class="timeline-item">
-                    
-                  <h3 class="timeline-header no-border">Cargo Declaration</h3>
-                </div>
-              </div>
-            <% else %>
-              <div>
-                <i class="fas fa-times bg-red"></i>
-                <div class="timeline-item">
-                    
-                  <h3 class="timeline-header no-border">Cargo Declaration</h3>
-                </div>
-              </div>
-            <% end %>
-          <% else %>
-            <div>
-                <i class="fas fa-times bg-red"></i>
-                <div class="timeline-item">
-                    
-                  <h3 class="timeline-header no-border">Cargo Declaration</h3>
-                </div>
-              </div>
-          <% end %>
 
           <% if @quotation.slbl_confirmation.present? %>
             <% if @quotation.slbl_confirmation.status == "SL/BL Confirmed"%>
@@ -156,7 +95,30 @@
                 <i class="fas fa-check bg-green"></i>
                 <div class="timeline-item">
                     
-                  <h3 class="timeline-header no-border">SL/BL Confirmation</h3>
+                  <h3 class="timeline-header no-border">BL Confirmation Complete</h3>
+                </div>
+              </div>
+              <% elsif @quotation.slbl_confirmation.status == "Confirmed" %>
+              <div>
+                <i class="fas fa-exclamation bg-yellow"></i>
+                <div class="timeline-item">
+                  <h3 class="timeline-header no-border">BL Confirmation Confirmed</h3>
+                </div>
+              </div>
+              <% elsif @quotation.slbl_confirmation.status == "Draft"%>
+              <div>
+                <i class="fas fa-exclamation bg-yellow"></i>
+                <div class="timeline-item">
+                    
+                  <h3 class="timeline-header no-border">BL Confirmation Draft</h3>
+                </div>
+              </div>
+              <% elsif @quotation.slbl_confirmation.status == "Rejected"%>
+              <div>
+                <i class="fas fa-exclamation bg-yellow"></i>
+                <div class="timeline-item">
+                    
+                  <h3 class="timeline-header no-border">BL Confirmation Rejected</h3>
                 </div>
               </div>
             <% else %>
@@ -164,7 +126,7 @@
                 <i class="fas fa-times bg-red"></i>
                 <div class="timeline-item">
                     
-                  <h3 class="timeline-header no-border">SL/BL Confirmation</h3>
+                  <h3 class="timeline-header no-border">BL Confirmation Not Complete</h3>
                 </div>
               </div>
             <% end %>
@@ -173,40 +135,13 @@
                 <i class="fas fa-times bg-red"></i>
                 <div class="timeline-item">
                     
-                  <h3 class="timeline-header no-border">SL/BL Confirmation</h3>
+                  <h3 class="timeline-header no-border">BL Confirmation Not Complete</h3>
                 </div>
               </div>
-          <% end %>
-
-          <% if @quotation.weight_type == "LCL" %>
-            <% if @quotation.vessel_depart.present? %>
-              <% if @quotation.vessel_depart.status == "Confirmed Vessel Depart"%>
-                <div>
-                  <i class="fas fa-check bg-green"></i>
-                  <div class="timeline-item">
-                    <h3 class="timeline-header no-border">Vessel Depart</h3>
-                  </div>
-                </div>
-              <% else %>
-                <div>
-                  <i class="fas fa-times bg-red"></i>
-                  <div class="timeline-item">
-                    <h3 class="timeline-header no-border">Vessel Depart</h3>
-                  </div>
-                </div>
-              <% end %>
-            <% else %>
-                <div>
-                  <i class="fas fa-times bg-red"></i>
-                  <div class="timeline-item">
-                    <h3 class="timeline-header no-border">Flight Depart</h3>
-                  </div>
-                </div>
-            <% end %>
           <% end %>
 
           <% if @quotation.attach_pre_alert.present? %>
-            <% if @quotation.attach_pre_alert.status == "Confirmed Attach Pre Alert"%>
+            <% if @quotation.attach_pre_alert.status == "Attach Pre Alert Confirmed"%>
               <div>
                 <i class="fas fa-check bg-green"></i>
                 <div class="timeline-item">
@@ -229,9 +164,113 @@
                 </div>
               </div>
           <% end %>
+
+          <% if @quotation.cargo_declaration.present? %>
+            <% if @quotation.cargo_declaration.status == "Cargo Declaration Confirmed"%>
+              <div>
+                <i class="fas fa-check bg-green"></i>
+                <div class="timeline-item">
+                    
+                  <h3 class="timeline-header no-border">Import Cargo Declaration Complete</h3>
+                </div>
+              </div>
+              <% elsif @quotation.cargo_declaration.status == "Draft"%>
+              <div>
+                <i class="fas fa-exclamation bg-yellow"></i>
+                <div class="timeline-item">
+                    
+                  <h3 class="timeline-header no-border">Import Cargo Declaration Draft</h3>
+                </div>
+              </div>
+              <% elsif @quotation.cargo_declaration.status == "Rejected" %>
+              <div>
+                <i class="fas fa-exclamation bg-yellow"></i>
+                <div class="timeline-item">
+                  <h3 class="timeline-header no-border">Import Cargo Declaration Rejected</h3>
+                </div>
+              </div>
+              <% elsif @quotation.cargo_declaration.status == "Confirmed" %>
+              <div>
+                <i class="fas fa-exclamation bg-yellow"></i>
+                <div class="timeline-item">
+                  <h3 class="timeline-header no-border">Import Cargo Declaration Confirmed</h3>
+                </div>
+              </div>
+            <% else %>
+              <div>
+                <i class="fas fa-times bg-red"></i>
+                <div class="timeline-item">
+                    
+                  <h3 class="timeline-header no-border">Import Cargo Declaration</h3>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <div>
+                <i class="fas fa-times bg-red"></i>
+                <div class="timeline-item">
+                    
+                  <h3 class="timeline-header no-border">Import Cargo Declaration</h3>
+                </div>
+              </div>
+          <% end %>
+
+          <% if @quotation.cargo_collection.present? %>
+            <% if @quotation.cargo_collection.status == "On Plan" %>
+              <div>
+                <i class="fas fa-exclamation bg-yellow"></i>
+                <div class="timeline-item">
+                    
+                  <h3 class="timeline-header no-border">Cargo Delivery On Plan</h3>
+                </div>
+              </div>
+            <% elsif @quotation.cargo_collection.status == "Collected"%>
+              <div>
+                <i class="fas fa-check bg-green"></i>
+                <div class="timeline-item">
+                    
+                  <h3 class="timeline-header no-border">Cargo Delivery Collected</h3>
+                </div>
+              </div>
+            <% elsif @quotation.cargo_collection.status == "Empty Send"%>
+              <div>
+                <i class="fas fa-exclamation bg-yellow"></i>
+                <div class="timeline-item">
+                    
+                  <h3 class="timeline-header no-border">Cargo Delivery Empty Send</h3>
+                </div>
+              </div>
+               <% elsif @quotation.cargo_collection.status == "Laden Collected"%>
+              <div>
+                <i class="fas fa-check bg-green"></i>
+                <div class="timeline-item">
+                    
+                  <h3 class="timeline-header no-border">Cargo Delivery Laden Collected</h3>
+                </div>
+              </div>
+            <% else %>
+              <div>
+                <i class="fas fa-times bg-red"></i>
+                <div class="timeline-item">
+                    
+                  <h3 class="timeline-header no-border">Cargo Delivery Not Collected</h3>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <div>
+                <i class="fas fa-times bg-red"></i>
+                <div class="timeline-item">
+                    
+                  <h3 class="timeline-header no-border">Cargo Delivery Not Collected</h3>
+                </div>
+              </div>
+          <% end %>
+
+          
 
           <% if @quotation.billing.present? %>
-            <% if @quotation.billing.status == "Confirmed Billing"%>
+            <% if @quotation.billing.status == "Billing Confirmed"%>
               <div>
                 <i class="fas fa-check bg-green"></i>
                 <div class="timeline-item">
@@ -254,33 +293,31 @@
                 </div>
               </div>
           <% end %>
-
-          <% if @quotation.insurance.present? %>
-            <% if @quotation.insurance.status == "Confirmed Insurance"%>
-              <div>
-                <i class="fas fa-check bg-green"></i>
-                <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Insurance</h3>
-                </div>
-              </div>
-            <% else %>
-              <div>
-                <i class="fas fa-times bg-red"></i>
-                <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Insurance</h3>
-                </div>
-              </div>
-            <% end %>
-          <% else %>
-              <div>
-                <i class="fas fa-times bg-red"></i>
-                <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Insurance</h3>
-                </div>
-              </div>
-          <% end %>
-      
           
+          <% if @quotation.insurance.present? %>
+            <% if @quotation.insurance.status == "Insurance Confirmed"%>
+              <div>
+                <i class="fas fa-check bg-green"></i>
+                <div class="timeline-item">
+                  <h3 class="timeline-header no-border">Insurance Complete</h3>
+                </div>
+              </div>
+            <% else %>
+              <div>
+                <i class="fas fa-times bg-red"></i>
+                <div class="timeline-item">
+                  <h3 class="timeline-header no-border">Insurance Not Complete</h3>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+              <div>
+                <i class="fas fa-times bg-red"></i>
+                <div class="timeline-item">
+                  <h3 class="timeline-header no-border">Insurance</h3>
+                </div>
+              </div>
+          <% end %>
  
             
             

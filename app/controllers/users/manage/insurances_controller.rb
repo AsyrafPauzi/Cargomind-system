@@ -4,7 +4,7 @@ class Users::Manage::InsurancesController < ApplicationController
 
      def update
             @insurance = Insurance.find_by_quotation_id(@quotation.id)
-            if @insurance.update(status: "Confirmed Insurance")
+            if @insurance.update(insurances_with_params.merge(status: "Insurance Confirmed"))
                 respond_to do |format|
                     format.html { redirect_to users_manage_shipment_path(@quotation.quotation_id), :flash => {:success => 'Successful Update Insurance.'}}
                     format.json { render :json => @quotation }
@@ -26,7 +26,7 @@ class Users::Manage::InsurancesController < ApplicationController
      private
  
         def insurances_with_params
-            params.require(:insurance).permit()
+            params.require(:insurance).permit(:policy)
         end
   
    

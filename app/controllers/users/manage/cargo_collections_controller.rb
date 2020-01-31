@@ -10,9 +10,16 @@ class Users::Manage::CargoCollectionsController < Users::BaseController
             else
                 @cargo_collection.update(status: "On Plan")
             end
-            if CargoDeclaration.find_by_quotation_id(@quotation.id).nil?
-                CargoDeclaration.create!(quotation_id: @quotation.id)
+            if @quotation.type_quotation == "Export"
+                if CargoDeclaration.find_by_quotation_id(@quotation.id).nil?
+                    CargoDeclaration.create!(quotation_id: @quotation.id)
+                end
+            else
+                if Billing.find_by_quotation_id(@quotation.id).nil?
+                    Billing.create!(quotation_id: @quotation.id)
+                end
             end
+            
             respond_to do |format|
                 format.html { redirect_to users_manage_shipment_path(@quotation.quotation_id), :flash => {:success => 'Successful Update Cargo Collection.'}}
                 format.json { render :json => @quotation }
@@ -60,7 +67,7 @@ class Users::Manage::CargoCollectionsController < Users::BaseController
      private
  
         def cargo_collections_with_params
-            params.require(:cargo_collection).permit(:haulage,:status,:truck_type,:driver_phone_number,:driver_name,:truck_number,:estimated_collection_date,:file_rot)
+            params.require(:cargo_collection).permit(:haulage,:status,:truck_type,:driver_phone_number,:driver_name,:truck_number,:estimated_collection_date,:file_rot,:lcl_remarks)
         end
   
    

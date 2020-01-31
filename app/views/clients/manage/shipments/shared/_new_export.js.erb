@@ -3,18 +3,6 @@
             $("#quotation_export_date").val($(this).val());
         });
 
-        $('#to_export').on("change", function () {
-            $("#quotation_export_to").val($(this).val());
-        });
-
-        $('#attn_export').on("change", function () {
-            $("#quotation_export_attn").val($(this).val());
-        });
-
-        $('#booking_no_export').on("change", function () {
-            $("#quotation_export_booking_no").val($(this).val());
-        });
-
         $('#shipper_export').on("change", function () {
             $("#quotation_export_shipper").val($(this).val());
         });
@@ -39,7 +27,7 @@
             $("#quotation_export_mode_of_shipment").val($(this).val());
         });
 
-        $('.weight_type_export').on("change", function () {
+        $('.weight_type_export').on("click", function () {
             $("#quotation_export_weight_type").val($(this).val());
         });
 

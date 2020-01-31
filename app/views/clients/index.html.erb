@@ -34,6 +34,7 @@
                                     <th width="20%">Shipper</th>
                                     <th width="20%">Consignee</th>
                                     <th width="10%">Quotation Type</th>
+                                    <th width="10%">Mode Of Shipment</th>
                                     <th width="10%">Status</th>
                                     <th width="10%">Quotation Status</th>
                                     <th width="10%">Action</th>
@@ -47,6 +48,7 @@
                                         <td><%= quotations.shipper %></td>
                                         <td><%= quotations.consignee %></td>
                                         <td><%= quotations.type_quotation %></td>
+                                        <td><%= quotations.mode_of_shipment %></td>
                                         <td><%= quotations.status %></td>
                                         <td><%= quotations.quotation_status.present? ? quotations.quotation_status : ""  %></td>
                                         <td> 

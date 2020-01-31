@@ -16,15 +16,27 @@ Rails.application.routes.draw do
   devise_scope :client do
     root to: "clients#index"
   end
-  resources :users, only: [:index]
+  resources :users, only: [:index] do
+    collection do
+      post '/post_status/', to: 'users#post_status', as: 'post_status'
+      delete '/delete_status/:id', to: 'users#delete_status', as: 'delete_status'
+    end
+  end
   namespace :users do
+ 
     namespace :manage do
       resources :shipments do
         collection do
           patch '/assign_user/:id', to: 'shipments#assign_user', as: 'assign_user'
           patch '/send_quotation/:id', to: 'shipments#send_quotation', as: 'send_quotation'
+          patch '/client_update/:id', to: 'shipments#client_update', as: 'client_update'
           get '/booking/', to: 'shipments#booking', as: 'booking'
-          get '/bill_of_lading/', to: 'shipments#bill_of_lading', as: 'bill_of_lading'
+          get '/bill_of_lading/:id', to: 'shipments#bill_of_lading', as: 'bill_of_lading'
+          patch '/update_bill_of_lading/:id', to: 'shipments#update_bill_of_lading', as: 'update_bill_of_lading'
+          get '/view_bill_of_lading/:id', to: 'shipments#view_bill_of_lading', as: 'view_bill_of_lading'
+          get '/awb/:id', to: 'shipments#awb', as: 'awb'
+          patch '/update_awb/:id', to: 'shipments#update_awb', as: 'update_awb'
+          get '/view_awb/:id', to: 'shipments#view_awb', as: 'view_awb'
         end
       end
       resources :profiles do
@@ -45,10 +57,6 @@ Rails.application.routes.draw do
           patch '/update_declaration/:id', to: 'cargo_declarations#client_update', as: 'client_update'
         end
       end
-      resources :cargo_submissions do
-        collection do
-        end
-      end
       resources :bookings do
         collection do
         end
@@ -56,10 +64,6 @@ Rails.application.routes.draw do
       resources :slbl_confirmations do
         collection do
           patch '/update_slbl_confirmation/:id', to: 'slbl_confirmations#client_update', as: 'client_update'
-        end
-      end
-      resources :flight_departs do
-        collection do
         end
       end
       resources :vessel_departs do

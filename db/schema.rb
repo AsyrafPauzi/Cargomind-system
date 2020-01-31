@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_09_174017) do
+ActiveRecord::Schema.define(version: 2020_01_30_124141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,11 +37,23 @@ ActiveRecord::Schema.define(version: 2020_01_09_174017) do
     t.index ["quotation_id"], name: "index_attach_pre_alerts_on_quotation_id"
   end
 
+  create_table "billing_details", force: :cascade do |t|
+    t.string "title"
+    t.bigint "billing_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.decimal "cost", precision: 9, scale: 2, default: "0.0"
+    t.decimal "bill", precision: 9, scale: 2, default: "0.0"
+    t.decimal "profit", precision: 9, scale: 2, default: "0.0"
+    t.index ["billing_id"], name: "index_billing_details_on_billing_id"
+  end
+
   create_table "billings", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "quotation_id"
     t.string "status"
+    t.string "invoice"
     t.index ["quotation_id"], name: "index_billings_on_quotation_id"
   end
 
@@ -54,7 +66,7 @@ ActiveRecord::Schema.define(version: 2020_01_09_174017) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "quotation_id"
-    t.index ["quotation_id"], name: "index_booking_on_quotation_id"
+    t.index ["quotation_id"], name: "index_bookings_on_quotation_id"
   end
 
   create_table "cargo_collections", force: :cascade do |t|
@@ -74,7 +86,7 @@ ActiveRecord::Schema.define(version: 2020_01_09_174017) do
   end
 
   create_table "cargo_declarations", force: :cascade do |t|
-    t.string "file_draft"
+    t.string "file_declaration"
     t.string "remarks"
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
@@ -82,14 +94,6 @@ ActiveRecord::Schema.define(version: 2020_01_09_174017) do
     t.bigint "quotation_id"
     t.string "file_client_draft"
     t.index ["quotation_id"], name: "index_cargo_declarations_on_quotation_id"
-  end
-
-  create_table "cargo_submissions", force: :cascade do |t|
-    t.string "status"
-    t.bigint "quotation_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["quotation_id"], name: "index_cargo_submissions_on_quotation_id"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -103,6 +107,7 @@ ActiveRecord::Schema.define(version: 2020_01_09_174017) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "role"
     t.index ["email"], name: "index_clients_on_email", unique: true
     t.index ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true
   end
@@ -118,19 +123,12 @@ ActiveRecord::Schema.define(version: 2020_01_09_174017) do
     t.index ["client_id"], name: "index_customers_on_client_id"
   end
 
-  create_table "flight_departs", force: :cascade do |t|
-    t.string "status"
-    t.bigint "quotation_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["quotation_id"], name: "index_flight_departs_on_quotation_id"
-  end
-
   create_table "insurances", force: :cascade do |t|
     t.string "status"
     t.bigint "quotation_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "policy"
     t.index ["quotation_id"], name: "index_insurances_on_quotation_id"
   end
 
@@ -157,6 +155,8 @@ ActiveRecord::Schema.define(version: 2020_01_09_174017) do
     t.bigint "user_id"
     t.string "quotation_status"
     t.string "file_quotation"
+    t.string "remarks"
+    t.string "file_client"
     t.index ["client_id"], name: "index_quotations_on_client_id"
     t.index ["user_id"], name: "index_quotations_on_user_id"
   end
@@ -169,7 +169,38 @@ ActiveRecord::Schema.define(version: 2020_01_09_174017) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "quotation_id"
     t.string "file_client_draft"
+    t.string "notify_party"
+    t.string "delivery_agent"
+    t.string "voyage_no"
+    t.string "combined_transport_onward_carriage"
+    t.string "place_of_receipt"
+    t.string "freight_payable_at"
+    t.string "place_of_delivery"
+    t.string "sibl_no"
+    t.string "marks_and_numbers"
+    t.string "no_of_pkgs"
+    t.string "description_of_goods"
+    t.string "gross_weight"
+    t.string "measurement"
+    t.string "container_no"
+    t.string "seal_no"
+    t.string "number_of_packages_in_words"
+    t.string "place_issue"
+    t.string "date_issue"
+    t.string "date"
+    t.string "by"
     t.index ["quotation_id"], name: "index_slbl_confirmations_on_quotation_id"
+  end
+
+  create_table "user_statuses", force: :cascade do |t|
+    t.string "description"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.bigint "quotation_id"
+    t.index ["quotation_id"], name: "index_user_statuses_on_quotation_id"
+    t.index ["user_id"], name: "index_user_statuses_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -195,16 +226,17 @@ ActiveRecord::Schema.define(version: 2020_01_09_174017) do
   end
 
   add_foreign_key "attach_pre_alerts", "quotations"
+  add_foreign_key "billing_details", "billings"
   add_foreign_key "billings", "quotations"
   add_foreign_key "bookings", "quotations"
   add_foreign_key "cargo_collections", "quotations"
   add_foreign_key "cargo_declarations", "quotations"
-  add_foreign_key "cargo_submissions", "quotations"
   add_foreign_key "customers", "clients"
-  add_foreign_key "flight_departs", "quotations"
   add_foreign_key "insurances", "quotations"
   add_foreign_key "quotations", "clients"
   add_foreign_key "quotations", "users"
   add_foreign_key "slbl_confirmations", "quotations"
+  add_foreign_key "user_statuses", "quotations"
+  add_foreign_key "user_statuses", "users"
   add_foreign_key "vessel_departs", "quotations"
 end

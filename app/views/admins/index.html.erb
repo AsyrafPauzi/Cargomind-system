@@ -1,149 +1,146 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Dashboard</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
 
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Dashboard</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item active"><a href="#">Dashboard</a></li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
+<!-- Main content -->
+<section class="content">
+  <!-- Default box -->
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Top 5 Latest Quotations</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+      <table id="table1" class="table table-striped table-bordered " style="width:100%">
+        <thead>
+          <tr>
+            <th width="8%">Quotation ID</th>
+            <th width="8%">Date Create</th>
+            <th width="13%">Shipper</th>
+            <th width="13%">Consignee</th>
+            <th width="10%">Quotation Type</th>
+            <th width="8%">Status</th>
+            <th width="10%">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @quotation.each do |quotations|%>
+          <tr>
+            <td><%= quotations.quotation_id %></td>
+            <td><%= quotations.created_at.strftime("%Y-%m-%d") %></td>
+            <td><%= quotations.shipper %></td>
+            <td><%= quotations.consignee %></td>
+            <td><%= quotations.type_quotation %></td>
+            <td><%= quotations.status %></td>
+            <td>
+              <p class="buttons">
+                <%= link_to '<span>Delete</span>'.html_safe,  admins_manage_shipment_path(quotations.quotation_id), :method => :delete, data: { confirm: 'Are you sure you want to delete this quotation?' }, class: 'btn btn-danger'%>
+              </p>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <!-- /.card-body -->
+  </div>
 
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <!-- /.row -->
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Recents 5 Quotations</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
-                <table class="table table-striped table-bordered" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Quotation ID</th>
-                                    <th>Date Create</th>
-                                    <th>To</th>
-                                    <th>Attn</th>
-                                    <th>Quotation Type</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% @quotation.each do |quotations|%>
-                                    <tr>
-                                        <td><%= quotations.quotation_id %></td>
-                                        <td><%= quotations.created_at.strftime("%Y-%m-%d") %></td>
-                                        <td><%= quotations.to %></td>
-                                        <td><%= quotations.attn %></td>
-                                        <td><%= quotations.type_quotation %></td>
-                                        <td><%= quotations.status %></td>
-                                        <td> 
-                                        <div class="btn-group">
-                                            <%= link_to '<span>View</span>'.html_safe,  admins_manage_shipment_path(quotations.quotation_id), data: {turbolinks: false}, class: 'btn btn-primary'%>
-                                            <%= link_to '<span>Delete</span>'.html_safe,  admins_manage_shipment_path(quotations.quotation_id), :method => :delete, data: { confirm: 'Are you sure you want to delete this quotation?' }, class: 'btn btn-danger '%>
-                                        </div>
-                                        </td>
-                                    </tr>
-                                <% end %>
-                            </tbody>
-              </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Recents 5 Users</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
-                <table class="table table-striped table-bordered" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>No. </th>
-                                    <th>Email</th>
-                                    <th>Date Create</th>
-                                    <th>Name</th>
-                                    <th>No Telephone</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% @user.each_with_index do |users, index| %>
-                                    <tr>
-                                        <td><%= index + 1 %></td>
-                                        <td><%= users.email %></td>
-                                        <td><%= users.created_at.strftime("%Y-%m-%d") %></td>
-                                        <td><%= users.name %></td>
-                                        <td><%= users.no_tel %></td>
-                                        <td> 
-                                        <div class="btn-group">
-                                            <%= link_to '<span>View</span>'.html_safe,  admins_manage_user_path(users.id), data: {turbolinks: false}, class: 'btn btn-primary'%>
-                                            <%= link_to '<span>Delete</span>'.html_safe,  admins_manage_user_path(users.id), :method => :delete, data: { confirm: 'Are you sure you want to delete this user?' }, class: 'btn btn-danger '%>
-                                        </div>
-                                        </td>
-                                    </tr>
-                                <% end %>
-                            </tbody>
-              </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Recents 5 Clients</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
-                <table class="table table-striped table-bordered" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>No. </th>
-                                    <th>Name</th>
-                                    <th>Date Create</th>
-                                    <th>Company</th>
-                                    <th>No Telephone</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% @client.each_with_index do |clients, index|%>
-                                    <tr>
-                                        <td><%= index + 1 %></td>
-                                        <td><%= clients.name %></td>
-                                        <td><%= clients.created_at.strftime("%Y-%m-%d") %></td>
-                                        <td><%= clients.address %></td>
-                                        <td><%= clients.no_tel %></td>
-                                        <td> 
-                                        <div class="btn-group">
-                                            <%= link_to '<span>View</span>'.html_safe,  admins_manage_client_path(clients.id), data: {turbolinks: false}, class: 'btn btn-primary'%>
-                                            <%= link_to '<span>Delete</span>'.html_safe,  admins_manage_client_path(clients.id), :method => :delete, data: { confirm: 'Are you sure you want to delete this Client?' }, class: 'btn btn-danger '%>
-                                        </div>
-                                        </td>
-                                    </tr>
-                                <% end %>
-                            </tbody>
-              </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Top 5 Latest Users</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+      <table id="table1" class="table table-striped table-bordered " style="width:100%">
+        <thead>
+          <tr>
+            <th>No. </th>
+            <th>Date Create</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>No Telephone</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @user.each_with_index do |users, index|%>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= users.created_at.strftime("%Y-%m-%d") %></td>
+            <td><%= users.email %></td>
+            <td><%= users.name %></td>
+            <td><%= users.no_tel %></td>
+            <td>
+              <p class="buttons">
+                <%= link_to '<span>View</span>'.html_safe,  admins_manage_user_path(users.id), data: {turbolinks: false}, class: 'btn btn-primary'%>
+                <%= link_to '<span>Delete</span>'.html_safe,  admins_manage_user_path(users.id), :method => :delete, data: { confirm: 'Are you sure you want to delete this User?' }, class: 'btn btn-danger'%>
+              </p>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <!-- /.card-body -->
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Top 5 Latest Clients</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+      <table id="table1" class="table table-striped table-bordered " style="width:100%">
+        <thead>
+          <tr>
+            <th>No. </th>
+            <th>Date Create</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>No Telephone</th>
+            <th>Address</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @client.each_with_index do |clients, index|%>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= clients.created_at.strftime("%Y-%m-%d") %></td>
+            <td><%= clients.email %></td>
+            <td><%= clients.name %></td>
+            <td><%= clients.no_tel %></td>
+            <td><%= clients.address %></td>
+            <td>
+              <p class="buttons">
+                <%= link_to '<span>View</span>'.html_safe,  admins_manage_client_path(clients.id), data: {turbolinks: false}, class: 'btn btn-primary'%>
+                <%= link_to '<span>Delete</span>'.html_safe,  admins_manage_client_path(clients.id), :method => :delete, data: { confirm: 'Are you sure you want to delete this Client?' }, class: 'btn btn-danger'%>
+              </p>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+
+</section>
+
+<script>
+  $(document).ready(function () {
+    $('#table1').DataTable();
+  });
+</script>

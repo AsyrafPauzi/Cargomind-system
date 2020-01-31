@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cargomind</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= wicked_pdf_stylesheet_link_tag "application" %>
+    <%= javascript_pack_tag 'application'%>
+    <%= wicked_pdf_stylesheet_link_tag 'application', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css'  %>
+    <%= wicked_pdf_stylesheet_link_tag 'application', 'https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css'  %>
+    <script src="https://kit.fontawesome.com/6d90f39943.js"></script>
+
+    
+
+  </head>
+  <body>
+        <%= yield %>
+  </body>
+</html>

@@ -6,16 +6,17 @@ class Users::Manage::CargoDeclarationsController < ApplicationController
         if params[:commit] == "Submit Final Form"
             @cargo_declaration = CargoDeclaration.find_by_quotation_id(@quotation.id)
             if @cargo_declaration.update(cargo_declarations_with_params)
-                @cargo_declaration.update(status: "Confirmed Cargo Declaration")
-                    if @quotation.mode_of_shipment = "Sea"
-                        if SlblConfirmation.find_by_quotation_id(@quotation.id).nil?
-                            SlblConfirmation.create!(quotation_id: @quotation.id)
-                        end
-                    else
-                        if CargoSubmission.find_by_quotation_id(@quotation.id).nil?
-                            CargoSubmission.create!(quotation_id: @quotation.id)
-                        end
+                @cargo_declaration.update(status: "Cargo Declaration Confirmed")
+                if @quotation.type_quotation == "Export"
+                    if SlblConfirmation.find_by_quotation_id(@quotation.id).nil?
+                        SlblConfirmation.create!(quotation_id: @quotation.id)
                     end
+                else
+                    if CargoCollection.find_by_quotation_id(@quotation.id).nil?
+                        CargoCollection.create!(quotation_id: @quotation.id)
+                    end
+                end
+                      
                 respond_to do |format|
                     format.html { redirect_to users_manage_shipment_path(@quotation.quotation_id), :flash => {:success => 'Successful Update Final Cargo Declaration.'}}
                     format.json { render :json => @quotation }

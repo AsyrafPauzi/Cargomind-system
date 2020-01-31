@@ -1,4 +1,4 @@
-<div class="col-md-3">
+<div class="col-md-4">
   <div class="card">
     <div class="card-header">
       <h3 class="card-title">Progress Tracking</h3>
@@ -14,24 +14,81 @@
         <div class="timeline">
           <!-- timeline time label -->
           <div class="time-label">
-            <span class="bg-red"><%= @quotation.created_at.strftime("%Y-%m-%d") %></span>
+            <span class="bg-green"><%= @quotation.created_at.strftime("%Y-%m-%d") %></span>
           </div>
-          
           <% if @quotation.quotation_status == "Pending"%>
+            <div>
+              <i class="fas fa-exclamation bg-yellow"></i>
+              <div class="timeline-item">
+                <h3 class="timeline-header no-border">Quotation Pending</h3>
+              </div>
+            </div>
+          <% elsif @quotation.status == "Draft" %>
             <div>
               <i class="fas fa-times bg-red"></i>
               <div class="timeline-item">
-                <h3 class="timeline-header no-border">Quotation</h3>
+                <h3 class="timeline-header no-border">Quotation Draft</h3>
               </div>
+            </div>
+          <% elsif @quotation.quotation_status == "Confirmed"%>
+              <div>
+                <i class="fas fa-exclamation bg-yellow"></i>
+                <div class="timeline-item">
+                  <h3 class="timeline-header no-border">Quotation Confirmed</h3>
+                </div>
+              </div>
+          <% elsif @quotation.quotation_status == "Draft" %>
+            <div>
+              <i class="fas fa-exclamation bg-yellow"></i>
+              <div class="timeline-item">
+                <h3 class="timeline-header no-border">Quotation Draft Received</h3>
+                <div class="timeline-body">       
+                      <%= link_to 'Download Staff Quotation', @quotation.file_quotation.url, target: :_blank %>
+                </div>
+              <div class="timeline-footer text-center">     
+                    <%= form_for(:quotation, url: client_update_users_manage_shipments_path, role:"form-horizontal", method: :patch) do |f|%>  
+                        <div class="btn-group btn-block" role="group" aria-label="Basic example">
+                        <%= f.submit 'Confirm', class: 'btn btn-success'%>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-quotation-reject">Reject</button>
+                      </div>
+                    <% end %>
+                  </div>
+              </div>     
+            </div>
+          <% elsif @quotation.quotation_status == "Client Feedback" %>
+            <div>
+              <i class="fas fa-exclamation bg-yellow"></i>
+              <div class="timeline-item">
+                <h3 class="timeline-header no-border">Quotation Client Feedback</h3>
+                <div class="timeline-body">
+                    <% if @quotation.file_client.present? %>
+                      <%= link_to 'Download Client Quotation', @quotation.file_client.url, target: :_blank %>
+                      <br/>
+                      <%= link_to 'Download Staff Quotation', @quotation.file_quotation.url, target: :_blank %>
+                    <% else %>
+                      <%= link_to 'Download Staff Quotation', @quotation.file_quotation.url, target: :_blank %>
+                    <% end %>
+                </div>
+              </div>     
+            </div>
+          <% elsif @quotation.quotation_status == "Final Confirmed" %>
+            <div>
+              <i class="fas fa-check bg-green"></i>
+              <div class="timeline-item">
+                <h3 class="timeline-header no-border">Quotation Final Confirmed</h3>
+                <div class="timeline-body">
+                      <%= link_to 'Download Final Staff Quotation', @quotation.file_quotation.url, target: :_blank %>
+                </div>
+              </div>     
             </div>
           <% else %>
             <div>
               <i class="fas fa-check bg-green"></i>
               <div class="timeline-item">
-                <h3 class="timeline-header no-border">Quotation Received<br/></h3>
+                <h3 class="timeline-header no-border">Quotation Final Confirmed<br/></h3>
                 <% if @quotation.file_quotation.present? %>
                 <div class="timeline-body">       
-                      <%= link_to 'Download Quotation', @quotation.file_quotation.url, target: :_blank %>
+                      <%= link_to 'Download Final Staff Quotation', @quotation.file_quotation.url, target: :_blank %>
                 </div>
                   <% end %>
               </div>
@@ -55,7 +112,7 @@
               <div>
                   <i class="fas fa-times bg-red"></i>
                   <div class="timeline-item">
-                    <h3 class="timeline-header no-border"><%= link_to "Booking", booking_clients_manage_shipments_path %> Confirmation not ready</h3>
+                    <h3 class="timeline-header no-border">Booking Confirmation not ready</h3>
                   </div>
               </div>
             <% end %>
@@ -63,133 +120,11 @@
               <div>
                   <i class="fas fa-times bg-red"></i>
                   <div class="timeline-item">
-                    <h3 class="timeline-header no-border"><%= link_to "Booking", booking_clients_manage_shipments_path %> Confirmation not ready</h3>
+                    <h3 class="timeline-header no-border">Booking Confirmation not ready</h3>
                   </div>
               </div>
           <% end %>
 
-          <% if @quotation.cargo_collection.present? %>
-            <% if @quotation.weight_type == "FCL" %>
-                <% if @quotation.cargo_collection.status == "Empty Send" %>
-                  <div>
-                    <i class="fas fa-exclamation bg-yellow"></i>
-                    <div class="timeline-item">
-                        
-                      <h3 class="timeline-header no-border">Empty Send</h3>
-                    </div>
-                  </div>
-                <% elsif @quotation.cargo_collection.status == "Laden Collected"%>
-                  <div>
-                    <i class="fas fa-check bg-green"></i>
-                    <div class="timeline-item">
-                        
-                      <h3 class="timeline-header no-border">Laden Collected</h3>
-                    </div>
-                  </div>
-                <% else %>
-                  <div>
-                    <i class="fas fa-times bg-red"></i>
-                    <div class="timeline-item">
-                        
-                      <h3 class="timeline-header no-border">Cargo Collection</h3>
-                    </div>
-                  </div>
-                <% end %>
-            <% else %>
-                <% if @quotation.cargo_collection.status == "On Plan" %>
-                  <div>
-                    <i class="fas fa-exclamation bg-yellow"></i>
-                    <div class="timeline-item">
-                        
-                      <h3 class="timeline-header no-border">On Plan</h3>
-                    </div>
-                  </div>
-                <% elsif @quotation.cargo_collection.status == "Collected"%>
-                  <div>
-                    <i class="fas fa-check bg-green"></i>
-                    <div class="timeline-item">
-                        
-                      <h3 class="timeline-header no-border">Collected</h3>
-                    </div>
-                  </div>
-                <% else %>
-                  <div>
-                    <i class="fas fa-times bg-red"></i>
-                    <div class="timeline-item">
-                        
-                      <h3 class="timeline-header no-border">Cargo Collection</h3>
-                    </div>
-                  </div>
-                <% end %>
-            <% end %>
-          <% else %>
-            <div>
-              <i class="fas fa-times bg-red"></i>
-              <div class="timeline-item">
-                <h3 class="timeline-header no-border">Cargo not been Collected</h3>
-              </div>
-            </div>
-          <% end %>
-          <% if @quotation.cargo_declaration.present? %>
-          
-            <% if @quotation.cargo_declaration.status == "Draft"%>
-              <div>
-                <i class="fas fa-exclamation bg-yellow"></i>
-                <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Your Cargo Declaration Draft is ready</h3>
-                    <% if @quotation.cargo_declaration.file_declaration.present? %>
-                  <div class="timeline-body">       
-                        <%= link_to 'Download Draft', @quotation.cargo_declaration.file_declaration.url, target: :_blank %>
-                  </div>
-                  <div class="timeline-footer text-center">     
-                    <%= form_for(:cargo_declaration, url: client_update_users_manage_cargo_declarations_path, role:"form-horizontal", method: :patch) do |f|%>  
-                        <div class="btn-group btn-block" role="group" aria-label="Basic example">
-                        <%= f.submit 'Confirm', class: 'btn btn-success'%>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-declaration-reject">Reject</button>
-                      </div>
-                    <% end %>
-                  </div>
-                    <% end %>
-                </div>
-              </div>
-
-            <% elsif @quotation.cargo_declaration.status == "Rejected" %>
-              <div>
-                <i class="fas fa-exclamation bg-yellow"></i>
-                <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Your Cargo Declaration Feedback Pending</h3>
-                </div>
-              </div>
-            <% elsif @quotation.cargo_declaration.status == "Confirmed" %>
-              <div>
-                <i class="fas fa-check bg-green"></i>
-                <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Your Cargo Declaration Complete</h3>
-                </div>
-              </div>
-            <% elsif @quotation.cargo_declaration.status == "Confirmed Cargo Declaration" %>
-              <div>
-                <i class="fas fa-check bg-green"></i>
-                <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Your Cargo Declaration Complete</h3>
-                </div>
-              </div>
-            <% else %>
-              <div>
-                <i class="fas fa-times bg-red"></i>
-                <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Cargo Declaration</h3>
-                </div>
-              </div>
-            <% end %>
-          <% else %>
-              <div>
-                <i class="fas fa-times bg-red"></i>
-                <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Cargo Declaration</h3>
-                </div>
-              </div>
-          <% end %>
 
           <% if @quotation.slbl_confirmation.present? %>
         
@@ -200,7 +135,7 @@
                   <h3 class="timeline-header no-border">Your BL Confirmation Draft is ready</h3>
                     <% if @quotation.slbl_confirmation.file_confirmation.present? %>
                   <div class="timeline-body">       
-                        <%= link_to 'Download Draft', @quotation.slbl_confirmation.file_confirmation.url, target: :_blank %>
+                        <%= link_to 'Download BL Confirmation Draft', @quotation.slbl_confirmation.file_confirmation.url, target: :_blank %>
                   </div>
                   <div class="timeline-footer text-center">     
                     <%= form_for(:slbl_confirmation, url: client_update_users_manage_slbl_confirmations_path, role:"form-horizontal", method: :patch) do |f|%>  
@@ -217,28 +152,33 @@
               <div>
                 <i class="fas fa-exclamation bg-yellow"></i>
                 <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Your BL Confirmation Feedback Pending</h3>
+                  <h3 class="timeline-header no-border">BL Confirmation Feedback Pending</h3>
                 </div>
               </div>
             <% elsif @quotation.slbl_confirmation.status == "Confirmed" %>
               <div>
-                <i class="fas fa-check bg-green"></i>
+                <i class="fas fa-exclamation bg-yellow"></i>
                 <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Your BL Confirmation Complete</h3>
+                  <h3 class="timeline-header no-border">BL Confirmation Confirmed</h3>
                 </div>
               </div>
             <% elsif @quotation.slbl_confirmation.status == "SL/BL Confirmed" %>
               <div>
                 <i class="fas fa-check bg-green"></i>
                 <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Your BL Confirmation Complete</h3>
+                  <h3 class="timeline-header no-border">BL Confirmation Complete</h3>
+                  <% if @quotation.slbl_confirmation.file_confirmation.present? %>
+                  <div class="timeline-body">       
+                        <%= link_to 'Download BL Confirmation', @quotation.slbl_confirmation.file_confirmation.url, target: :_blank %>
+                  </div>
+                    <% end %>
                 </div>
               </div>
             <% else %>
               <div>
                 <i class="fas fa-times bg-red"></i>
                 <div class="timeline-item">
-                  <h3 class="timeline-header no-border">BL Confirmation</h3>
+                  <h3 class="timeline-header no-border">BL Confirmation Not Complete</h3>
                 </div>
               </div>
             <% end %>
@@ -246,44 +186,17 @@
               <div>
                 <i class="fas fa-times bg-red"></i>
                 <div class="timeline-item">
-                  <h3 class="timeline-header no-border">BL Confirmation</h3>
+                  <h3 class="timeline-header no-border">BL Confirmation Not Complete</h3>
                 </div>
               </div>
           <% end %>
-
-        <% if @quotation.weight_type == "LCL" %>
-          <% if @quotation.vessel_depart.present? %>
-            <% if @quotation.vessel_depart.status == "Confirmed Vessel Depart"%>
-              <div>
-                <i class="fas fa-check bg-green"></i>
-                <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Vessel Depart</h3>
-                </div>
-              </div>
-            <% else %>
-              <div>
-                <i class="fas fa-times bg-red"></i>
-                <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Vessel Depart</h3>
-                </div>
-              </div>
-            <% end %>
-          <% else %>
-              <div>
-                <i class="fas fa-times bg-red"></i>
-                <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Vessel Depart</h3>
-                </div>
-              </div>
-          <% end %>
-        <% end %>
 
           <% if @quotation.attach_pre_alert.present? %>
-            <% if @quotation.attach_pre_alert.status == "Confirmed Attach Pre Alert"%>
+            <% if @quotation.attach_pre_alert.status == "Attach Pre Alert Confirmed"%>
               <div>
                 <i class="fas fa-check bg-green"></i>
                 <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Your Attach Pre Alert is ready</h3>
+                  <h3 class="timeline-header no-border">Attach Pre Alert is ready</h3>
                     <% if @quotation.attach_pre_alert.file_attach_pre_alert.present? %>
                   <div class="timeline-body">       
                         <%= link_to 'Download Attach Pre Alert', @quotation.attach_pre_alert.file_attach_pre_alert.url, target: :_blank %>
@@ -308,8 +221,118 @@
               </div>
           <% end %>
 
+          <% if @quotation.cargo_declaration.present? %>
+            <% if @quotation.cargo_declaration.status == "Draft"%>
+              <div>
+                <i class="fas fa-exclamation bg-yellow"></i>
+                <div class="timeline-item">
+                  <h3 class="timeline-header no-border">Import Cargo Declaration Draft is ready</h3>
+                    <% if @quotation.cargo_declaration.file_declaration.present? %>
+                  <div class="timeline-body">       
+                        <%= link_to 'Download Cargo Declaration Draft', @quotation.cargo_declaration.file_declaration.url, target: :_blank %>
+                  </div>
+                  <div class="timeline-footer text-center">     
+                    <%= form_for(:cargo_declaration, url: client_update_users_manage_cargo_declarations_path, role:"form-horizontal", method: :patch) do |f|%>  
+                        <div class="btn-group btn-block" role="group" aria-label="Basic example">
+                        <%= f.submit 'Confirm', class: 'btn btn-success'%>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-declaration-reject">Reject</button>
+                      </div>
+                    <% end %>
+                  </div>
+                    <% end %>
+                </div>
+              </div>
+            <% elsif @quotation.cargo_declaration.status == "Rejected" %>
+              <div>
+                <i class="fas fa-exclamation bg-yellow"></i>
+                <div class="timeline-item">
+                  <h3 class="timeline-header no-border">Cargo Import Declaration Rejected</h3>
+                </div>
+              </div>
+            <% elsif @quotation.cargo_declaration.status == "Confirmed" %>
+              <div>
+                <i class="fas fa-exclamation bg-yellow"></i>
+                <div class="timeline-item">
+                  <h3 class="timeline-header no-border">Cargo Import Declaration Confirmed</h3>
+                </div>
+              </div>
+            <% elsif @quotation.cargo_declaration.status == "Cargo Declaration Confirmed" %>
+              <div>
+                <i class="fas fa-check bg-green"></i>
+                <div class="timeline-item">
+                  <h3 class="timeline-header no-border">Your Import Cargo Declaration Complete</h3>
+                </div>
+              </div>
+            <% else %>
+              <div>
+                <i class="fas fa-times bg-red"></i>
+                <div class="timeline-item">
+                  <h3 class="timeline-header no-border">Cargo Import Declaration not complete</h3>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+              <div>
+                <i class="fas fa-times bg-red"></i>
+                <div class="timeline-item">
+                  <h3 class="timeline-header no-border">Cargo Import Declaration not complete</h3>
+                </div>
+              </div>
+          <% end %>
+
+          <% if @quotation.cargo_collection.present? %>
+            <% if @quotation.cargo_collection.status == "Collected"%>
+              <div>
+                <i class="fas fa-check bg-green"></i>
+                <div class="timeline-item">
+                  <h3 class="timeline-header no-border">Cargo delivery collected</h3>
+                </div>
+              </div>
+            <% elsif @quotation.cargo_collection.status == "On Plan"%>
+              <div>
+                <i class="fas fa-exclamation bg-yellow"></i>
+                <div class="timeline-item">
+                  <h3 class="timeline-header no-border">Cargo delivery on plan</h3>
+                </div>
+              </div>
+            <% elsif @quotation.cargo_collection.status == "Empty Send"%>
+              <div>
+                <i class="fas fa-exclamation bg-yellow"></i>
+                <div class="timeline-item">
+                    
+                  <h3 class="timeline-header no-border">Cargo delivery Empty Send</h3>
+                </div>
+              </div>
+            <% elsif @quotation.cargo_collection.status == "Laden Collected"%>
+              <div>
+                <i class="fas fa-check bg-green"></i>
+                <div class="timeline-item">
+                    
+                  <h3 class="timeline-header no-border">Cargo delivery Laden Collected</h3>
+                </div>
+              </div>
+            <% else %>
+              <div>
+                <i class="fas fa-times bg-red"></i>
+                <div class="timeline-item">
+                  <h3 class="timeline-header no-border">Cargo delivery not collected</h3>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <div>
+              <i class="fas fa-times bg-red"></i>
+              <div class="timeline-item">
+                <h3 class="timeline-header no-border">Cargo delivery not been collected</h3>
+              </div>
+            </div>
+          <% end %>
+          
+
+          
+
           <% if @quotation.billing.present? %>
-            <% if @quotation.billing.status == "Confirmed Billing"%>
+            <% if @quotation.billing.status == "Billing Confirmed"%>
               <div>
                 <i class="fas fa-check bg-green"></i>
                 <div class="timeline-item">
@@ -334,18 +357,23 @@
           <% end %>
           
           <% if @quotation.insurance.present? %>
-            <% if @quotation.insurance.status == "Confirmed Insurance"%>
+            <% if @quotation.insurance.status == "Insurance Confirmed"%>
               <div>
                 <i class="fas fa-check bg-green"></i>
                 <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Insurance</h3>
+                  <h3 class="timeline-header no-border">Insurance Confirmed</h3>
+                    <% if @quotation.insurance.policy.present? %>
+                  <div class="timeline-body">       
+                        <%= link_to 'Download Policy', @quotation.insurance.policy.url, target: :_blank %>
+                  </div>
+                    <% end %>
                 </div>
               </div>
             <% else %>
               <div>
                 <i class="fas fa-times bg-red"></i>
                 <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Insurance</h3>
+                  <h3 class="timeline-header no-border">Insurance Not Complete</h3>
                 </div>
               </div>
             <% end %>
@@ -353,11 +381,10 @@
               <div>
                 <i class="fas fa-times bg-red"></i>
                 <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Insurance</h3>
+                  <h3 class="timeline-header no-border">Insurance Not Complete</h3>
                 </div>
               </div>
           <% end %>
-
           <div class="time-label">
             <span class="bg-green">Complete</span>
           </div>
@@ -367,13 +394,9 @@
 
   </div>
 </div>
-<% if @quotation.cargo_declaration.present? %>
-  <%= render partial: "clients/manage/shipments/shared/modal_declaration_reject" %>
-<% end %>
-<% if @quotation.slbl_confirmation.present? %>
-     <%= render partial: "clients/manage/shipments/shared/modal_slbl_reject" %>
-<% end %>
-
+    <%= render partial: "clients/manage/shipments/shared/modal_declaration_reject" %>
+    <%= render partial: "clients/manage/shipments/shared/modal_quotation_reject" %>
+    <%= render partial: "clients/manage/shipments/shared/modal_slbl_reject" %>
 <script>
     // Add the following code if you want the name of the file appear on select
     $(".custom-file-input").on("change", function () {

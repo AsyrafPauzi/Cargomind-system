@@ -1,9 +1,11 @@
 <section class="content">
-    <div class="card px-3 py-3 bill-landing">
-
-        <table class="table table-bordered">
+    <div class="card px-5 py-3 bill-landing">
+        <%= form_for(:sibl_confirmation, url: update_bill_of_lading_users_manage_shipments_path, role:"form-horizontal", method: :patch) do |f|%>
+        <table class="table table-bordered" style="margin-bottom: 0px;">
             <tr>
-                <td width="50%" colspan="2"><span>Shipper</span><br /><p class="p-3">PT. DIGGANTARA INDONESIA <br/>JALAN PAJAJARAN 154 BANDUNG 40174</p></td>
+                <td width="50%" colspan="2">
+                    <span>Shipper</span><br /><%= f.text_area :shipper, class:"form-confirmation", value: @quotation.shipper.present? ? @quotation.shipper : ""%>
+                </td>
                 <td width="50%" colspan="2" rowspan="2">
                     <%= image_tag("BILL OF LADING.png", width: '300',class:"mx-auto d-block") %>
                     <%= image_tag("cargomind.jpg", width: '600',class:"mx-auto d-block") %></td>
@@ -11,16 +13,11 @@
             <tr>
                 <td colspan="2">
                     <span>
-                        Consignee
+                        CONSIGNEE
                     </span>
                     <br />
-                    <div  class="p-3">
-                        <p>
-                            COMMANDING OFFICER MATERIAL UDARA 2
-                        </p>
-                        <p>
-                            D/A PANGKALAN UDARA SUABNG 40000, SHAH ALAM SELANGOR DARUL EHSAN
-                        </p>
+                    <div class="p-3">
+                        <%= f.text_area :consignee, class:"form-confirmation", value: @quotation.consignee.present? ? @quotation.consignee : "" %>
                     </div>
                 </td>
             </tr>
@@ -30,9 +27,9 @@
                         Notify party
                     </span>
                     <br />
-                    <div  class="p-3">
+                    <div class="p-3">
                         <p>
-                            SAME AS CONSIGNEE
+                            <%= f.text_field :notify_party, class:"form-confirmation", value: @quotation.slbl_confirmation.notify_party.present? ? @quotation.slbl_confirmation.notify_party : ""%>
                         </p>
                     </div>
                 </td>
@@ -41,9 +38,9 @@
                         Delivery agent
                     </span>
                     <br />
-                    <div  class="p-3">
+                    <div class="p-3">
                         <p>
-                            CARGOMIND SDN BHD
+                            <%= f.text_field :delivery_agent, class:"form-confirmation", value: @quotation.slbl_confirmation.delivery_agent.present? ? @quotation.slbl_confirmation.delivery_agent : ""%>
                         </p>
                     </div>
                 </td>
@@ -51,12 +48,12 @@
             <tr>
                 <td>
                     <span>
-                        Delivery agent
+                        Vessel
                     </span>
                     <br />
-                    <div  class="px-5">
+                    <div class="px-5">
                         <p>
-                            MH722
+                            <%= f.text_field :vessel, class:"form-confirmation", value: @quotation.booking.vessel.present? ? @quotation.booking.vessel : ""%>
                         </p>
                     </div>
                 </td>
@@ -65,22 +62,22 @@
                         Voyage no
                     </span>
                     <br />
-                    <div  class="px-5">
+                    <div class="px-5">
                         <p>
-                          
+                            <%= f.text_field :voyage_no, class:"form-confirmation", value: @quotation.slbl_confirmation.voyage_no.present? ? @quotation.slbl_confirmation.voyage_no : ""%>
                         </p>
                     </div>
                 </td>
                 <td>
                 </td>
                 <td>
-                     <span>
+                    <span>
                         Combined transport Onward carriage
                     </span>
                     <br />
-                    <div  class="px-5">
+                    <div class="px-5">
                         <p>
-                          
+                            <%= f.text_field :combined_transport_onward_carriage, class:"form-confirmation", value: @quotation.slbl_confirmation.combined_transport_onward_carriage.present? ? @quotation.slbl_confirmation.combined_transport_onward_carriage : ""%>
                         </p>
                     </div>
                 </td>
@@ -91,9 +88,9 @@
                         Place of receipt
                     </span>
                     <br />
-                    <div  class="px-5">
+                    <div class="px-5">
                         <p>
-                          INDONESIA
+                            <%= f.text_field :place_of_receipt, class:"form-confirmation", value: @quotation.slbl_confirmation.place_of_receipt.present? ? @quotation.slbl_confirmation.place_of_receipt : ""%>
                         </p>
                     </div>
                 </td>
@@ -102,9 +99,9 @@
                         Port of loading
                     </span>
                     <br />
-                    <div  class="px-5">
+                    <div class="px-5">
                         <p>
-                          INDONESIA
+                            <%= f.text_field :port_of_loading, class:"form-confirmation", value: @quotation.port_of_loading.present? ? @quotation.port_of_loading : ""%>
                         </p>
                     </div>
                 </td>
@@ -113,9 +110,9 @@
                         Final destionation: (for merchant's reference only)
                     </span>
                     <br />
-                    <div  class="px-5">
+                    <div class="px-5">
                         <p>
-                          KLIA
+                            <%= f.text_field :final_destination, class:"form-confirmation", value: @quotation.final_destination.present? ? @quotation.final_destination : ""%>
                         </p>
                     </div>
                 </td>
@@ -124,9 +121,9 @@
                         Freight payable at
                     </span>
                     <br />
-                    <div  class="px-5">
+                    <div class="px-5">
                         <p>
-                          DESTINATION
+                            <%= f.text_field :freight_payable_at, class:"form-confirmation", value: @quotation.slbl_confirmation.freight_payable_at.present? ? @quotation.slbl_confirmation.freight_payable_at : ""%>
                         </p>
                     </div>
                 </td>
@@ -137,9 +134,9 @@
                         Port of discharge
                     </span>
                     <br />
-                    <div  class="px-5">
+                    <div class="px-5">
                         <p>
-                          KLIA
+                            <%= f.text_field :port_of_discharge, class:"form-confirmation", value: @quotation.port_of_discharge.present? ? @quotation.port_of_discharge : ""%>
                         </p>
                     </div>
                 </td>
@@ -148,9 +145,9 @@
                         Place of delivery
                     </span>
                     <br />
-                    <div  class="px-5">
+                    <div class="px-5">
                         <p>
-                          KLIA
+                            <%= f.text_field :place_of_delivery, class:"form-confirmation", value: @quotation.slbl_confirmation.place_of_delivery.present? ? @quotation.slbl_confirmation.place_of_delivery : ""%>
                         </p>
                     </div>
                 </td>
@@ -159,86 +156,95 @@
                         B/L No.
                     </span>
                     <br />
-                    <div  class="px-5">
+                    <div class="px-5">
                         <p>
-                          KULINDO01911001
+                            <%= f.text_field :sibl_no, class:"form-confirmation", value: @quotation.slbl_confirmation.sibl_no.present? ? @quotation.slbl_confirmation.sibl_no : ""%>
                         </p>
                     </div>
                 </td>
             </tr>
 
         </table>
-        <table class="table table-bordered">
+        <table class="table table-bordered " style="witdh:100%;margin-bottom: 0px;">
             <tr>
-                <td>
+                <td width="20%">
                     <span>
                         Marks and numbers
                     </span>
                     <br />
                     <div>
                         <p>
-                          NIL MARKS
+                            <%= f.text_area :marks_and_numbers, size: "30x5" , class:"form-confirmation txtlimit-5", value: @quotation.slbl_confirmation.marks_and_numbers.present? ? @quotation.slbl_confirmation.marks_and_numbers : ""%>
                         </p>
                     </div>
                 </td>
-                <td>
+                <td width="15%">
                     <span>
                         No. of pkgs
                     </span>
                     <br />
                     <div>
                         <p>
-                          1 x 20 'HC CNTR OF GENERAL CARGO (5 PACKAGES)
+                            <%= f.text_area :no_of_pkgs, size: "30x5" , class:"form-confirmation txtlimit-5", value: @quotation.slbl_confirmation.no_of_pkgs.present? ? @quotation.slbl_confirmation.no_of_pkgs : ""%>
                         </p>
                     </div>
                 </td>
-                <td>
+                <td width="30%">
                     <span>
                         Description of goods
                     </span>
                     <br />
                     <div>
                         <p>
-                          SHIPPER'S LOAD COUNT & SEAL CONTAINER SAID TO CONTAIN :-
+                            <%= f.text_area :description_of_goods, size: "30x5" , class:"form-confirmation txtlimit-5", value: @quotation.slbl_confirmation.description_of_goods.present? ? @quotation.slbl_confirmation.description_of_goods : ""%>
                         </p>
                     </div>
                 </td>
-                <td>
+                <td width="20%">
                     <span>
                         Gross weight
                     </span>
-                    <br/>
+                    <br />
                     <div>
                         <p>
-                          14000.0000KGS
+                            <%= f.text_area :gross_weight, size: "30x5" , class:"form-confirmation txtlimit-5", value: @quotation.slbl_confirmation.gross_weight.present? ? @quotation.slbl_confirmation.gross_weight : ""%>
                         </p>
                     </div>
                 </td>
-                <td>
+                <td width="15%">
                     <span>
                         Measurement
                     </span>
+                    <div>
+                        <p>
+                            <%= f.text_area :measurement, size: "30x5" , class:"form-confirmation txtlimit-5", value: @quotation.slbl_confirmation.measurement.present? ? @quotation.slbl_confirmation.measurement : ""%>
+                        </p>
+                    </div>
                 </td>
             </tr>
         </table>
-        <table>
-            <tr >
-                <td><span class="mb-3" style="text-decoration: underline;">CONTAINER NO:</span></td>
-                <td>AIRCRAFT SPAREPARTS (5 PACKAGES)</td>
-                <td></td>
-                <td></td>
+        <table style="margin-bottom: 0px;width:100%;">
+            <tr>
+                <td witdh="20%"><span class="mb-3" style="text-decoration: underline;">CONTAINER NO:</span></td>
+                <td witdh="20%">
+                    <%= f.text_area :container_no, size: "30x3", class:"form-confirmation txtlimit-3", value: @quotation.slbl_confirmation.container_no.present? ? @quotation.slbl_confirmation.container_no : ""%>
+                </td>
+                <td witdh="20%">&nbsp</td>
+                <td witdh="20%">&nbsp</td>
             </tr>
-             <tr >
+            <tr>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
             </tr>
             <tr>
-                <td><span style="text-decoration: underline;">SEAL NO:</span></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td witdh="20%"><span style="text-decoration: underline;">SEAL NO:</span></td>
+                <td witdh="20%">
+                    <%= f.text_area :seal_no, size: "30x3", class:"form-confirmation txtlimit-3", value: @quotation.slbl_confirmation.seal_no.present? ? @quotation.slbl_confirmation.seal_no : ""%>
+                </td>
+                <td witdh="20%">&nbsp</td>
+                <td witdh="20%">&nbsp</td>
             </tr>
         </table>
 
@@ -248,41 +254,51 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-bordered">
+                <table class="table table-bordered" style="margin-bottom: 0px;">
                     <tr>
-                        <td colspan="3"><span>Number of packages in words</span><br /><p class="p-3">FIVE PACKAGES ONLY</p></td>
+                        <td colspan="3">
+                            <span>Number of packages in words</span>
+                            <br />
+                            <p class="p-3">
+                                <%= f.text_field :number_of_packages_in_words, class:"form-confirmation", value: @quotation.slbl_confirmation.number_of_packages_in_words.present? ? @quotation.slbl_confirmation.number_of_packages_in_words : ""%>
+                            </p>
+                        </td>
                         <td colspan="3">
                             <div class="p-3">
-                                <span class>If the Pre-carriage of onward carriage boxes are filled out, shipment bill<br/>
-                                be treated as through combined transport
+                                <span class>If the Pre-carriage of onward carriage boxes are filled out, shipment
+                                    bill<br />
+                                    be treated as through combined transport
                                 </span>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td><span>OCEANFREIGHT AND CHARGES<span><br/><span>Rates, weight and / or Measurements</span><br/><span>subject to correction</span></td>
+                        <td><span>OCEANFREIGHT AND CHARGES<span><br /><span>Rates, weight and / or
+                                        Measurements</span><br /><span>subject to correction</span></td>
                         <td align="center"><span>Prepaid</span></td>
                         <td align="center"><span>Collect</span></td>
                         <td colspan="3" rowspan="3">
                             <div class="p-3">
                                 <p>Received for shipment in apparent good order and condition</p>
-                                <p>Terms of this Bill of Lading continued on reverse side hereo</p>
-                                <p>IN WITNESS WHEREOF, three (3) original Bills of Lading have been signed all <br/>of this tenor and date one of which being accomplished the others stand void.</p>
+                                <p>Terms of this Bill of Lading continued on reverse side hereof.</p>
+                                <p>IN WITNESS WHEREOF, three (3) original Bills of Lading have been signed all <br />of
+                                    this tenor and date one of which being accomplished the others stand void.</p>
                                 <div class="mt-5">
                                     <span>Place and date of issue</span><br>
                                     <div class="p-3">
-                                    <span>KLIA<span><span class="float-right"> 09.11.2019</span>
+                                        <span><%= f.text_field :place_issue, class:"form-confirmation-span" , value: @quotation.slbl_confirmation.place_issue.present? ? @quotation.slbl_confirmation.place_issue : ""%><span><span
+                                                    class="float-right"><%= f.date_field :date_issue, class:"form-confirmation-date-issue" , value: @quotation.slbl_confirmation.date_issue.present? ? @quotation.slbl_confirmation.date_issue : ""%></span>
                                     </div>
                                     <hr>
                                 </div>
-                                
+
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <div class="p-3">
-                                <span>FREIGHT PREPAID<br/>SHIPPED ON BOARD
+                                <span>FREIGHT PREPAID<br />SHIPPED ON BOARD
                                 </span>
                             </div>
                         </td>
@@ -298,41 +314,85 @@
                         <td colspan="3">
                             <div class="row">
                                 <div class="col-md-12">
-                                     <span class="float-right">Shipped on board above vessel</span>
+                                    <span class="float-right">Shipped on board above vessel</span>
                                 </div>
                             </div>
                             <div class="row pt-5">
                                 <div class="col-md-1 pt-3">
                                     Date
-                                </div> 
+                                </div>
                                 <div class="col-md-5">
                                     <span class="m-5">
-                                    09.11/2019
+                                        <%= f.text_field :date, class:"form-confirmation", value: @quotation.slbl_confirmation.date.present? ? @quotation.slbl_confirmation.date : ""%>
                                     </span>
                                     <hr>
-                                </div> 
-                                 <div class="col-md-1 pt-3">
+                                </div>
+                                <div class="col-md-1 pt-3">
                                     By
-                                </div> 
+                                </div>
                                 <div class="col-md-5">
                                     <span class="m-5">
-                                   
+                                        <%= f.text_field :by, class:"form-confirmation", value: @quotation.slbl_confirmation.by.present? ? @quotation.slbl_confirmation.by : ""%>
                                     </span>
                                     <hr>
-                                </div> 
+                                </div>
                             </div>
                         </td>
-                        <td colspan="3">
-                         
+                        <td colspan="3 m">  
                         </td>
                     </tr>
-                        
-
                 </table>
-
+                <div class="row my-2">
+                    <div class="col-md-12 text-center">
+                        <%= f.submit 'Save', class: 'btn btn-primary'%>
+                    </div>
+                </div>
             </div>
 
         </div>
+        <% end %>
     </div>
 
 </section>
+
+<script>
+(function () {
+    var a = document.getElementsByClassName("txtlimit-5"),
+        limit = 5;//Define max lines limit
+
+    function limitLines() {
+        var l = a.value.replace(/\r\n/g, "\n").replace(/\r/g, "").split(/\n/g);//split lines
+        if (l.length > limit) {
+            a.value = l.slice(0, limit).join("\n");
+        }
+    }
+    
+    function paste() {//onpaste needs timeout
+        setTimeout(limitLines, 1);
+    }
+
+    limitLines(); //Like onload
+
+    a.onkeyup = limitLines;
+    a.onpaste = paste;
+
+     var a = document.getElementsByClassName("txtlimit-3"),
+        limit = 3;//Define max lines limit
+
+    function limitLiness() {
+        var l = a.value.replace(/\r\n/g, "\n").replace(/\r/g, "").split(/\n/g);//split lines
+        if (l.length > limit) {
+            a.value = l.slice(0, limit).join("\n");
+        }
+    }
+    
+    function pastee() {//onpaste needs timeout
+        setTimeout(limitLiness, 1);
+    }
+
+    limitLiness(); //Like onload
+
+    a.onkeyup = limitLiness;
+    a.onpaste = pastee;
+})();
+</script>

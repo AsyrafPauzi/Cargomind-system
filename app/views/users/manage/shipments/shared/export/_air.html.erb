@@ -1,0 +1,1155 @@
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Summary Order</h3>
+
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                title="Collapse">
+                <i class="fas fa-minus"></i></button>
+        </div>
+    </div>
+    <div class="card-body">
+        <%= form_for(@quotation, url: users_manage_shipment_path, role:"form-horizontal", method: :patch) do |f|%>
+        <div class="form-group row">
+            <label for="mode_of_shipment" class="col-sm-3 col-form-label">Mode Of Shipment :</label>
+            <div class="col-sm-9">
+                <label for="mode_of_shipment"
+                    class="col-form-label form-control"><%= @quotation.mode_of_shipment %></label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="type_quotation" class="col-sm-3 col-form-label">Type Logistic :</label>
+            <div class="col-sm-9">
+                <label for="type_quotation" class="col-form-label form-control"><%= @quotation.type_quotation %></label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="email" class="col-sm-3 col-form-label">Assign User/Staff :</label>
+            <div class="col-sm-9">
+                <label for="email" class="col-form-label form-control"><%= @quotation.user.email %></label>
+            </div>
+        </div>
+        <% end %>
+        <div class="form-group row">
+            <label for="mode_of_shipment" class="col-sm-12 col-form-label">User Status</label>
+
+        </div>
+    </div>
+</div>
+<div class="card card-primary card-outline card-tabs">
+    <div class="card-header p-0 pt-1 border-bottom-0">
+        <ul class="nav nav-tabs" id="custom-tabs-two-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active <%=  @quotation.quotation_status == "Final Confirmed" ? 'bg-blue' : '' %>"
+                    id="custom-tabs-two-quotation-tab" data-toggle="pill" href="#custom-tabs-two-quotation" role="tab"
+                    aria-controls="custom-tabs-two-quotation" aria-selected="true">Quotation</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%=  @quotation.booking.present? ? @quotation.booking.status == "Booking Confirmation" ? ' bg-blue ' : '' : 'disabled' %>"
+                    id="custom-tabs-two-booking-tab" data-toggle="pill" href="#custom-tabs-two-booking" role="tab"
+                    aria-controls="custom-tabs-two-booking" aria-selected="false">Booking</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%=  @quotation.cargo_collection.present? ? @quotation.cargo_collection.status == "Collected" ? ' bg-blue ' : '' : 'disabled' %>"
+                    id="custom-tabs-two-cargo-collection-tab" data-toggle="pill"
+                    href="#custom-tabs-two-cargo-collection" role="tab" aria-controls="custom-tabs-two-cargo-collection"
+                    aria-selected="false">Cargo Collection</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%=  @quotation.cargo_declaration.present? ? @quotation.cargo_declaration.status == "Cargo Declaration Confirmed" ? ' bg-blue ' : '' : 'disabled' %>"
+                    id="custom-tabs-two-cargo-declaration-tab" data-toggle="pill"
+                    href="#custom-tabs-two-cargo-declaration" role="tab"
+                    aria-controls="custom-tabs-two-cargo-declaration" aria-selected="false">Cargo Declaration</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%=  @quotation.slbl_confirmation.present? ? @quotation.slbl_confirmation.status == "SL/BL Confirmed" ? ' bg-blue ' : '' : 'disabled' %>"
+                    id="custom-tabs-two-aWB-confirmation-tab" data-toggle="pill"
+                    href="#custom-tabs-two-aWB-confirmation" role="tab" aria-controls="custom-tabs-two-cargo-submission"
+                    aria-selected="false">SI / AWB Confirmation</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%=  @quotation.attach_pre_alert.present? ? @quotation.attach_pre_alert.status == "Attach Pre Alert Confirmed" ? ' bg-blue ' : '' : 'disabled' %>"
+                    id="custom-tabs-two-pre-alert-attach-tab" data-toggle="pill"
+                    href="#custom-tabs-two-pre-alert-attach" role="tab" aria-controls="custom-tabs-two-pre-alert-attach"
+                    aria-selected="false">Pre Alert Attach</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%=  @quotation.billing.present? ? @quotation.billing.status == "Billing Confirmed" ? ' bg-blue ' : '' : 'disabled' %>"
+                    id="custom-tabs-two-billing-tab" data-toggle="pill" href="#custom-tabs-two-billing" role="tab"
+                    aria-controls="custom-tabs-two-billing" aria-selected="false">Billing</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link <%=  @quotation.insurance.present? ? @quotation.insurance.status == "Insurance Confirmed" ? ' bg-blue ' : '' : 'disabled' %>"
+                    id="custom-tabs-two-insurance-tab" data-toggle="pill" href="#custom-tabs-two-insurance" role="tab"
+                    aria-controls="custom-tabs-two-insurance" aria-selected="false">Insurance</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <div class="tab-content" id="custom-tabs-two-tabContent">
+            <div class="tab-pane fade active show" id="custom-tabs-two-quotation" role="tabpanel"
+                aria-labelledby="custom-tabs-two-quotation-tab">
+
+                <%= form_for(@quotation, url: send_quotation_users_manage_shipments_path, role:"form-horizontal", method: :patch) do |f|%>
+                <div class="form-group row">
+                    <label for="commodity" class="col-sm-3 col-form-label">Quotation File :</label>
+                    <div class="col-sm-9">
+                        <div class="custom-file">
+                            <%= f.file_field :quotation_file, class: 'custom-file-input', required: true%>
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                    </div>
+                </div>
+                <% if @quotation.file_quotation.present? %>
+                <div class="form-group row">
+                    <label for="commodity" class="col-sm-3 col-form-label">File Download :</label>
+                    <div class="col-sm-9">
+                        <%= link_to 'Download file', @quotation.file_quotation.url, target: :_blank %>
+                    </div>
+                </div>
+                <% end %>
+                <div class="m-2">
+                    <% if @quotation.quotation_status == "Client Feedback" %>
+                    <div class="form-group row">
+                        <label for="email" class="col-sm-3 col-form-label">Feeback :</label>
+                        <div class="col-sm-9">
+                            <label for="email"
+                                class="col-form-label form-control ronly"><%= @quotation.remarks %></label>
+                        </div>
+                    </div>
+                    <% if @quotation.file_client.present? %>
+                    <div class="form-group row">
+                        <label for="email" class="col-sm-3 col-form-label">File Client</label>
+                        <div class="col-sm-9">
+                            <%= link_to 'Download Client File', @quotation.file_client.url, target: :_blank %>
+                        </div>
+                    </div>
+                    <% end %>
+                    <% end %>
+                </div>
+                <div class="my-2">
+                    <% if @quotation.quotation_status == "Confirmed" %>
+                    <%= f.submit 'Final Submit', class: 'btn btn-primary', style:"float:right"%>
+                    <% elsif @quotation.quotation_status == "Final Confirmed" %>
+                    <button type="submit" class="btn btn-primary" style="float:right" disabled>Been Submitted</button>
+                    <% else %>
+                    <%= f.submit 'Submit', class: 'btn btn-primary', style:"float:right"%>
+                    <% end %>
+                </div>
+                <% end %>
+
+            </div>
+            <div class="tab-pane fade" id="custom-tabs-two-booking" role="tabpanel"
+                aria-labelledby="custom-tabs-two-booking-tab">
+                <% if @quotation.booking.present? %>
+
+                <%= form_for(:booking, url: users_manage_booking_path, role:"form-horizontal", method: :patch) do |f|%>
+                <div class="form-group row">
+                    <label for="date" class="col-sm-3 col-form-label">Date :</label>
+                    <div class="col-sm-9">
+                        <label for="date" class="col-form-label form-control ronly"><%= @quotation.date %></label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="shipper" class="col-sm-3 col-form-label">Shipper :</label>
+                    <div class="col-sm-9">
+                        <label for="shipper" class="col-form-label form-control ronly"><%= @quotation.shipper %></label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="consignee" class="col-sm-3 col-form-label">Consignee :</label>
+                    <div class="col-sm-9">
+                        <label for="consignee"
+                            class="col-form-label form-control ronly"><%= @quotation.consignee %></label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="port_of_loading" class="col-sm-3 col-form-label">Port Of Loading :</label>
+                    <div class="col-sm-9">
+                        <label for="port_of_loading"
+                            class="col-form-label form-control ronly"><%= @quotation.port_of_loading %></label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="port_of_discharge" class="col-sm-3 col-form-label">Port Of Discharge :</label>
+                    <div class="col-sm-9">
+                        <label for="port_of_discharge"
+                            class="col-form-label form-control ronly"><%= @quotation.port_of_discharge %></label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="final_destination" class="col-sm-3 col-form-label">Final Destination :</label>
+                    <div class="col-sm-9">
+                        <label for="final_destination"
+                            class="col-form-label form-control ronly"><%= @quotation.final_destination %></label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="mode_of_shipment_export" class="col-sm-3 col-form-label">Mode Of Shipment :</label>
+                    <div class="col-sm-9">
+                        <label for="mode_of_shipment"
+                            class="col-form-label form-control ronly"><%= @quotation.mode_of_shipment %></label>
+                    </div>
+                </div>
+                <div class="form-group row" id="form_weight_type_export">
+                    <label for="weight_type_export" class="col-sm-3 col-form-label">Weight Type :</label>
+                    <div class="col-sm-9">
+                        <label for="weight_type"
+                            class="col-form-label form-control ronly"><%= @quotation.weight_type %></label>
+                    </div>
+                </div>
+                <div class="form-group row" id="form_fcl_export">
+                    <label for="fcl_export" class="col-sm-3 col-form-label">FCL :</label>
+                    <div class="col-sm-9">
+                        <label for="weight_fcl"
+                            class="col-form-label form-control ronly"><%= @quotation.weight_fcl %></label>
+                    </div>
+                </div>
+                <div class="form-group row" id="form_lcl_export">
+                    <label for="weight_lcl" class="col-sm-3 col-form-label">Weight, Dimension (LxWxH) in Meter :</label>
+                    <div class="col-sm-9">
+                        <label for="weight_lcl"
+                            class="col-form-label form-control ronly"><%= @quotation.weight_lcl %></label>
+                    </div>
+                </div>
+                <div class="form-group row" id="form_air_export">
+                    <label for="weight_air" class="col-sm-3 col-form-label">Weight, Dimension (LxWxH) in Centimeter
+                        :</label>
+                    <div class="col-sm-9">
+                        <label for="weight_air"
+                            class="col-form-label form-control ronly"><%= @quotation.weight_air %></label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="commodity" class="col-sm-3 col-form-label">Commodity :</label>
+                    <div class="col-sm-9">
+                        <label for="commodity"
+                            class="col-form-label form-control ronly"><%= @quotation.commodity %></label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="commodity" class="col-sm-3 col-form-label">Booking Confirmation :</label>
+                    <div class="col-sm-9">
+                        <div class="custom-file">
+                            <%= f.file_field :file_booking, class: 'custom-file-input', required: true%>
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                    </div>
+                </div>
+                <% if @quotation.mode_of_shipment == "Sea" %>
+                <div class="form-group row">
+                    <label for="commodity" class="col-sm-3 col-form-label">Liner Booking Number :</label>
+                    <div class="col-sm-9">
+                        <%= f.text_field :booking_number, class: 'form-control', value: @quotation.booking.booking_number.present? ? @quotation.booking.booking_number  : "", required: true%>
+                    </div>
+                </div>
+                <% else %>
+                <div class="form-group row">
+                    <label for="commodity" class="col-sm-3 col-form-label">AWB Number :</label>
+                    <div class="col-sm-9">
+                        <%= f.text_field :booking_number, class: 'form-control', value: @quotation.booking.booking_number.present? ? @quotation.booking.booking_number  : "", required: true%>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="commodity" class="col-sm-3 col-form-label">Flight Number :</label>
+                    <div class="col-sm-9">
+                        <%= f.text_field :flight_number, class: 'form-control', value: @quotation.booking.flight_number.present? ? @quotation.booking.flight_number  : "", required: true%>
+                    </div>
+                </div>
+                <% end %>
+                <div class="form-group row">
+                    <label for="commodity" class="col-sm-3 col-form-label">Vessel :</label>
+                    <div class="col-sm-9">
+                        <%= f.text_field :vessel, class: 'form-control', value: @quotation.booking.vessel.present? ? @quotation.booking.vessel  : "", required: true%>
+                    </div>
+                </div>
+                <% if @quotation.booking.file_booking.present? %>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-3 col-form-label">File Download</label>
+                    <div class="col-sm-9">
+                        <%= link_to 'Download File', @quotation.booking.file_booking.url, target: :_blank %>
+                    </div>
+                </div>
+                <% end %>
+                <div class="my-2">
+                    <% if @quotation.booking.status == "Booking Confirmation" %>
+                    <button type="submit" class="btn btn-primary" style="float:right" disabled>Been Submitted</button>
+                    <% else %>
+                    <%= f.submit 'Submit', class: 'btn btn-primary', style:"float:right"%>
+                    <% end %>
+                </div>
+                <% end %>
+
+                <% end %>
+            </div>
+            <div class="tab-pane fade " id="custom-tabs-two-cargo-collection" role="tabpanel"
+                aria-labelledby="custom-tabs-two-cargo-collection-tab">
+                <% if @quotation.cargo_collection.present? %>
+                <%= form_for(:cargo_collection, url: users_manage_cargo_collection_path, role:"form-horizontal", method: :patch) do |f|%>
+                <div class="form-group row">
+                    <label for="estimated_collection_date" class="col-sm-3 col-form-label">Estimated Collection Date
+                        :</label>
+                    <div class="col-sm-9">
+                        <%= f.date_field :estimated_collection_date, class: 'form-control', value: @quotation.cargo_collection.estimated_collection_date.present? ? @quotation.cargo_collection.estimated_collection_date  : "", required: true%>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="truck_number" class="col-sm-3 col-form-label">Truck Number :</label>
+                    <div class="col-sm-9">
+                        <%= f.text_field :truck_number, class: 'form-control', value: @quotation.cargo_collection.truck_number.present? ? @quotation.cargo_collection.truck_number  : "", required: true%>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="driver_name" class="col-sm-3 col-form-label">Driver Name :</label>
+                    <div class="col-sm-9">
+                        <%= f.text_field :driver_name, class: 'form-control', value: @quotation.cargo_collection.driver_name.present? ? @quotation.cargo_collection.driver_name  : "", required: true%>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="driver_phone_number" class="col-sm-3 col-form-label">Driver Phone Number :</label>
+                    <div class="col-sm-9">
+                        <%= f.text_field :driver_phone_number, class: 'form-control', value: @quotation.cargo_collection.driver_phone_number.present? ? @quotation.cargo_collection.driver_phone_number  : "", required: true%>
+                    </div>
+                </div>
+                <% if @quotation.mode_of_shipment == "Air" %>
+                <div class="form-group row">
+                    <label for="truck_type" class="col-sm-3 col-form-label">Truck Type :</label>
+                    <div class="col-sm-9">
+                        <%= f.text_field :truck_type, class: 'form-control', value: @quotation.cargo_collection.truck_type.present? ? @quotation.cargo_collection.truck_type  : "", required: true%>
+                    </div>
+                </div>
+                <% else %>
+                <div class="form-group row">
+                    <label for="truck_type" class="col-sm-3 col-form-label">Truck Type :</label>
+                    <div class="col-sm-9">
+                        <%= f.text_field :truck_type, class: 'form-control', value: @quotation.weight_type.present? ? @quotation.weight_type  : "", readonly: true%>
+                    </div>
+                </div>
+                <% end %>
+                <% if @quotation.weight_type == "FCL" %>
+                <div class="form-group row">
+                    <label for="haulage" class="col-sm-3 col-form-label">Haulage :</label>
+                    <div class="col-sm-9">
+                        <%= f.text_field :haulage, class: 'form-control', value: @quotation.cargo_collection.haulage.present? ? @quotation.cargo_collection.haulage  : "", required: true%>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="commodity" class="col-sm-3 col-form-label">Upload ROT :</label>
+                    <div class="col-sm-9">
+                        <div class="custom-file">
+                            <%= f.file_field :file_rot, class: 'custom-file-input'%>
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                    </div>
+                </div>
+                <% elsif @quotation.weight_type == "LCL" %>
+                <div class="form-group row">
+                    <label for="lcl_remarks" class="col-sm-3 col-form-label">Remarks :</label>
+                    <div class="col-sm-9">
+                        <%= f.text_field :lcl_remarks, class: 'form-control', value: @quotation.cargo_collection.lcl_remarks.present? ? @quotation.cargo_collection.lcl_remarks  : ""%>
+                    </div>
+                </div>
+                <% end %>
+                <% if @quotation.cargo_collection.status == "On Plan" %>
+                <div class="my-2">
+                    <%= link_to '<span>Collected</span>'.html_safe, update_collection_users_manage_cargo_collections_path(@quotation.quotation_id), :method=> :patch, data: {turbolinks: false}, class: 'btn btn-primary', style:"float:right"%>
+                </div>
+                <% elsif @quotation.cargo_collection.status == "Collected" %>
+                <div class="my-2">
+                    <button type="submit" class="btn btn-primary" style="float:right" disabled>Been Submitted</button>
+                </div>
+                <% else %>
+                <div class="my-2">
+                    <button type="submit" class="btn btn-primary" style="float:right">Submit</button>
+                </div>
+                <% end %>
+
+                <% end %>
+                <% end %>
+            </div>
+            <div class="tab-pane fade" id="custom-tabs-two-cargo-declaration" role="tabpanel"
+                aria-labelledby="custom-tabs-two-cargo-declaration-tab">
+                <% if @quotation.cargo_declaration.present? %>
+                <%= form_for(:cargo_declaration, url: users_manage_cargo_declaration_path, role:"form-horizontal", method: :patch) do |f|%>
+                <div class="form-group row">
+                    <% if @quotation.cargo_declaration.status == "Confirmed" %>
+                    <label for="file_declaration" class="col-sm-3 col-form-label">Upload Final Customs Form:</label>
+                    <% else %>
+                    <label for="file_declaration" class="col-sm-3 col-form-label">Upload Draft :</label>
+                    <% end %>
+                    <div class="col-sm-9">
+                        <div class="custom-file">
+                            <%= f.file_field :file_declaration, class: 'custom-file-input', required: true%>
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                    </div>
+                </div>
+                <% if @quotation.cargo_declaration.file_declaration.present? %>
+                <div class="form-group row">
+                    <label for="commodity" class="col-sm-3 col-form-label">File Draft :</label>
+                    <div class="col-sm-9">
+                        <%= link_to 'Download file', @quotation.cargo_declaration.file_declaration.url, target: :_blank %>
+                    </div>
+                </div>
+                <% end %>
+                <% if @quotation.cargo_declaration.status == "Rejected" %>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-3 col-form-label">Feeback :</label>
+                    <div class="col-sm-9">
+                        <label for="email"
+                            class="col-form-label form-control ronly"><%= @quotation.cargo_declaration.remarks %></label>
+                    </div>
+                </div>
+                <% if @quotation.cargo_declaration.file_client_draft.present? %>
+                <div class="form-group row">
+                    <label for="commodity" class="col-sm-3 col-form-label">File Client :</label>
+                    <div class="col-sm-9">
+                        <%= link_to 'Download file', @quotation.cargo_declaration.file_client_draft.url, target: :_blank %>
+                    </div>
+                </div>
+                <% end %>
+                <% end %>
+                <% if @quotation.cargo_declaration.status == "Confirmed" %>
+                <div class="my-2">
+                    <%= f.submit 'Submit Final Form', class: 'btn btn-primary', style:"float:right"%>
+                </div>
+                <% elsif @quotation.cargo_declaration.status == "Cargo Declaration Confirmed" %>
+                <div class="my-2">
+                    <%= f.submit 'Been Submitted', class: 'btn btn-primary', style:"float:right", disabled: true%>
+                </div>
+                <% else %>
+                <div class="my-2">
+                    <%= f.submit 'Submit', class: 'btn btn-primary', style:"float:right"%>
+                </div>
+                <% end %>
+
+                <% end %>
+                <% end %>
+            </div>
+            <div class="tab-pane fade" id="custom-tabs-two-aWB-confirmation" role="tabpanel"
+                aria-labelledby="custom-tabs-two-aWB-confirmation-tab">
+                <% if @quotation.slbl_confirmation.present? %>
+                <%= form_for(:slbl_confirmation, url: users_manage_slbl_confirmation_path, role:"form-horizontal", method: :patch) do |f|%>
+                <div class="form-group row">
+                    <% if @quotation.slbl_confirmation.status == "Confirmed" %>
+                    <label for="file_confirmation" class="col-sm-3 col-form-label">Upload Final Customs Form:</label>
+                    <% else %>
+                    <label for="file_confirmation" class="col-sm-3 col-form-label">Upload Draft :</label>
+                    <% end %>
+                    <div class="col-sm-9">
+                        <div class="custom-file">
+                            <%= f.file_field :file_confirmation, class: 'custom-file-input'%>
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-3 col-form-label">Edit AWB COnfirmation</label>
+                    <div class="col-sm-9">
+                        <%= link_to 'Edit Here', awb_users_manage_shipments_path(@quotation.quotation_id), target: :_blank  %> |
+                        <%= link_to 'Download PDF', view_awb_users_manage_shipments_path(@quotation.quotation_id, format: :pdf) %>
+                    </div>
+                </div>
+                <% if @quotation.slbl_confirmation.file_confirmation.present? %>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-3 col-form-label">Download Draft File</label>
+                    <div class="col-sm-9">
+                        <%= link_to 'Download File', @quotation.slbl_confirmation.file_confirmation.url, target: :_blank %>
+                    </div>
+                </div>
+                <% end %>
+                <% if @quotation.slbl_confirmation.status == "Rejected"%>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-3 col-form-label">Feeback :</label>
+                    <div class="col-sm-9">
+                        <label for="email"
+                            class="col-form-label form-control ronly"><%= @quotation.slbl_confirmation.remarks %></label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-3 col-form-label">Edit AWB COnfirmation</label>
+                    <div class="col-sm-9">
+                        <%= link_to 'Edit Here', awb_users_manage_shipments_path(@quotation.quotation_id), target: :_blank  %> |
+                        <%= link_to 'Download PDF', view_awb_users_manage_shipments_path(@quotation.quotation_id, format: :pdf) %>
+                    </div>
+                </div>
+                <% if @quotation.slbl_confirmation.file_client_draft.present? %>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-3 col-form-label">File Client</label>
+                    <div class="col-sm-9">
+                        <%= link_to 'Download Client File', @quotation.slbl_confirmation.file_client_draft.url, target: :_blank %>
+                    </div>
+                </div>
+                <% end %>
+                <% end %>
+                <% if @quotation.slbl_confirmation.status == "Confirmed" %>
+                <div class="my-2">
+                    <%= f.submit 'Submit Final AWB', class: 'btn btn-primary', style:"float:right"%>
+                </div>
+                <% elsif @quotation.slbl_confirmation.status == "SL/BL Confirmed" %>
+                <div class="my-2">
+                    <%= f.submit 'Been Submitted', class: 'btn btn-primary', style:"float:right", disabled: true%>
+                </div>
+                <% else %>
+                <div class="my-2">
+                    <%= f.submit 'Submit', class: 'btn btn-primary', style:"float:right"%>
+                </div>
+                <% end %>
+
+                <% end %>
+                <% end %>
+            </div>
+            <div class="tab-pane fade" id="custom-tabs-two-pre-alert-attach" role="tabpanel"
+                aria-labelledby="custom-tabs-two-pre-alert-attach-tab">
+                <% if @quotation.attach_pre_alert.present? %>
+                <%= form_for(:attach_pre_alert, url: users_manage_attach_pre_alert_path, role:"form-horizontal", method: :patch) do |f|%>
+                <div class="form-group row">
+                    <label for="file_declaration" class="col-sm-3 col-form-label">Upload Attach Pre Alert:</label>
+                    <div class="col-sm-9">
+                        <div class="custom-file">
+                            <%= f.file_field :file_attach_pre_alert, class: 'custom-file-input', required: true%>
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                    </div>
+                </div>
+                <% if @quotation.attach_pre_alert.file_attach_pre_alert.present? %>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-3 col-form-label">Pre Alert Attach File</label>
+                    <div class="col-sm-9">
+                        <%= link_to 'Download File', @quotation.attach_pre_alert.file_attach_pre_alert.url, target: :_blank %>
+                    </div>
+                </div>
+                <% end %>
+                <div class="my-2">
+                    <% if @quotation.attach_pre_alert.status == "Attach Pre Alert Confirmed" %>
+                    <%= f.submit 'Been Submitted', class: 'btn btn-primary', style:"float:right", disabled: true%>
+                    <% else %>
+                    <%= f.submit 'Submit', class: 'btn btn-primary', style:"float:right"%>
+                    <% end %>
+
+                </div>
+                <% end %>
+                <% end %>
+            </div>
+            <div class="tab-pane fade" id="custom-tabs-two-billing" role="tabpanel"
+                aria-labelledby="custom-tabs-two-billing-tab">
+                <% if @quotation.billing.present? %>
+                <%= form_for(:billing, url: users_manage_billing_path, role:"form-horizontal", method: :patch) do |f|%>
+                <% if @quotation.billing.status == "Billing Confirmed" %>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label">Particular</label>
+                            <div class="col-sm-2">
+                                <label>Cost</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Bill</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Profit</label>
+                            </div>
+                        </div>
+                        <% @quotation.billing.billing_details.order(created_at: :asc).each_with_index do |details, index| %>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label"><%= details.title %>
+                                <input type="hidden" name="billing[title][]" value="<%= details.title %>">
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="number" name="billing[cost][]" id="billing_cost_<%= index + 1 %>"
+                                    class="billing form-control" value="<%= details.cost %>" min="0.00" step=".01">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="number" name="billing[bill][]" id="billing_bill_<%= index +1 %>"
+                                    class="billing form-control" value="<%= details.bill %>" min="0.00" step=".01">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="number" name="billing[profit][]" id="billing_profit_<%= index + 1 %>"
+                                    class="billing form-control" value="<%= details.profit %>" min="0.00" step=".01"
+                                    readonly>
+                            </div>
+                        </div>
+                        <% end %>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label">Total
+                            </label>
+                            <div class="col-sm-2">
+                                <label class="col-sm-6 col-form-label">RM<span id="total_cost"></span></label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="col-sm-6 col-form-label">RM<span id="total_bill"></span></label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="col-sm-6 col-form-label">RM<span id="total_profit"></span></label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="file_declaration" class="col-sm-3 col-form-label">Upload invoice:</label>
+                            <div class="col-sm-9">
+                                <div class="custom-file">
+                                    <%= f.file_field :invoice, class: 'custom-file-input', required: true%>
+                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
+                        <% if @quotation.billing.invoice.present? %>
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-3 col-form-label">invoice File</label>
+                            <div class="col-sm-9">
+                                <%= link_to 'Download Invoice', @quotation.billing.invoice.url, target: :_blank %>
+                            </div>
+                        </div>
+                        <% end %>
+                    </div>
+                </div>
+                <% else %>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group row">
+                            <label class="col-sm-6 col-form-label">Particular</label>
+                            <div class="col-sm-2">
+                                <label>Cost</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Bill</label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>Profit</label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label">OCEAN FREIGHT
+                                <input type="hidden" name="billing[title][]" value="OCEAN FREIGHT">
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[cost][]" id="billing_cost_1"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[bill][]" id="billing_bill_1"
+                                    class=" billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[profit][]" id="billing_profit_1"
+                                    class=" billing form-control" value="0.00" min="0.00" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label">TERMINAL HANDLING
+                                CHARGE
+                                <input type="hidden" name="billing[title][]" value="TERMINAL HANDLING CHARGE">
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[cost][]" id="billing_cost_2"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[bill][]" id="billing_bill_2"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[profit][]" id="billing_profit_2"
+                                    class="billing form-control" value="0.00" min="0.00" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label">DELIVERY ORDER FEE
+                                <input type="hidden" name="billing[title][]" value="DELIVERY ORDER FEE">
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[cost][]" id="billing_cost_3"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[bill][]" id="billing_bill_3"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[profit][]" id="billing_profit_3"
+                                    class="billing form-control" value="0.00" min="0.00" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label">CLEANING FEE
+                                <input type="hidden" name="billing[title][]" value="CLEANING FEE">
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[cost][]" id="billing_cost_4"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[bill][]" id="billing_bill_4"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[profit][]" id="billing_profit_4"
+                                    class="billing form-control" value="0.00" min="0.00" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label">EDI FEE
+                                <input type="hidden" name="billing[title][]" value="EDI FEE">
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[cost][]" id="billing_cost_5"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[bill][]" id="billing_bill_5"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[profit][]" id="billing_profit_5"
+                                    class="billing form-control" value="0.00" min="0.00" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label">AGENCY RECOVERY
+                                CHARGE
+                                <input type="hidden" name="billing[title][]" value="AGENCY RECOVERY CHARGE">
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[cost][]" id="billing_cost_6"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[bill][]" id="billing_bill_6"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[profit][]" id="billing_profit_6"
+                                    class="billing form-control" value="0.00" min="0.00" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label">FORWARDING, HANDLING
+                                &
+                                SUPERVISION FEE
+                                <input type="hidden" name="billing[title][]"
+                                    value="FORWARDING, HANDLING & SUPERVISION FEE">
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[cost][]" id="billing_cost_7"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[bill][]" id="billing_bill_7"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[profit][]" id="billing_profit_7"
+                                    class="billing form-control" value="0.00" min="0.00" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label">TRANSPORTATION
+                                CHARGES
+                                <input type="hidden" name="billing[title][]" value="TRANSPORTATION CHARGES">
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[cost][]" id="billing_cost_8"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[bill][]" id="billing_bill_8"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[profit][]" id="billing_profit_8"
+                                    class="billing form-control" value="0.00" min="0.00" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label">INSURANCE
+                                <input type="hidden" name="billing[title][]" value="INSURANCE">
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[cost][]" id="billing_cost_9"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[bill][]" id="billing_bill_9"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[profit][]" id="billing_profit_9"
+                                    class="billing form-control" value="0.00" min="0.00" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label">UNSTUFFING CHARGES
+                                <input type="hidden" name="billing[title][]" value="UNSTUFFING CHARGES">
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[cost][]" id="billing_cost_10"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[bill][]" id="billing_bill_10"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[profit][]" id="billing_profit_10"
+                                    class="billing form-control" value="0.00" min="0.00" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label">STUFFING CHARGES
+                                <input type="hidden" name="billing[title][]" value="STUFFING CHARGES">
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[cost][]" id="billing_cost_11"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[bill][]" id="billing_bill_11"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[profit][]" id="billing_profit_11"
+                                    class="billing form-control" value="0.00" min="0.00" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label">WAREHOUSE HANDLING
+                                CHARGES
+                                <input type="hidden" name="billing[title][]" value="WAREHOUSE HANDLING CHARGES">
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[cost][]" id="billing_cost_12"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[bill][]" id="billing_bill_12"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[profit][]" id="billing_profit_12"
+                                    class="billing form-control" value="0.00" min="0.00" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label">MT HAULAGE CHARGES
+                                <input type="hidden" name="billing[title][]" value="MT HAULAGE CHARGES">
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[cost][]" id="billing_cost_13"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[bill][]" id="billing_bill_13"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[profit][]" id="billing_profit_13"
+                                    class="billing form-control" value="0.00" min="0.00" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label">DEPOT GATE CHARGES
+                                <input type="hidden" name="billing[title][]" value="DEPOT GATE CHARGES">
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[cost][]" id="billing_cost_14"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[bill][]" id="billing_bill_14"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[profit][]" id="billing_profit_14"
+                                    class="billing form-control" value="0.00" min="0.00" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label">TERMINAL HANDLING
+                                CHARGE
+                                <input type="hidden" name="billing[title][]" value="TERMINAL HANDLING CHARGE">
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[cost][]" id="billing_cost_15"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[bill][]" id="billing_bill_15"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[profit][]" id="billing_profit_15"
+                                    class="billing form-control" value="0.00" min="0.00" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label">BILL OF LADING FEE
+                                <input type="hidden" name="billing[title][]" value="BILL OF LADING FEE">
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[cost][]" id="billing_cost_16"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[bill][]" id="billing_bill_16"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[profit][]" id="billing_profit_16"
+                                    class="billing form-control" value="0.00" min="0.00" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label">TELEX RELEASE FEE
+                                <input type="hidden" name="billing[title][]" value="TELEX RELEASE FEE">
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[cost][]" id="billing_cost_17"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[bill][]" id="billing_bill_17"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[profit][]" id="billing_profit_17"
+                                    class="billing form-control" value="0.00" min="0.00" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label">EDI FEE
+                                <input type="hidden" name="billing[title][]" value="EDI FEE">
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[cost][]" id="billing_cost_18"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[bill][]" id="billing_bill_18"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[profit][]" id="billing_profit_18"
+                                    class="billing form-control" value="0.00" min="0.00" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label">SEAL FEE
+                                <input type="hidden" name="billing[title][]" value="SEAL FEE">
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[cost][]" id="billing_cost_19"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[bill][]" id="billing_bill_19"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[profit][]" id="billing_profit_19"
+                                    class="billing form-control" value="0.00" min="0.00" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label">AGENCY RECOVERY
+                                CHARGE
+                                <input type="hidden" name="billing[title][]" value="AGENCY RECOVERY CHARGE">
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[cost][]" id="billing_cost_20"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[bill][]" id="billing_bill_20"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[profit][]" id="billing_profit_20"
+                                    class="billing form-control" value="0.00" min="0.00" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label">FORWARDING, HANDLING
+                                &
+                                SUPERVISION FEE
+                                <input type="hidden" name="billing[title][]"
+                                    value="FORWARDING, HANDLING & SUPERVISION FEE"></label>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[cost][]" id="billing_cost_21"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[bill][]" id="billing_bill_21"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[profit][]" id="billing_profit_21"
+                                    class="billing form-control" value="0.00" min="0.00" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label">OCEAN FREIGHT
+                                (REEFER)
+                                <input type="hidden" name="billing[title][]" value="OCEAN FREIGHT (REEFER)">
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[cost][]" id="billing_cost_22"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[bill][]" id="billing_bill_22"
+                                    class="billing form-control" value="0.00" min="0.00">
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="billing[profit][]" id="billing_profit_22"
+                                    class="billing form-control" value="0.00" min="0.00" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="estimated_collection_date" class="col-sm-6 col-form-label">Total
+                            </label>
+                            <div class="col-sm-2">
+                                <label class="col-sm-6 col-form-label">RM<span id="total_cost"></span></label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="col-sm-6 col-form-label">RM<span id="total_bill"></span></label>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="col-sm-6 col-form-label">RM<span id="total_profit"></span></label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="file_declaration" class="col-sm-3 col-form-label">Upload invoice:</label>
+                            <div class="col-sm-9">
+                                <div class="custom-file">
+                                    <%= f.file_field :invoice, class: 'custom-file-input', required: true%>
+                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% end %>
+
+                <div class="my-2">
+
+                    <% if @quotation.billing.status == "Billing Confirmed" %>
+                    <%= f.submit 'Update', class: 'btn btn-primary', style:"float:right"%>
+                    <% else %>
+                    <%= f.submit 'Submit', class: 'btn btn-primary', style:"float:right"%>
+                    <% end %>
+                </div>
+                <% end %>
+                <% end %>
+            </div>
+            <div class="tab-pane fade" id="custom-tabs-two-insurance" role="tabpanel"
+                aria-labelledby="custom-tabs-two-insurance-tab">
+                <% if @quotation.insurance.present? %>
+                <%= form_for(:insurance, url: users_manage_insurance_path, role:"form-horizontal", method: :patch) do |f|%>
+                <div class="form-group row">
+                    <label for="file_declaration" class="col-sm-3 col-form-label">Upload Policy:</label>
+                    <div class="col-sm-9">
+                        <div class="custom-file">
+                            <%= f.file_field :policy, class: 'custom-file-input', required: true%>
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                    </div>
+                </div>
+                <% if @quotation.insurance.policy.present? %>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-3 col-form-label">Policy Attach File</label>
+                    <div class="col-sm-9">
+                        <%= link_to 'Download File', @quotation.insurance.policy.url, target: :_blank %>
+                    </div>
+                </div>
+                <% end %>
+                <div class="my-2">
+                    <% if @quotation.insurance.status == "Insurance Confirmed" %>
+                    <%= f.submit 'Been Submitted', class: 'btn btn-primary', style:"float:right", disabled: true%>
+                    <% else %>
+                    <%= f.submit 'Submit', class: 'btn btn-primary', style:"float:right"%>
+                    <% end %>
+                </div>
+                <% end %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <!-- /.card -->
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Status User</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <%= form_for(:user_status, url: post_status_users_path, role:"form-horizontal", method: :post) do |f|%>
+        <div class="form-group row">
+            <label for="commodity" class="col-sm-3 col-form-label">Date Today :</label>
+            <%= f.hidden_field :user_id, value: current_user.id %>
+            <%= f.hidden_field :quotation_id, value: @quotation.id %>
+            <div class="col-sm-9">
+                <%= f.text_field :date, class: 'form-control', value: Time.now.strftime("%Y-%d-%m"), readonly: true%>
+            </div>
+        </div>
+         <div class="form-group row">
+            <label for="commodity" class="col-sm-3 col-form-label">Status :</label>
+            <div class="col-sm-9">
+                <%= f.text_field :status, class: 'form-control', required: true%>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="commodity" class="col-sm-3 col-form-label">Description :</label>
+            <div class="col-sm-9">
+                <%= f.text_area :description, :cols => 10, :rows => 5, class: 'form-control', required: true %>
+            </div>
+        </div>
+        <div class="form-group row mr-1" style="float:right">
+            <%= f.submit 'Post', class: 'btn btn-primary'%>
+        </div>
+        <% end %>
+
+
+        <table class="table table-striped table-bordered my-2" style="width:100%">
+            <thead>
+                <tr>
+                    <th width="10%">Date Create</th>
+                    <th width="25%">Status</th>
+                    <th width="25%">Description</th>
+                    <th width="10%">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% current_user.user_statuses.where(quotation_id: @quotation.id).each do |u|%>
+                <tr>
+                    <td><%= u.created_at.strftime("%Y-%m-%d") %></td>
+                    <td><%= u.status %></td>
+                    <td><%= u.description %></td>
+                    <td>
+                        <div class="btn-group">
+                            <%= link_to '<span>Delete</span>'.html_safe, delete_status_users_path(u.id), method: :delete, data: {turbolinks: false}, class: 'btn btn-primary'%>
+                        </div>
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>
+
+
+
+
+
+
+
+
+
+<script>
+    <%= render partial: "users/manage/shipments/shared/export/air.js" %>
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+</script>

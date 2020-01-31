@@ -72,15 +72,15 @@ class Admins::Manage::ClientsController < Admins::BaseController
     private
 
        def clients_with_params
-           params.require(:client).permit(:password, :password_confirmation,:email,:address,:name,:no_tel)
+           params.require(:client).permit(:password, :password_confirmation,:email,:address,:name,:no_tel,:role)
        end
 
        def clients_params
-           params.require(:client).permit(:email, :password, :password_confirmation)
+           params.require(:client).permit(:email, :password, :password_confirmation,:role)
        end
  
        def clients_without_params
-           params.require(:client).permit(:email,:name,:no_tel,:address)
+           params.require(:client).permit(:email,:name,:no_tel,:address,:role)
        end
 
 end

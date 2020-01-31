@@ -19,16 +19,58 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css");
 @import url("https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css");
 
-.bill-landing
-{
-    background-image: url(cargomind-opacity.png);
-    background-position: center;
-    background-size: 1000px;
-    background-repeat:no-repeat;
+.bill-landing {
+  background-image: url(cargomind-opacity.png);
+  background-position: center;
+  background-size: 1000px;
+  background-repeat: no-repeat;
 }
 
-.ronly
-{
+.awb {
+  background-image: url(awb.png);
+  background-position: center;
+  background-size: 1000px;
+  background-repeat: no-repeat;
+}
 
-    background-color: lightgrey;
+.ronly {
+
+  background-color: lightgrey;
+}
+
+.nav.nav-tabs>li.disabled {
+  pointer-events: none;
+
+  a {
+    color: silver;
+  }
+}
+
+.form-confirmation {
+  display: block;
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid black;
+}
+
+.form-confirmation-span {
+  width: 50%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid black;
+}
+
+.form-confirmation-date-issue {
+  width: 70%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid black;
+}
+
+table.no-border {
+  border: none;
 }
