@@ -443,13 +443,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="email" class="col-sm-3 col-form-label">Edit AWB COnfirmation</label>
-                    <div class="col-sm-9">
-                        <%= link_to 'Edit Here', awb_users_manage_shipments_path(@quotation.quotation_id), target: :_blank  %> |
-                        <%= link_to 'Download PDF', view_awb_users_manage_shipments_path(@quotation.quotation_id, format: :pdf) %>
-                    </div>
-                </div>
                 <% if @quotation.slbl_confirmation.file_confirmation.present? %>
                 <div class="form-group row">
                     <label for="email" class="col-sm-3 col-form-label">Download Draft File</label>
@@ -464,13 +457,6 @@
                     <div class="col-sm-9">
                         <label for="email"
                             class="col-form-label form-control ronly"><%= @quotation.slbl_confirmation.remarks %></label>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="email" class="col-sm-3 col-form-label">Edit AWB COnfirmation</label>
-                    <div class="col-sm-9">
-                        <%= link_to 'Edit Here', awb_users_manage_shipments_path(@quotation.quotation_id), target: :_blank  %> |
-                        <%= link_to 'Download PDF', view_awb_users_manage_shipments_path(@quotation.quotation_id, format: :pdf) %>
                     </div>
                 </div>
                 <% if @quotation.slbl_confirmation.file_client_draft.present? %>
