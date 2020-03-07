@@ -24,6 +24,9 @@ gem 'jbuilder', '~> 2.7'
   gem 'foreman'
   gem 'devise'
   gem 'carrierwave'
+  gem 'mini_magick'
+  gem 'fog-aws'
+  gem 'aws-sdk-rails'
   gem 'wicked_pdf'
   
 # Use Active Storage variant
