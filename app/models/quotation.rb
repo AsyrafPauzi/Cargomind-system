@@ -11,8 +11,8 @@
     has_one :slbl_confirmation, :dependent => :delete
     has_one :insurance, :dependent => :delete
     has_one :vessel_depart, :dependent => :delete
-    has_one :billing, :dependent => :delete
-    has_many :user_statuses
+    has_one :billing, :dependent => :destroy
+    has_many :user_statuses, dependent: :delete_all
 
 
 

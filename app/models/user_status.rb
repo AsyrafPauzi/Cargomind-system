@@ -1,4 +1,4 @@
 class UserStatus < ApplicationRecord
     belongs_to :user
-    belongs_to :quotation
+    belongs_to :quotation 
 end

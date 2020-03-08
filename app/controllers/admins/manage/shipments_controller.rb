@@ -1,5 +1,5 @@
 class Admins::Manage::ShipmentsController < Admins::BaseController
-    #before_action :get_shipment, only: [:create, :index, :update]
+    before_action :get_shipment, only: [:destroy]
      def index
              
      end
@@ -39,13 +39,20 @@ class Admins::Manage::ShipmentsController < Admins::BaseController
      end
  
      def destroy
+
+        @quotation.destroy
+        respond_to do |format|
+          format.html { redirect_to admins_path, notice: 'Quotation was successfully destroyed.' }
+          format.json { head :no_content }
+        end
+
      end
  
      private
  
      def get_shipment
  
-            # @company = Company.find(current_user.company_id)
+        @quotation = Quotation.find_by_quotation_id(params[:id])
         
      end
  
