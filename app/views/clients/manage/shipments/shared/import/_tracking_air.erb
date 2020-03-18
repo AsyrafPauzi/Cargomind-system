@@ -77,7 +77,9 @@
               <div class="timeline-item">
                 <h3 class="timeline-header no-border">Quotation Final Confirmed</h3>
                 <div class="timeline-body">
+                    <% if @quotation.file_quotation.url.present? %>
                       <%= link_to 'Download Final Staff Quotation', @quotation.file_quotation.url, target: :_blank %>
+                    <% end %>
                 </div>
               </div>     
             </div>
@@ -87,8 +89,10 @@
               <div class="timeline-item">
                 <h3 class="timeline-header no-border">Quotation Final Confirmed<br/></h3>
                 <% if @quotation.file_quotation.present? %>
-                <div class="timeline-body">       
+                <div class="timeline-body">    
+                    <% if @quotation.file_quotation.url.present? %>   
                       <%= link_to 'Download Final Staff Quotation', @quotation.file_quotation.url, target: :_blank %>
+                    <% end %>
                 </div>
                   <% end %>
               </div>
@@ -340,6 +344,7 @@
               </div>
           <% end %>
           
+          <% if false %>
           <% if @quotation.insurance.present? %>
             <% if @quotation.insurance.status == "Insurance Confirmed"%>
               <div>
@@ -369,6 +374,8 @@
                 </div>
               </div>
           <% end %>
+          <% end %>
+
           <div class="time-label">
             <span class="bg-green">Complete</span>
           </div>

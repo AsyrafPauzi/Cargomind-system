@@ -33,6 +33,15 @@ class Users::Manage::ShipmentsController < ApplicationController
             if AttachPreAlert.find_by_quotation_id(@quotation.id).nil?
               AttachPreAlert.create!(quotation_id: @quotation.id)
           end
+          if CargoDeclaration.find_by_quotation_id(@quotation.id).nil?
+            CargoDeclaration.create!(quotation_id: @quotation.id)
+        end
+        if CargoCollection.find_by_quotation_id(@quotation.id).nil?
+          CargoCollection.create!(quotation_id: @quotation.id)
+      end
+      if Billing.find_by_quotation_id(@quotation.id).nil?
+        Billing.create!(quotation_id: @quotation.id)
+    end
 
             end
           format.html { redirect_to clients_manage_shipments_path, notice: 'Quotation was successfully created.' }
@@ -151,6 +160,15 @@ class Users::Manage::ShipmentsController < ApplicationController
         if AttachPreAlert.find_by_quotation_id(@quotation.id).nil?
           AttachPreAlert.create!(quotation_id: @quotation.id)
       end
+      if CargoDeclaration.find_by_quotation_id(@quotation.id).nil?
+        CargoDeclaration.create!(quotation_id: @quotation.id)
+    end
+    if CargoCollection.find_by_quotation_id(@quotation.id).nil?
+      CargoCollection.create!(quotation_id: @quotation.id)
+  end
+  if Billing.find_by_quotation_id(@quotation.id).nil?
+    Billing.create!(quotation_id: @quotation.id)
+end
         end
 
          respond_to do |format|

@@ -78,11 +78,13 @@
                     id="custom-tabs-two-billing-tab" data-toggle="pill" href="#custom-tabs-two-billing" role="tab"
                     aria-controls="custom-tabs-two-billing" aria-selected="false">Billing</a>
             </li>
+            <% if false %>
             <li class="nav-item">
                 <a class="nav-link <%=  @quotation.insurance.present? ? @quotation.insurance.status == "Insurance Confirmed" ? ' bg-blue ' : '' : 'disabled' %>"
                     id="custom-tabs-two-insurance-tab" data-toggle="pill" href="#custom-tabs-two-insurance" role="tab"
                     aria-controls="custom-tabs-two-insurance" aria-selected="false">Insurance</a>
             </li>
+            <% end %>
         </ul>
     </div>
     <div class="card-body">
@@ -287,7 +289,7 @@
                 <% if @quotation.cargo_collection.present? %>
                 <%= form_for(:cargo_collection, url: users_manage_cargo_collection_path, role:"form-horizontal", method: :patch) do |f|%>
                 <div class="form-group row">
-                    <label for="estimated_collection_date" class="col-sm-3 col-form-label">Estimated Collection Date
+                    <label for="estimated_collection_date" class="col-sm-3 col-form-label">Estimated Delivery Date
                         :</label>
                     <div class="col-sm-9">
                         <%= f.date_field :estimated_collection_date, class: 'form-control', value: @quotation.cargo_collection.estimated_collection_date.present? ? @quotation.cargo_collection.estimated_collection_date  : "", required: true%>

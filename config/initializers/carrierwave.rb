@@ -9,6 +9,8 @@ CarrierWave.configure do |config|
         }
         config.fog_directory = ENV['S3_BUCKET']
         config.storage = :fog
+        config.fog_public = true
+        config.asset_host = 'https://cargomind-web.s3-ap-southeast-1.amazonaws.com'
       else
         config.fog_provider = 'fog/aws' 
         config.fog_credentials = {
@@ -20,6 +22,7 @@ CarrierWave.configure do |config|
         config.fog_directory = 'cargomind-web'
         config.storage = :fog
         config.fog_public = true
+        config.asset_host = 'https://cargomind-web.s3-ap-southeast-1.amazonaws.com'
       config.enable_processing = Rails.env.development?
     end
   end

@@ -30,7 +30,16 @@ class Clients::Manage::ShipmentsController < Clients::BaseController
               end
               if AttachPreAlert.find_by_quotation_id(@quotation.id).nil?
                 AttachPreAlert.create!(quotation_id: @quotation.id)
-            end              
+            end    
+            if CargoDeclaration.find_by_quotation_id(@quotation.id).nil?
+              CargoDeclaration.create!(quotation_id: @quotation.id)
+          end
+          if CargoCollection.find_by_quotation_id(@quotation.id).nil?
+            CargoCollection.create!(quotation_id: @quotation.id)
+        end
+        if Billing.find_by_quotation_id(@quotation.id).nil?
+          Billing.create!(quotation_id: @quotation.id)
+      end          
               end
             format.html { redirect_to clients_manage_shipments_path, notice: 'Quotation was successfully created.' }
           else
@@ -97,6 +106,15 @@ class Clients::Manage::ShipmentsController < Clients::BaseController
             if AttachPreAlert.find_by_quotation_id(@quotation.id).nil?
               AttachPreAlert.create!(quotation_id: @quotation.id)
           end
+          if CargoDeclaration.find_by_quotation_id(@quotation.id).nil?
+            CargoDeclaration.create!(quotation_id: @quotation.id)
+        end
+        if CargoCollection.find_by_quotation_id(@quotation.id).nil?
+          CargoCollection.create!(quotation_id: @quotation.id)
+      end
+      if Billing.find_by_quotation_id(@quotation.id).nil?
+        Billing.create!(quotation_id: @quotation.id)
+    end
             end
             respond_to do |format|
                 format.html { redirect_to request.referrer, :flash => {:success => 'Successful Send Quotation.'}}

@@ -77,7 +77,9 @@
               <div class="timeline-item">
                 <h3 class="timeline-header no-border">Quotation Final Confirmed</h3>
                 <div class="timeline-body">
+                    <% if @quotation.file_quotation.url.present? %>
                       <%= link_to 'Download Final Staff Quotation', @quotation.file_quotation.url, target: :_blank %>
+                    <% end %>
                 </div>
               </div>     
             </div>
@@ -88,7 +90,9 @@
                 <h3 class="timeline-header no-border">Quotation Final Confirmed<br/></h3>
                 <% if @quotation.file_quotation.present? %>
                 <div class="timeline-body">       
+                    <% if @quotation.file_quotation.url.present? %>
                       <%= link_to 'Download Final Staff Quotation', @quotation.file_quotation.url, target: :_blank %>
+                    <% end %>
                 </div>
                   <% end %>
               </div>
@@ -309,6 +313,9 @@
                 <div class="timeline-item">
                     
                   <h3 class="timeline-header no-border">Cargo delivery Laden Collected</h3>
+                  <div class="timeline-body">       
+                        Date: <%=  @quotation.cargo_collection.updated_at.strftime("%Y-%m-%d") %>
+                  </div>
                 </div>
               </div>
             <% else %>
@@ -337,6 +344,9 @@
                 <i class="fas fa-check bg-green"></i>
                 <div class="timeline-item">
                   <h3 class="timeline-header no-border">Billing</h3>
+                  <div class="timeline-body">       
+                        <%= link_to 'Download Billing', @quotation.billing.invoice.url, target: :_blank %>
+                  </div>
                 </div>
               </div>
             <% else %>
@@ -356,6 +366,7 @@
               </div>
           <% end %>
           
+          <% if false %>
           <% if @quotation.insurance.present? %>
             <% if @quotation.insurance.status == "Insurance Confirmed"%>
               <div>
@@ -385,6 +396,9 @@
                 </div>
               </div>
           <% end %>
+          <% end%>
+
+
           <div class="time-label">
             <span class="bg-green">Complete</span>
           </div>
