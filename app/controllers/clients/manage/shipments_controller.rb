@@ -41,7 +41,7 @@ class Clients::Manage::ShipmentsController < Clients::BaseController
           Billing.create!(quotation_id: @quotation.id)
       end          
               end
-            format.html { redirect_to clients_manage_shipments_path, notice: 'Quotation was successfully created.' }
+            format.html { redirect_to clients_path, notice: 'Quotation was successfully created.' }
           else
             format.html { render :new }
             format.json { render json: @quotation.errors, status: :unprocessable_entity }
@@ -59,7 +59,7 @@ class Clients::Manage::ShipmentsController < Clients::BaseController
                 @quotation.update(status: "Confirm Order",quotation_status: "Delivered")
                 Booking.create!(quotation_id: @quotation.id)
               end
-            format.html { redirect_to clients_manage_shipments_path, notice: 'Quotation was successfully created.' }
+            format.html { redirect_to clients_path, notice: 'Quotation was successfully created.' }
           else
             format.html { render :new }
             format.json { render json: @quotation.errors, status: :unprocessable_entity }
@@ -141,7 +141,7 @@ class Clients::Manage::ShipmentsController < Clients::BaseController
 
       @quotation.destroy
       respond_to do |format|
-        format.html { redirect_to clients_manage_shipments_path, notice: 'Quotation was successfully destroyed.' }
+        format.html { redirect_to clients_path, notice: 'Quotation was successfully destroyed.' }
         format.json { head :no_content }
       end
 

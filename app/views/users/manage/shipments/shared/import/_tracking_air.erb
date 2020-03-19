@@ -215,40 +215,48 @@
               </div>
           <% end %>
 
-          <% if @quotation.cargo_collection.present? %>
-            <% if @quotation.cargo_collection.status == "On Plan" %>
-              <div>
-                <i class="fas fa-exclamation bg-yellow"></i>
-                <div class="timeline-item">
-                    
-                  <h3 class="timeline-header no-border">Cargo Delivery On Plan</h3>
-                </div>
-              </div>
-            <% elsif @quotation.cargo_collection.status == "Collected"%>
-              <div>
-                <i class="fas fa-check bg-green"></i>
-                <div class="timeline-item">
-                    
-                  <h3 class="timeline-header no-border">Cargo Delivery Collected</h3>
-                </div>
-              </div>
-            <% else %>
-              <div>
-                <i class="fas fa-times bg-red"></i>
-                <div class="timeline-item">
-                    
-                  <h3 class="timeline-header no-border">Cargo Delivery Not Collected</h3>
-                </div>
-              </div>
-            <% end %>
+           <% if @quotation.cargo_collection.present? %>
+          <% if @quotation.cargo_collection.status == "Planned" %>
+          <div>
+            <i class="fas fa-exclamation bg-yellow"></i>
+            <div class="timeline-item">
+
+              <h3 class="timeline-header no-border">Cargo Delivery Planned</h3>
+            </div>
+          </div>
+          <% elsif @quotation.cargo_collection.status == "Deliver"%>
+          <div>
+            <i class="fas fa-check bg-green"></i>
+            <div class="timeline-item">
+
+              <h3 class="timeline-header no-border">Cargo Delivery Deliver</h3>
+            </div>
+          </div>
+          <% elsif @quotation.cargo_collection.status == "Re-Planned"%>
+          <div>
+            <i class="fas fa-exclamation bg-yellow"></i>
+            <div class="timeline-item">
+
+              <h3 class="timeline-header no-border">Cargo Delivery Re-Planned</h3>
+            </div>
+          </div>
           <% else %>
-            <div>
-                <i class="fas fa-times bg-red"></i>
-                <div class="timeline-item">
-                    
-                  <h3 class="timeline-header no-border">Cargo Delivery Not Collected</h3>
-                </div>
-              </div>
+          <div>
+            <i class="fas fa-times bg-red"></i>
+            <div class="timeline-item">
+
+              <h3 class="timeline-header no-border">Cargo Delivery Not Deliver</h3>
+            </div>
+          </div>
+          <% end %>
+          <% else %>
+          <div>
+            <i class="fas fa-times bg-red"></i>
+            <div class="timeline-item">
+
+              <h3 class="timeline-header no-border">Cargo Delivery Not Deliver</h3>
+            </div>
+          </div>
           <% end %>
 
           

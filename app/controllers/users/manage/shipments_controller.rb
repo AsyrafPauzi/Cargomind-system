@@ -44,7 +44,7 @@ class Users::Manage::ShipmentsController < ApplicationController
     end
 
             end
-          format.html { redirect_to clients_manage_shipments_path, notice: 'Quotation was successfully created.' }
+          format.html { redirect_to clients_path, notice: 'Quotation was successfully created.' }
         else
           format.html { render :new }
           format.json { render json: @quotation.errors, status: :unprocessable_entity }
@@ -64,7 +64,7 @@ class Users::Manage::ShipmentsController < ApplicationController
                 Booking.create!(quotation_id: @quotation.id)
             end
             end
-          format.html { redirect_to clients_manage_shipments_path, notice: 'Quotation was successfully created.' }
+          format.html { redirect_to clients_path, notice: 'Quotation was successfully created.' }
         else
           format.html { render :new }
           format.json { render json: @quotation.errors, status: :unprocessable_entity }

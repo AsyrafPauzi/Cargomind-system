@@ -216,39 +216,28 @@
           <% end %>
 
           <% if @quotation.cargo_collection.present? %>
-          <% if @quotation.cargo_collection.status == "On Plan" %>
+          <% if @quotation.cargo_collection.status == "Planned" %>
           <div>
             <i class="fas fa-exclamation bg-yellow"></i>
             <div class="timeline-item">
 
-              <h3 class="timeline-header no-border">Cargo Delivery On Plan</h3>
+              <h3 class="timeline-header no-border">Cargo Delivery Planned</h3>
             </div>
           </div>
-          <% elsif @quotation.cargo_collection.status == "Collected"%>
+          <% elsif @quotation.cargo_collection.status == "Deliver"%>
           <div>
             <i class="fas fa-check bg-green"></i>
             <div class="timeline-item">
 
-              <h3 class="timeline-header no-border">Cargo Delivery Collected</h3>
+              <h3 class="timeline-header no-border">Cargo Delivery Deliver</h3>
             </div>
           </div>
-          <% elsif @quotation.cargo_collection.status == "Empty Send"%>
+          <% elsif @quotation.cargo_collection.status == "Re-Planned"%>
           <div>
             <i class="fas fa-exclamation bg-yellow"></i>
             <div class="timeline-item">
 
-              <h3 class="timeline-header no-border">Cargo Delivery Empty Send</h3>
-            </div>
-          </div>
-          <% elsif @quotation.cargo_collection.status == "Laden Collected"%>
-          <div>
-            <i class="fas fa-check bg-green"></i>
-            <div class="timeline-item">
-
-              <h3 class="timeline-header no-border">Cargo Delivery Laden Collected</h3>
-              <div class="timeline-body">
-                Date: <%=  @quotation.cargo_collection.updated_at.strftime("%Y-%m-%d") %>
-              </div>
+              <h3 class="timeline-header no-border">Cargo Delivery Re-Planned</h3>
             </div>
           </div>
           <% else %>
@@ -256,7 +245,7 @@
             <i class="fas fa-times bg-red"></i>
             <div class="timeline-item">
 
-              <h3 class="timeline-header no-border">Cargo Delivery Not Collected</h3>
+              <h3 class="timeline-header no-border">Cargo Delivery Not Deliver</h3>
             </div>
           </div>
           <% end %>
@@ -265,7 +254,7 @@
             <i class="fas fa-times bg-red"></i>
             <div class="timeline-item">
 
-              <h3 class="timeline-header no-border">Cargo Delivery Not Collected</h3>
+              <h3 class="timeline-header no-border">Cargo Delivery Not Deliver</h3>
             </div>
           </div>
           <% end %>

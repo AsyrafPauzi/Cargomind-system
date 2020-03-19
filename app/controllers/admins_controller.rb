@@ -6,7 +6,7 @@ class AdminsController < Admins::BaseController
   def index
     @user = User.all.limit(5).order(created_at: :desc)
     @client = Client.all.limit(5).order(created_at: :desc)
-    @quotation = Quotation.all.limit(5).order(created_at: :desc)
+    @quotation = Quotation.all.order(created_at: :desc)
   end
 
   private

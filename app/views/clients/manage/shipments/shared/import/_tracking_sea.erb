@@ -285,36 +285,35 @@
           <% end %>
 
           <% if @quotation.cargo_collection.present? %>
-            <% if @quotation.cargo_collection.status == "Collected"%>
-              <div>
-                <i class="fas fa-check bg-green"></i>
-                <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Cargo delivery collected</h3>
-                </div>
-              </div>
-            <% elsif @quotation.cargo_collection.status == "On Plan"%>
+            <% if @quotation.cargo_collection.status == "Planned"%>
               <div>
                 <i class="fas fa-exclamation bg-yellow"></i>
                 <div class="timeline-item">
                   <h3 class="timeline-header no-border">Cargo delivery on plan</h3>
+                  <div class="timeline-body">       
+                        Date: <%=  @quotation.cargo_collection.estimated_collection_date %>
+                  </div>
                 </div>
               </div>
-            <% elsif @quotation.cargo_collection.status == "Empty Send"%>
+            <% elsif @quotation.cargo_collection.status == "Re-Planned"%>
               <div>
                 <i class="fas fa-exclamation bg-yellow"></i>
                 <div class="timeline-item">
                     
-                  <h3 class="timeline-header no-border">Cargo delivery Empty Send</h3>
+                  <h3 class="timeline-header no-border">Cargo delivery re-planned</h3>
+                  <div class="timeline-body">       
+                        Date: <%=  @quotation.cargo_collection.estimated_collection_date %>
+                  </div>
                 </div>
               </div>
-            <% elsif @quotation.cargo_collection.status == "Laden Collected"%>
+            <% elsif @quotation.cargo_collection.status == "Deliver"%>
               <div>
                 <i class="fas fa-check bg-green"></i>
                 <div class="timeline-item">
                     
-                  <h3 class="timeline-header no-border">Cargo delivery Laden Collected</h3>
+                  <h3 class="timeline-header no-border">Cargo delivery deliver</h3>
                   <div class="timeline-body">       
-                        Date: <%=  @quotation.cargo_collection.updated_at.strftime("%Y-%m-%d") %>
+                        Date: <%=  @quotation.cargo_collection.estimated_collection_date %>
                   </div>
                 </div>
               </div>
@@ -322,7 +321,7 @@
               <div>
                 <i class="fas fa-times bg-red"></i>
                 <div class="timeline-item">
-                  <h3 class="timeline-header no-border">Cargo delivery not collected</h3>
+                  <h3 class="timeline-header no-border">Cargo delivery not deliver</h3>
                 </div>
               </div>
             <% end %>
@@ -330,7 +329,7 @@
             <div>
               <i class="fas fa-times bg-red"></i>
               <div class="timeline-item">
-                <h3 class="timeline-header no-border">Cargo delivery not been collected</h3>
+                <h3 class="timeline-header no-border">Cargo delivery not deliver</h3>
               </div>
             </div>
           <% end %>

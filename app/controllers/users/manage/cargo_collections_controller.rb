@@ -1,15 +1,24 @@
 class Users::Manage::CargoCollectionsController < Users::BaseController
-    before_action :get_quotation, only: [:update,:update_collection]
+    before_action :get_quotation, only: [:update,:update_collection, :update_collection_replanned]
 
      def update
         
         @cargo_collection = CargoCollection.find_by_quotation_id(@quotation.id)
         if @cargo_collection.update(cargo_collections_with_params)
+            if @quotation.type_quotation == "Import"
+                if params[:commit] == "Re-Planned"
+                    @cargo_collection.update(status: "Re-Planned")
+                else
+                    @cargo_collection.update(status: "Planned")
+                end
+                
+            else
             if @quotation.weight_type == "FCL"
                 @cargo_collection.update(status: "Empty Send")
             else
                 @cargo_collection.update(status: "On Plan")
             end
+        end
             if @quotation.type_quotation == "Export"
                 if CargoDeclaration.find_by_quotation_id(@quotation.id).nil?
                     CargoDeclaration.create!(quotation_id: @quotation.id)
@@ -31,29 +40,62 @@ class Users::Manage::CargoCollectionsController < Users::BaseController
      end
 
      def update_collection
-        if @quotation.weight_type == "FCL"
+
+        if @quotation.type_quotation == "Import"
+
             @cargo_collection = CargoCollection.find_by_quotation_id(@quotation.id)
-            if @cargo_collection.update(status: "Laden Collected")
+            if @cargo_collection.update(status: "Deliver")
                 respond_to do |format|
-                    format.html { redirect_to users_manage_shipment_path(@quotation.quotation_id), :flash => {:success => 'Successful Update Cargo Collection.'}}
+                    format.html { redirect_to users_manage_shipment_path(@quotation.quotation_id), :flash => {:success => 'Successful Update Cargo Delivery.'}}
                     format.json { render :json => @quotation }
                 end
             else
             format.json { render json: @quotation.errors, status: :unprocessable_entity }
                 redirect_to request.referrer
             end
+
         else
-            @cargo_collection = CargoCollection.find_by_quotation_id(@quotation.id)
-            if @cargo_collection.update(status: "Collected")
-                respond_to do |format|
-                    format.html { redirect_to users_manage_shipment_path(@quotation.quotation_id), :flash => {:success => 'Successful Update Cargo Collection.'}}
-                    format.json { render :json => @quotation }
+            if @quotation.weight_type == "FCL"
+                @cargo_collection = CargoCollection.find_by_quotation_id(@quotation.id)
+                if @cargo_collection.update(status: "Laden Collected")
+                    respond_to do |format|
+                        format.html { redirect_to users_manage_shipment_path(@quotation.quotation_id), :flash => {:success => 'Successful Update Cargo Delivery.'}}
+                        format.json { render :json => @quotation }
+                    end
+                else
+                format.json { render json: @quotation.errors, status: :unprocessable_entity }
+                    redirect_to request.referrer
                 end
             else
-                format.json { render json: @quotation.errors, status: :unprocessable_entity }
-                redirect_to request.referrer
+                @cargo_collection = CargoCollection.find_by_quotation_id(@quotation.id)
+                if @cargo_collection.update(status: "Collected")
+                    respond_to do |format|
+                        format.html { redirect_to users_manage_shipment_path(@quotation.quotation_id), :flash => {:success => 'Successful Update Cargo Delivery.'}}
+                        format.json { render :json => @quotation }
+                    end
+                else
+                    format.json { render json: @quotation.errors, status: :unprocessable_entity }
+                    redirect_to request.referrer
+                end
             end
         end
+
+
+     end
+
+     def update_collection_replanned
+
+       
+                @cargo_collection = CargoCollection.find_by_quotation_id(@quotation.id)
+                if @cargo_collection.update(status: "Re-Planned")
+                    respond_to do |format|
+                        format.html { redirect_to users_manage_shipment_path(@quotation.quotation_id), :flash => {:success => 'Successful Update Cargo Collection.'}}
+                        format.json { render :json => @quotation }
+                    end
+                else
+                format.json { render json: @quotation.errors, status: :unprocessable_entity }
+                    redirect_to request.referrer
+                end
      end
  
      private

@@ -1,219 +1,218 @@
 <section class="content-header">
-      <div class="container-fluid">
+    <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Shipments</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><%= link_to "Dashboard" ,  clients_path %></li>
-              <li class="breadcrumb-item"><%= link_to "Shipments" ,  clients_manage_shipments_path %></li>
-              <li class="breadcrumb-item active"><%= @quotation.quotation_id %></li>
-            </ol>
-          </div>
+            <div class="col-sm-6">
+                <h1>Shipments</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><%= link_to "Dashboard" ,  clients_path %></li>
+                    <li class="breadcrumb-item active"><%= @quotation.quotation_id %></li>
+                </ol>
+            </div>
         </div>
-      </div><!-- /.container-fluid -->
-    </section>
+    </div><!-- /.container-fluid -->
+</section>
 
-    <section class="content">
-    
-        <div class="row">
-            <div class="col-8">
+<section class="content">
+
+    <div class="row">
+        <div class="col-8">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Details Shipments</h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                        <i class="fas fa-minus"></i></button>
+                            <i class="fas fa-minus"></i></button>
                     </div>
-                    </div>
-                    <div class="card-body">
+                </div>
+                <div class="card-body">
                     <p id="error"><%= flash[:danger] %></p>
                     <p id="notice"><%= flash[:success] %></p>
                     <%= form_for(@quotation, url:  clients_manage_shipment_path, role:"form-horizontal", method: :patch) do |f|%>
-                      <div class="form-group row">
+                    <div class="form-group row">
                         <label for="date" class="col-sm-2 col-form-label">Status :</label>
-                         <div class="col-sm-10">
-                        <%= f.text_field :status, class: 'form-control',readonly: true%>
+                        <div class="col-sm-10">
+                            <%= f.text_field :status, class: 'form-control',readonly: true%>
                         </div>
-                      </div>
+                    </div>
                     <% if @quotation.status == "Draft" %>
-                      <div class="form-group row">
+                    <div class="form-group row">
                         <label for="date" class="col-sm-2 col-form-label">Date :</label>
-                         <div class="col-sm-10">
-                        <%= f.date_field :date, class: 'form-control', required: true %>
+                        <div class="col-sm-10">
+                            <%= f.date_field :date, class: 'form-control', required: true %>
                         </div>
-                      </div>
-                      <div class="form-group row">
+                    </div>
+                    <div class="form-group row">
                         <label for="shipper" class="col-sm-2 col-form-label">Shipper :</label>
                         <div class="col-sm-10">
-                        <%= f.text_area :shipper, :rows => 5,class: "form-control"  , required: true%>
+                            <%= f.text_area :shipper, :rows => 5,class: "form-control"  , required: true%>
                         </div>
-                      </div>
-                      <div class="form-group row">
+                    </div>
+                    <div class="form-group row">
                         <label for="consignee" class="col-sm-2 col-form-label">Consignee :</label>
                         <div class="col-sm-10">
-                        <%= f.text_area :consignee, :rows => 5,class: "form-control"  , required: true%>
+                            <%= f.text_area :consignee, :rows => 5,class: "form-control"  , required: true%>
                         </div>
-                      </div>
-                      <div class="form-group row">
+                    </div>
+                    <div class="form-group row">
                         <label for="port_of_loading" class="col-sm-2 col-form-label">Port Of Loading :</label>
                         <div class="col-sm-10">
-                        <%= f.text_field :port_of_loading, class: 'form-control', required: true %>
+                            <%= f.text_field :port_of_loading, class: 'form-control', required: true %>
                         </div>
-                      </div>
-                      <div class="form-group row">
+                    </div>
+                    <div class="form-group row">
                         <label for="port_of_discharge" class="col-sm-2 col-form-label">Port Of Discharge :</label>
                         <div class="col-sm-10">
-                        <%= f.text_field :port_of_discharge, class: 'form-control', required: true %>
+                            <%= f.text_field :port_of_discharge, class: 'form-control', required: true %>
                         </div>
-                      </div>
-                      <div class="form-group row">
+                    </div>
+                    <div class="form-group row">
                         <label for="final_destination" class="col-sm-2 col-form-label">Final Destination :</label>
                         <div class="col-sm-10">
-                        <%= f.text_field :final_destination, class: 'form-control', required: true %>
+                            <%= f.text_field :final_destination, class: 'form-control', required: true %>
                         </div>
-                      </div>
-                      <div class="form-group row">
+                    </div>
+                    <div class="form-group row">
                         <label for="mode_of_shipment_export" class="col-sm-2 col-form-label">Mode Of Shipment :</label>
                         <div class="col-sm-10">
-                        <%= f.select :mode_of_shipment, ['Sea', 'Air'], {}, { :class => 'form-control'} %>
+                            <%= f.select :mode_of_shipment, ['Sea', 'Air'], {}, { :class => 'form-control'} %>
                         </div>
-                      </div>
-                      <div class="form-group row" id="form_weight_type_export">
+                    </div>
+                    <div class="form-group row" id="form_weight_type_export">
                         <label for="weight_type_export" class="col-sm-2 col-form-label">Weight Type :</label>
                         <div class="col-sm-10">
-                        <%= f.select :weight_type, ['FCL', 'LCL'], {}, { :class => 'form-control'} %>
+                            <%= f.select :weight_type, ['FCL', 'LCL'], {}, { :class => 'form-control'} %>
                         </div>
-                      </div>
-                      <div class="form-group row" id="form_fcl_export">
+                    </div>
+                    <div class="form-group row" id="form_fcl_export">
                         <label for="fcl_export" class="col-sm-2 col-form-label">FCL :</label>
                         <div class="col-sm-10">
-                        <%= f.select :weight_fcl, ["20'", "40'", "40'HC"], {}, { :class => 'form-control'} %>
+                            <%= f.select :weight_fcl, ["20'", "40'", "40'HC"], {}, { :class => 'form-control'} %>
                         </div>
-                      </div>
-                      <div class="form-group row" id="form_lcl_export">
+                    </div>
+                    <div class="form-group row" id="form_lcl_export">
                         <label for="weight_lcl" class="col-sm-2 col-form-label">Weight, Dimension (LxWxH) in Meter :</label>
                         <div class="col-sm-10">
-                        <%= f.text_field :weight_lcl, class: 'form-control'%>
+                            <%= f.text_field :weight_lcl, class: 'form-control'%>
                         </div>
-                      </div>
-                      <div class="form-group row" id="form_air_export">
+                    </div>
+                    <div class="form-group row" id="form_air_export">
                         <label for="weight_air" class="col-sm-2 col-form-label">Weight, Dimension (LxWxH) in Centimeter :</label>
                         <div class="col-sm-10">
-                        <%= f.text_field :weight_air, class: 'form-control'%>
+                            <%= f.text_field :weight_air, class: 'form-control'%>
                         </div>
-                      </div>
-                      <div class="form-group row">
+                    </div>
+                    <div class="form-group row">
                         <label for="commodity" class="col-sm-2 col-form-label">Commodity :</label>
                         <div class="col-sm-10">
-                        <%= f.text_field :commodity, class: 'form-control', required: true %>
+                            <%= f.text_field :commodity, class: 'form-control', required: true %>
                         </div>
-                      </div>
+                    </div>
                     <% else %>
-                      <div class="form-group row">
+                    <div class="form-group row">
                         <label for="date" class="col-sm-2 col-form-label">Date :</label>
-                         <div class="col-sm-10">
-                        <%= f.date_field :date, class: 'form-control', readonly: true %>
+                        <div class="col-sm-10">
+                            <%= f.date_field :date, class: 'form-control', readonly: true %>
                         </div>
-                      </div>
-                      <div class="form-group row">
+                    </div>
+                    <div class="form-group row">
                         <label for="shipper" class="col-sm-2 col-form-label">Shipper :</label>
                         <div class="col-sm-10">
-                        <%= f.text_area :shipper, :rows => 5,class: "form-control", readonly: true%>
+                            <%= f.text_area :shipper, :rows => 5,class: "form-control", readonly: true%>
                         </div>
-                      </div>
-                      <div class="form-group row">
+                    </div>
+                    <div class="form-group row">
                         <label for="consignee" class="col-sm-2 col-form-label">Consignee :</label>
                         <div class="col-sm-10">
-                        <%= f.text_area :consignee, :rows => 5,class: "form-control", readonly: true%>
+                            <%= f.text_area :consignee, :rows => 5,class: "form-control", readonly: true%>
                         </div>
-                      </div>
-                      <div class="form-group row">
+                    </div>
+                    <div class="form-group row">
                         <label for="port_of_loading" class="col-sm-2 col-form-label">Port Of Loading :</label>
                         <div class="col-sm-10">
-                        <%= f.text_field :port_of_loading, class: 'form-control', readonly: true %>
+                            <%= f.text_field :port_of_loading, class: 'form-control', readonly: true %>
                         </div>
-                      </div>
-                      <div class="form-group row">
+                    </div>
+                    <div class="form-group row">
                         <label for="port_of_discharge" class="col-sm-2 col-form-label">Port Of Discharge :</label>
                         <div class="col-sm-10">
-                        <%= f.text_field :port_of_discharge, class: 'form-control', readonly: true%>
+                            <%= f.text_field :port_of_discharge, class: 'form-control', readonly: true%>
                         </div>
-                      </div>
-                      <div class="form-group row">
+                    </div>
+                    <div class="form-group row">
                         <label for="final_destination" class="col-sm-2 col-form-label">Final Destination :</label>
                         <div class="col-sm-10">
-                        <%= f.text_field :final_destination, class: 'form-control', readonly: true %>
+                            <%= f.text_field :final_destination, class: 'form-control', readonly: true %>
                         </div>
-                      </div>
-                      <div class="form-group row">
+                    </div>
+                    <div class="form-group row">
                         <label for="mode_of_shipment_export" class="col-sm-2 col-form-label">Mode Of Shipment :</label>
                         <div class="col-sm-10">
-                        <%= f.text_field :mode_of_shipment, class: 'form-control', readonly: true %>
+                            <%= f.text_field :mode_of_shipment, class: 'form-control', readonly: true %>
                         </div>
-                      </div>
-                      <div class="form-group row" id="form_weight_type_export">
+                    </div>
+                    <div class="form-group row" id="form_weight_type_export">
                         <label for="weight_type_export" class="col-sm-2 col-form-label">Weight Type :</label>
                         <div class="col-sm-10">
-                        <%= f.text_field :weight_type, class: 'form-control', readonly: true %>
+                            <%= f.text_field :weight_type, class: 'form-control', readonly: true %>
                         </div>
-                      </div>
-                      <div class="form-group row" id="form_fcl_export">
+                    </div>
+                    <div class="form-group row" id="form_fcl_export">
                         <label for="fcl_export" class="col-sm-2 col-form-label">FCL :</label>
                         <div class="col-sm-10">
-                        <%= f.text_field :weight_fcl, class: 'form-control', readonly: true %>
+                            <%= f.text_field :weight_fcl, class: 'form-control', readonly: true %>
                         </div>
-                      </div>
-                      <div class="form-group row" id="form_lcl_export">
+                    </div>
+                    <div class="form-group row" id="form_lcl_export">
                         <label for="weight_lcl" class="col-sm-2 col-form-label">Weight, Dimension (LxWxH) in Meter :</label>
                         <div class="col-sm-10">
-                        <%= f.text_field :weight_lcl, class: 'form-control', readonly: true%>
+                            <%= f.text_field :weight_lcl, class: 'form-control', readonly: true%>
                         </div>
-                      </div>
-                      <div class="form-group row" id="form_air_export">
+                    </div>
+                    <div class="form-group row" id="form_air_export">
                         <label for="weight_air" class="col-sm-2 col-form-label">Weight, Dimension (LxWxH) in Centimeter :</label>
                         <div class="col-sm-10">
-                        <%= f.text_field :weight_air, class: 'form-control', readonly: true%>
+                            <%= f.text_field :weight_air, class: 'form-control', readonly: true%>
                         </div>
-                      </div>
-                      <div class="form-group row">
+                    </div>
+                    <div class="form-group row">
                         <label for="commodity" class="col-sm-2 col-form-label">Commodity :</label>
                         <div class="col-sm-10">
-                        <%= f.text_field :commodity, class: 'form-control', readonly: true %>
+                            <%= f.text_field :commodity, class: 'form-control', readonly: true %>
                         </div>
-                      </div>
+                    </div>
                     <% end %>
 
-                      <% if @quotation.status == "Draft" %>
-                        <div class="modal-footer justify-content-center">
-                          <%= f.submit 'Save', class: 'btn btn-default btn-block mt-0'%>
-                          <%= f.submit 'Send RFQ', class: 'btn btn-default btn-block mt-0'%>
-                          <%= f.submit 'Confirm Order', class: 'btn btn-default btn-block mt-0'%>
-                        </div>
-                      <% else %>
-                        <div class="justify-content-center text-center">
-                          <%= f.submit 'Request Amendment', class: 'btn btn-default btn-block'%>
-                        </div>
-                      <% end %>
-                     
-                  <% end %>
+                    <% if @quotation.status == "Draft" %>
+                    <div class="modal-footer justify-content-center">
+                        <%= f.submit 'Save', class: 'btn btn-default btn-block mt-0'%>
+                        <%= f.submit 'Send RFQ', class: 'btn btn-default btn-block mt-0'%>
+                        <%= f.submit 'Confirm Order', class: 'btn btn-default btn-block mt-0'%>
                     </div>
-                 </div>
-            </div>
-            <% if @quotation.type_quotation == "Import" %>
-              <% if @quotation.mode_of_shipment == "Sea"%>
-              <%= render partial: "clients/manage/shipments/shared/import/tracking_sea" %>
-              <% else %>
-              <%= render partial: "clients/manage/shipments/shared/import/tracking_air" %>
-              <% end %>
-            <% else %>
-              <% if @quotation.mode_of_shipment == "Sea"%>
-              <%= render partial: "clients/manage/shipments/shared/export/tracking_sea" %>
-              <% else %>
-              <%= render partial: "clients/manage/shipments/shared/export/tracking_air" %>
-              <% end %>
-            <% end %>
+                    <% else %>
+                    <div class="justify-content-center text-center">
+                        <%= f.submit 'Request Amendment', class: 'btn btn-default btn-block'%>
+                    </div>
+                    <% end %>
 
-    </section>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <% if @quotation.type_quotation == "Import" %>
+        <% if @quotation.mode_of_shipment == "Sea"%>
+        <%= render partial: "clients/manage/shipments/shared/import/tracking_sea" %>
+        <% else %>
+        <%= render partial: "clients/manage/shipments/shared/import/tracking_air" %>
+        <% end %>
+        <% else %>
+        <% if @quotation.mode_of_shipment == "Sea"%>
+        <%= render partial: "clients/manage/shipments/shared/export/tracking_sea" %>
+        <% else %>
+        <%= render partial: "clients/manage/shipments/shared/export/tracking_air" %>
+        <% end %>
+        <% end %>
+
+</section>

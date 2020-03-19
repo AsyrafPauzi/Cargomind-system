@@ -16,16 +16,17 @@
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
+        <%= link_to "Create RFQ" , new_clients_manage_shipment_path, class:"btn btn-default my-3" %>
         <!-- /.row -->
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Recents 10 Quotations</h3>
+                        <h3 class="card-title">Quotations Listing</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body table-responsive-md p-0">
-                        <table class="table table-striped table-bordered" style="width:100%">
+                        <table id="table1" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
                                     <th width="6%">Quotation ID</th>
@@ -75,3 +76,11 @@
         </div>
     </div><!-- /.container-fluid -->
 </section>
+
+<script>
+    $(document).ready(function() {
+        $('#table1').DataTable({
+
+        });
+    });
+</script>

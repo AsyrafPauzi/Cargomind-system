@@ -68,7 +68,7 @@
                     aria-controls="custom-tabs-two-cargo-declaration" aria-selected="false">Import Cargo Declaration</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link <%=  @quotation.cargo_collection.present? ? @quotation.cargo_collection.status == "Collected" || @quotation.cargo_collection.status == "Laden Collected" ? ' bg-blue ' : '' : '' %>"
+                <a class="nav-link <%=  @quotation.cargo_collection.present? ? @quotation.cargo_collection.status == "Deliver" || @quotation.cargo_collection.status == "Laden Collected" ? ' bg-blue ' : '' : '' %>"
                     id="custom-tabs-two-cargo-collection-tab" data-toggle="pill"
                     href="#custom-tabs-two-cargo-collection" role="tab" aria-controls="custom-tabs-two-cargo-collection"
                     aria-selected="false">Cargo Delivery</a>
@@ -98,7 +98,7 @@
                     <label for="commodity" class="col-sm-3 col-form-label">Quotation File :</label>
                     <div class="col-sm-9">
                         <div class="custom-file">
-                            <%= f.file_field :quotation_file, class: 'custom-file-input', required: true%>
+                            <%= f.file_field :quotation_file, class: 'custom-file-input'%>
                             <label class="custom-file-label" for="customFile">Choose file</label>
                         </div>
                     </div>
@@ -234,7 +234,7 @@
                     <label for="commodity" class="col-sm-3 col-form-label">Booking Confirmation :</label>
                     <div class="col-sm-9">
                         <div class="custom-file">
-                            <%= f.file_field :file_booking, class: 'custom-file-input', required: true%>
+                            <%= f.file_field :file_booking, class: 'custom-file-input'%>
                             <label class="custom-file-label" for="customFile">Choose file</label>
                         </div>
                     </div>
@@ -243,27 +243,27 @@
                 <div class="form-group row">
                     <label for="commodity" class="col-sm-3 col-form-label">Liner Booking Number :</label>
                     <div class="col-sm-9">
-                        <%= f.text_field :booking_number, class: 'form-control', value: @quotation.booking.booking_number.present? ? @quotation.booking.booking_number  : "", required: true%>
+                        <%= f.text_field :booking_number, class: 'form-control', value: @quotation.booking.booking_number.present? ? @quotation.booking.booking_number  : ""%>
                     </div>
                 </div>
                 <% else %>
                 <div class="form-group row">
                     <label for="commodity" class="col-sm-3 col-form-label">AWB Number :</label>
                     <div class="col-sm-9">
-                        <%= f.text_field :booking_number, class: 'form-control', value: @quotation.booking.booking_number.present? ? @quotation.booking.booking_number  : "", required: true%>
+                        <%= f.text_field :booking_number, class: 'form-control', value: @quotation.booking.booking_number.present? ? @quotation.booking.booking_number  : ""%>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="commodity" class="col-sm-3 col-form-label">Flight Number :</label>
                     <div class="col-sm-9">
-                        <%= f.text_field :flight_number, class: 'form-control', value: @quotation.booking.flight_number.present? ? @quotation.booking.flight_number  : "", required: true%>
+                        <%= f.text_field :flight_number, class: 'form-control', value: @quotation.booking.flight_number.present? ? @quotation.booking.flight_number  : ""%>
                     </div>
                 </div>
                 <% end %>
                 <div class="form-group row">
                     <label for="commodity" class="col-sm-3 col-form-label">Vessel :</label>
                     <div class="col-sm-9">
-                        <%= f.text_field :vessel, class: 'form-control', value: @quotation.booking.vessel.present? ? @quotation.booking.vessel  : "", required: true%>
+                        <%= f.text_field :vessel, class: 'form-control', value: @quotation.booking.vessel.present? ? @quotation.booking.vessel  : ""%>
                     </div>
                 </div>
                 <% if @quotation.booking.file_booking.present? %>
@@ -293,32 +293,32 @@
                     <label for="estimated_collection_date" class="col-sm-3 col-form-label">Estimated Delivery Date
                         :</label>
                     <div class="col-sm-9">
-                        <%= f.date_field :estimated_collection_date, class: 'form-control', value: @quotation.cargo_collection.estimated_collection_date.present? ? @quotation.cargo_collection.estimated_collection_date  : "", required: true%>
+                        <%= f.date_field :estimated_collection_date, class: 'form-control', value: @quotation.cargo_collection.estimated_collection_date.present? ? @quotation.cargo_collection.estimated_collection_date  : ""%>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="truck_number" class="col-sm-3 col-form-label">Truck Number :</label>
                     <div class="col-sm-9">
-                        <%= f.text_field :truck_number, class: 'form-control', value: @quotation.cargo_collection.truck_number.present? ? @quotation.cargo_collection.truck_number  : "", required: true%>
+                        <%= f.text_field :truck_number, class: 'form-control', value: @quotation.cargo_collection.truck_number.present? ? @quotation.cargo_collection.truck_number  : ""%>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="driver_name" class="col-sm-3 col-form-label">Driver Name :</label>
                     <div class="col-sm-9">
-                        <%= f.text_field :driver_name, class: 'form-control', value: @quotation.cargo_collection.driver_name.present? ? @quotation.cargo_collection.driver_name  : "", required: true%>
+                        <%= f.text_field :driver_name, class: 'form-control', value: @quotation.cargo_collection.driver_name.present? ? @quotation.cargo_collection.driver_name  : ""%>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="driver_phone_number" class="col-sm-3 col-form-label">Driver Phone Number :</label>
                     <div class="col-sm-9">
-                        <%= f.text_field :driver_phone_number, class: 'form-control', value: @quotation.cargo_collection.driver_phone_number.present? ? @quotation.cargo_collection.driver_phone_number  : "", required: true%>
+                        <%= f.text_field :driver_phone_number, class: 'form-control', value: @quotation.cargo_collection.driver_phone_number.present? ? @quotation.cargo_collection.driver_phone_number  : ""%>
                     </div>
                 </div>
                 <% if @quotation.mode_of_shipment == "Air" %>
                 <div class="form-group row">
                     <label for="truck_type" class="col-sm-3 col-form-label">Truck Type :</label>
                     <div class="col-sm-9">
-                        <%= f.text_field :truck_type, class: 'form-control', value: @quotation.cargo_collection.truck_type.present? ? @quotation.cargo_collection.truck_type  : "", required: true%>
+                        <%= f.text_field :truck_type, class: 'form-control', value: @quotation.cargo_collection.truck_type.present? ? @quotation.cargo_collection.truck_type  : ""%>
                     </div>
                 </div>
                 <% else %>
@@ -333,7 +333,7 @@
                 <div class="form-group row">
                     <label for="haulage" class="col-sm-3 col-form-label">Haulage :</label>
                     <div class="col-sm-9">
-                        <%= f.text_field :haulage, class: 'form-control', value: @quotation.cargo_collection.haulage.present? ? @quotation.cargo_collection.haulage  : "", required: true%>
+                        <%= f.text_field :haulage, class: 'form-control', value: @quotation.cargo_collection.haulage.present? ? @quotation.cargo_collection.haulage  : ""%>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -361,25 +361,22 @@
                     </div>
                 </div>
                 <% end %>
-                <% if @quotation.cargo_collection.status == "On Plan" %>
-                <div class="my-2">
-                    <%= link_to '<span>Collected</span>'.html_safe, update_collection_users_manage_cargo_collections_path(@quotation.quotation_id), :method=> :patch, data: {turbolinks: false}, class: 'btn btn-primary', style:"float:right"%>
+                <% if @quotation.cargo_collection.status == "Planned" || @quotation.cargo_collection.status == "Re-Planned" %>
+                <div class="my-2" style="float:right" >
+                     <%= f.submit "Re-Planned", class: "btn btn-primary"%>
+                    <%= link_to '<span>Deliver</span>'.html_safe, update_collection_users_manage_cargo_collections_path(@quotation.quotation_id), :method=> :patch, data: {turbolinks: false}, class: 'btn btn-primary'%>
                 </div>
-                <% elsif @quotation.cargo_collection.status == "Empty Send" %>
-                <div class="my-2">
-                    <%= link_to '<span>Collected</span>'.html_safe, update_collection_users_manage_cargo_collections_path(@quotation.quotation_id), :method=> :patch, data: {turbolinks: false}, class: 'btn btn-primary', style:"float:right"%>
-                </div>
-                <% elsif @quotation.cargo_collection.status == "Collected" %>
+                <% elsif @quotation.cargo_collection.status == "Deliver" %>
                 <div class="my-2">
                     <button type="submit" class="btn btn-primary" style="float:right" disabled>Been Submitted</button>
                 </div>
-                <% elsif @quotation.cargo_collection.status == "Laden Collected" %>
+                <% elsif @quotation.cargo_collection.status == "Deliver" %>
                 <div class="my-2">
                     <button type="submit" class="btn btn-primary" style="float:right" disabled>Been Submitted</button>
                 </div>
                 <% else %>
                 <div class="my-2">
-                    <button type="submit" class="btn btn-primary" style="float:right">Submit</button>
+                    <button type="submit" class="btn btn-primary" style="float:right">Planned</button>
                 </div>
                 <% end %>
 
@@ -398,7 +395,7 @@
                     <% end %>
                     <div class="col-sm-9">
                         <div class="custom-file">
-                            <%= f.file_field :file_declaration, class: 'custom-file-input', required: true%>
+                            <%= f.file_field :file_declaration, class: 'custom-file-input'%>
                             <label class="custom-file-label" for="customFile">Choose file</label>
                         </div>
                     </div>
@@ -519,7 +516,7 @@
                     <label for="file_declaration" class="col-sm-3 col-form-label">Upload Attach Pre Alert:</label>
                     <div class="col-sm-9">
                         <div class="custom-file">
-                            <%= f.file_field :file_attach_pre_alert, class: 'custom-file-input', required: true%>
+                            <%= f.file_field :file_attach_pre_alert, class: 'custom-file-input'%>
                             <label class="custom-file-label" for="customFile">Choose file</label>
                         </div>
                     </div>
@@ -599,7 +596,7 @@
                             <label for="file_declaration" class="col-sm-3 col-form-label">Upload invoice:</label>
                             <div class="col-sm-9">
                                 <div class="custom-file">
-                                    <%= f.file_field :invoice, class: 'custom-file-input', required: true%>
+                                    <%= f.file_field :invoice, class: 'custom-file-input'%>
                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                 </div>
                             </div>
@@ -1032,7 +1029,7 @@
                             <label for="file_declaration" class="col-sm-3 col-form-label">Upload invoice:</label>
                             <div class="col-sm-9">
                                 <div class="custom-file">
-                                    <%= f.file_field :invoice, class: 'custom-file-input', required: true%>
+                                    <%= f.file_field :invoice, class: 'custom-file-input'%>
                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                 </div>
                             </div>
@@ -1060,7 +1057,7 @@
                     <label for="file_declaration" class="col-sm-3 col-form-label">Upload Policy:</label>
                     <div class="col-sm-9">
                         <div class="custom-file">
-                            <%= f.file_field :policy, class: 'custom-file-input', required: true%>
+                            <%= f.file_field :policy, class: 'custom-file-input'%>
                             <label class="custom-file-label" for="customFile">Choose file</label>
                         </div>
                     </div>
@@ -1106,13 +1103,13 @@
          <div class="form-group row">
             <label for="commodity" class="col-sm-3 col-form-label">Status :</label>
             <div class="col-sm-9">
-                <%= f.text_field :status, class: 'form-control', required: true%>
+                <%= f.text_field :status, class: 'form-control'%>
             </div>
         </div>
         <div class="form-group row">
             <label for="commodity" class="col-sm-3 col-form-label">Description :</label>
             <div class="col-sm-9">
-                <%= f.text_area :description, :cols => 10, :rows => 5, class: 'form-control', required: true %>
+                <%= f.text_area :description, :cols => 10, :rows => 5, class: 'form-control' %>
             </div>
         </div>
         <div class="form-group row mr-1" style="float:right">

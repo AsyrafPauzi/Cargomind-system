@@ -50,6 +50,7 @@ Rails.application.routes.draw do
       resources :cargo_collections do
         collection do
           patch '/update_collection/:id', to: 'cargo_collections#update_collection', as: 'update_collection'
+          patch '/update_collection_replanned/:id', to: 'cargo_collections#update_collection_replanned', as: 'update_collection_replanned'
         end
       end
       resources :cargo_declarations do

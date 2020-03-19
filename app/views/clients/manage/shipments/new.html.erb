@@ -1,216 +1,203 @@
 <section class="content-header">
-  <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
-        <h1>Shipments</h1>
-      </div>
-      <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><%= link_to "Dashboard" ,  clients_path %></li>
-          <li class="breadcrumb-item"><%= link_to "Shipments" ,  clients_manage_shipments_path %></li>
-          <li class="breadcrumb-item active">New</li>
-        </ol>
-      </div>
-    </div>
-  </div><!-- /.container-fluid -->
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Shipments</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><%= link_to "Dashboard" ,  clients_path %></li>
+                    <li class="breadcrumb-item active">New</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
 </section>
 
 <section class="content">
-  <div class="container-fluid">
-    <div class="row">
-      <!--  column -->
-      <div class="col-md-12">
+    <div class="container-fluid">
+        <div class="row">
+            <!--  column -->
+            <div class="col-md-12">
 
-        <div class="card card-primary">
-          <div class="card-header">
-            <h3 class="card-title">Details Shipments</h3>
-          </div>
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Details Shipments</h3>
+                    </div>
 
-          <div class="card-body" style="background-color:#F5F5F5;">
-            <ul class="nav nav-tabs nav-fill justify-content-center" id="custom-content-below-tab" role="tablist">
-              <li class="nav-item ">
-                <a class="nav-link active bg-gray" id="custom-content-below-import-tab" data-toggle="pill"
-                  href="#custom-content-below-import" role="tab" aria-controls="custom-content-below-home"
-                  aria-selected="true">IMPORT</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link bg-gray" id="custom-content-below-export-tab" data-toggle="pill"
-                  href="#custom-content-below-export" role="tab" aria-controls="custom-content-below-profile"
-                  aria-selected="false">EXPORT</a>
-              </li>
-            </ul>
-            <div class="tab-content" id="custom-content-below-tabContent">
-              <div class="tab-pane fade show active" id="custom-content-below-import" role="tabpanel"
-                aria-labelledby="custom-content-below-home-tab">
-                <div class="row">
-                  <div class="col-md-12 mt-3"> 
-                  <h4>Import</h4>
-                  </div>
-                  <div class="col-md-6 mt-3">
-                    <div class="form-group">
-                      <label for="date_import">Date :</label>
-                      <input type="date" class="form-control" id="date_import" placeholder="Enter Date">
+                    <div class="card-body" style="background-color:#F5F5F5;">
+                        <ul class="nav nav-tabs nav-fill justify-content-center" id="custom-content-below-tab" role="tablist">
+                            <li class="nav-item ">
+                                <a class="nav-link active bg-gray" id="custom-content-below-import-tab" data-toggle="pill" href="#custom-content-below-import" role="tab" aria-controls="custom-content-below-home" aria-selected="true">IMPORT</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link bg-gray" id="custom-content-below-export-tab" data-toggle="pill" href="#custom-content-below-export" role="tab" aria-controls="custom-content-below-profile" aria-selected="false">EXPORT</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="custom-content-below-tabContent">
+                            <div class="tab-pane fade show active" id="custom-content-below-import" role="tabpanel" aria-labelledby="custom-content-below-home-tab">
+                                <div class="row">
+                                    <div class="col-md-12 mt-3">
+                                        <h4>Import</h4>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <div class="form-group">
+                                            <label for="date_import">Date :</label>
+                                            <input type="date" class="form-control" id="date_import" placeholder="Enter Date">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="shipper_import">Shipper :</label>
+                                            <textarea class="form-control" rows="5" id="shipper_import"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="consignee_import">Consignee :</label>
+                                            <textarea class="form-control" rows="5" id="consignee_import"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <div class="form-group">
+                                            <label for="port_of_loading_import">Port Of Loading :</label>
+                                            <input type="input" class="form-control" id="port_of_loading_import" placeholder="Enter Port Of Loading">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="port_of_discharge_import">Port Of Discharge :</label>
+                                            <input type="input" class="form-control" id="port_of_discharge_import" placeholder="Enter Port Of Discharge">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="final_destination_import">Final Destination :</label>
+                                            <input type="input" class="form-control" id="final_destination_import" placeholder="Enter Final Destination">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="mode_of_shipment_import">Mode Of Shipment</label>
+                                            <select class="form-control" id="mode_of_shipment_import">
+                                                <option value="null" selected hidden disable>Please Select..</option>
+                                                <option value="Sea">Sea</option>
+                                                <option value="Air">Air</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group" id="form_weight_type_import">
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <button type="button" value="FCL" class="btn btn-secondary weight_type_import">FCL</button>
+                                                <button type="button" value="LCL" class="btn btn-secondary weight_type_import">LCL</button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="form_fcl_import">
+                                            <label for="fcl_import">FCL :</label>
+                                            <select class="form-control" id="fcl_import">
+                                                <option value="null" selected hidden disable>Please Select..</option>
+                                                <option value="20'">20'</option>
+                                                <option value="40'">40'</option>
+                                                <option value="40'HC">40'HC</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group" id="form_lcl_import">
+                                            <label for="lcl_import">Weight, Dimension (LxWxH) in Meter :</label>
+                                            <input type="input" class="form-control" id="lcl_import">
+                                        </div>
+                                        <div class="form-group" id="form_air_import">
+                                            <label for="air_import">Weight, Dimension (LxWxH) in Centimeter :</label>
+                                            <input type="input" class="form-control" id="air_import">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="commodity_import">Commodity :</label>
+                                            <input type="input" class="form-control" id="commodity_import" placeholder="Enter Commodity">
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-import">
+                                            Create
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="custom-content-below-export" role="tabpanel" aria-labelledby="custom-content-below-profile-tab">
+                                <div class="row">
+                                    <div class="col-md-12 mt-3">
+                                        <h4>Export</h4>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <div class="form-group">
+                                            <label for="date_export">Date :</label>
+                                            <input type="date" class="form-control" id="date_export" placeholder="Enter Date">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="shipper_export">Shipper :</label>
+                                            <textarea class="form-control" rows="5" id="shipper_export"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="consignee_export">Consignee :</label>
+                                            <textarea class="form-control" rows="5" id="consignee_export"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mt-3">
+                                        <div class="form-group">
+                                            <label for="port_of_loading_export">Port Of Loading :</label>
+                                            <input type="input" class="form-control" id="port_of_loading_export" placeholder="Enter Port Of Loading">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="port_of_discharge_export">Port Of Discharge :</label>
+                                            <input type="input" class="form-control" id="port_of_discharge_export" placeholder="Enter Port Of Discharge">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="final_destination_export">Final Destination :</label>
+                                            <input type="input" class="form-control" id="final_destination_export" placeholder="Enter Final Destination">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="mode_of_shipment_export">Mode Of Shipment</label>
+                                            <select class="form-control" id="mode_of_shipment_export">
+                                                <option value="null" selected hidden disable>Please Select..</option>
+                                                <option value="Sea">Sea</option>
+                                                <option value="Air">Air</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group" id="form_weight_type_export">
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <button type="button" value="FCL" class="btn btn-secondary weight_type_export">FCL</button>
+                                                <button type="button" value="LCL" class="btn btn-secondary weight_type_export">LCL</button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" id="form_fcl_export">
+                                            <label for="fcl_export">FCL :</label>
+                                            <select class="form-control" id="fcl_export">
+                                                <option value="null" selected hidden disable>Please Select..</option>
+                                                <option value="20'">20'</option>
+                                                <option value="40'">40'</option>
+                                                <option value="40'HC">40'HC</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group" id="form_lcl_export">
+                                            <label for="lcl_export">Weight, Dimension (LxWxH) in Meter :</label>
+                                            <input type="input" class="form-control" id="lcl_export">
+                                        </div>
+                                        <div class="form-group" id="form_air_export">
+                                            <label for="air_export">Weight, Dimension (LxWxH) in Centimeter :</label>
+                                            <input type="input" class="form-control" id="air_export">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="commodity_export">Commodity :</label>
+                                            <input type="input" class="form-control" id="commodity_export" placeholder="Enter Commodity">
+                                        </div>
+                                        <!-- /.card-body -->
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-export">
+                                            Create
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                      <label for="shipper_import">Shipper :</label>
-                      <textarea class="form-control" rows="5" id="shipper_import"></textarea>
-                    </div>
-                    <div class="form-group">
-                      <label for="consignee_import">Consignee :</label>
-                      <textarea class="form-control" rows="5" id="consignee_import"></textarea>
-                    </div>
-                  </div>
-                  <div class="col-md-6 mt-3">
-                    <div class="form-group">
-                      <label for="port_of_loading_import">Port Of Loading :</label>
-                      <input type="input" class="form-control" id="port_of_loading_import"
-                        placeholder="Enter Port Of Loading">
-                    </div>
-                    <div class="form-group">
-                      <label for="port_of_discharge_import">Port Of Discharge :</label>
-                      <input type="input" class="form-control" id="port_of_discharge_import"
-                        placeholder="Enter Port Of Discharge">
-                    </div>
-                    <div class="form-group">
-                      <label for="final_destination_import">Final Destination :</label>
-                      <input type="input" class="form-control" id="final_destination_import"
-                        placeholder="Enter Final Destination">
-                    </div>
-                    <div class="form-group">
-                      <label for="mode_of_shipment_import">Mode Of Shipment</label>
-                      <select class="form-control" id="mode_of_shipment_import">
-                        <option value="null" selected hidden disable>Please Select..</option>
-                        <option value="Sea">Sea</option>
-                        <option value="Air">Air</option>
-                      </select>
-                    </div>
-                    <div class="form-group" id="form_weight_type_import">
-                      <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" value="FCL" class="btn btn-secondary weight_type_import">FCL</button>
-                        <button type="button" value="LCL" class="btn btn-secondary weight_type_import">LCL</button>
-                      </div>
-                    </div>
-                    <div class="form-group" id="form_fcl_import">
-                      <label for="fcl_import">FCL :</label>
-                      <select class="form-control" id="fcl_import">
-                        <option value="null" selected hidden disable>Please Select..</option>
-                        <option value="20'">20'</option>
-                        <option value="40'">40'</option>
-                        <option value="40'HC">40'HC</option>
-                      </select>
-                    </div>
-                    <div class="form-group" id="form_lcl_import">
-                      <label for="lcl_import">Weight, Dimension (LxWxH) in Meter :</label>
-                      <input type="input" class="form-control" id="lcl_import">
-                    </div>
-                    <div class="form-group" id="form_air_import">
-                      <label for="air_import">Weight, Dimension (LxWxH) in Centimeter :</label>
-                      <input type="input" class="form-control" id="air_import">
-                    </div>
-                    <div class="form-group">
-                      <label for="commodity_import">Commodity :</label>
-                      <input type="input" class="form-control" id="commodity_import" placeholder="Enter Commodity">
-                    </div>
-                    <!-- /.card-body -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-import">
-                      Create
-                    </button>
-                  </div>
+
                 </div>
-              </div>
-              <div class="tab-pane fade" id="custom-content-below-export" role="tabpanel"
-                aria-labelledby="custom-content-below-profile-tab">
-                <div class="row">
-                  <div class="col-md-12 mt-3"> 
-                  <h4>Export</h4>
-                  </div>
-                  <div class="col-md-6 mt-3">
-                    <div class="form-group">
-                      <label for="date_export">Date :</label>
-                      <input type="date" class="form-control" id="date_export" placeholder="Enter Date">
-                    </div>
-                    <div class="form-group">
-                      <label for="shipper_export">Shipper :</label>
-                      <textarea class="form-control" rows="5" id="shipper_export"></textarea>
-                    </div>
-                    <div class="form-group">
-                      <label for="consignee_export">Consignee :</label>
-                      <textarea class="form-control" rows="5" id="consignee_export"></textarea>
-                    </div>
-                  </div>
-                  <div class="col-md-6 mt-3">
-                    <div class="form-group">
-                      <label for="port_of_loading_export">Port Of Loading :</label>
-                      <input type="input" class="form-control" id="port_of_loading_export"
-                        placeholder="Enter Port Of Loading">
-                    </div>
-                    <div class="form-group">
-                      <label for="port_of_discharge_export">Port Of Discharge :</label>
-                      <input type="input" class="form-control" id="port_of_discharge_export"
-                        placeholder="Enter Port Of Discharge">
-                    </div>
-                    <div class="form-group">
-                      <label for="final_destination_export">Final Destination :</label>
-                      <input type="input" class="form-control" id="final_destination_export"
-                        placeholder="Enter Final Destination">
-                    </div>
-                    <div class="form-group">
-                      <label for="mode_of_shipment_export">Mode Of Shipment</label>
-                      <select class="form-control" id="mode_of_shipment_export">
-                        <option value="null" selected hidden disable>Please Select..</option>
-                        <option value="Sea">Sea</option>
-                        <option value="Air">Air</option>
-                      </select>
-                    </div>
-                    <div class="form-group" id="form_weight_type_export">
-                      <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" value="FCL" class="btn btn-secondary weight_type_export">FCL</button>
-                        <button type="button" value="LCL" class="btn btn-secondary weight_type_export">LCL</button>
-                      </div>
-                    </div>
-                    <div class="form-group" id="form_fcl_export">
-                      <label for="fcl_export">FCL :</label>
-                      <select class="form-control" id="fcl_export">
-                        <option value="null" selected hidden disable>Please Select..</option>
-                        <option value="20'">20'</option>
-                        <option value="40'">40'</option>
-                        <option value="40'HC">40'HC</option>
-                      </select>
-                    </div>
-                    <div class="form-group" id="form_lcl_export">
-                      <label for="lcl_export">Weight, Dimension (LxWxH) in Meter :</label>
-                      <input type="input" class="form-control" id="lcl_export">
-                    </div>
-                    <div class="form-group" id="form_air_export">
-                      <label for="air_export">Weight, Dimension (LxWxH) in Centimeter :</label>
-                      <input type="input" class="form-control" id="air_export">
-                    </div>
-                    <div class="form-group">
-                      <label for="commodity_export">Commodity :</label>
-                      <input type="input" class="form-control" id="commodity_export" placeholder="Enter Commodity">
-                    </div>
-                    <!-- /.card-body -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-export">
-                      Create
-                    </button>
-                  </div>
-                </div>
-              </div>
+                <!--/.col -->
             </div>
-          </div>
-
-        </div>
-        <!--/.col -->
-      </div>
-      <!-- /.row -->
-    </div><!-- /.container-fluid -->
-    <%= render partial: "clients/manage/shipments/shared/modal_export" %>
-    <%= render partial: "clients/manage/shipments/shared/modal_import" %>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+        <%= render partial: "clients/manage/shipments/shared/modal_export" %>
+        <%= render partial: "clients/manage/shipments/shared/modal_import" %>
 
 </section>
 
 <script>
-  <%= render partial: "clients/manage/shipments/shared/new.js" %>
-    <%= render partial: "clients/manage/shipments/shared/new_import.js" %>
-    <%= render partial: "clients/manage/shipments/shared/new_export.js" %>
+    <%= render partial: "clients/manage/shipments/shared/new.js" %>
+        <%= render partial: "clients/manage/shipments/shared/new_import.js" %>
+        <%= render partial: "clients/manage/shipments/shared/new_export.js" %>
 </script>
