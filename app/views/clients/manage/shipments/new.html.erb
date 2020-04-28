@@ -11,193 +11,476 @@
                 </ol>
             </div>
         </div>
-    </div><!-- /.container-fluid -->
+    </div>
 </section>
 
 <section class="content">
     <div class="container-fluid">
-        <div class="row">
-            <!--  column -->
-            <div class="col-md-12">
+        <div class="row my-2 text-center">
+            <div class="col-md-1">
 
+            </div>
+            <div class="col-md-2">
+                <select class="form-control form-control-sm">
+                    <option value="" disabled selected>MODE OF SHIPMENT</option>
+                    <option value="Import">Import</option>
+                    <option value="Export">Export</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <select class="form-control form-control-sm">
+                    <option value="" disabled selected>MODE OF TRANSPORT</option>
+                    <option value="Air">Air</option>
+                    <option value="Sea">Sea</option>
+                    <option value="Land">Land</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <select class="form-control form-control-sm">
+                    <option value="" disabled selected>INCOTERM</option>
+                    <option value="EX-W">EX-Work</option>
+                    <option value="FOB">FOB</option>
+                    <option value="CIF">CIF</option>
+                    <option value="D2D">Door 2 Door</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <select class="form-control form-control-sm">
+                    <option value="" disabled selected>CURRENCY</option>
+                    <option value="MYR">MYR</option>
+                    <option value="EUR">EUR</option>
+                    <option value="USD">USD</option>
+                    <option value="GBP">GBP</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-sm btn-default">SAVE</button>
+            </div>
+            <div class="col-md-1">
+
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Details Shipments</h3>
+                      
+                            <div class="row">
+                                <div class="col-3"><h3 class="card-title">MODE OF TRANSPORT: </h3></div>
+                                <div class="col-3"><h3 class="card-title">MODE OF SHIPMENT: </h3></div>
+                                <div class="col-3"><h3 class="card-title">INCOTERM: </h3></div>
+                                <div class="col-3"><h3 class="card-title">CURRENCY: </h3></div>
+                            </div>
+                      
                     </div>
-
-                    <div class="card-body" style="background-color:#F5F5F5;">
-                        <ul class="nav nav-tabs nav-fill justify-content-center" id="custom-content-below-tab" role="tablist">
-                            <li class="nav-item ">
-                                <a class="nav-link active bg-gray" id="custom-content-below-import-tab" data-toggle="pill" href="#custom-content-below-import" role="tab" aria-controls="custom-content-below-home" aria-selected="true">IMPORT</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link bg-gray" id="custom-content-below-export-tab" data-toggle="pill" href="#custom-content-below-export" role="tab" aria-controls="custom-content-below-profile" aria-selected="false">EXPORT</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content" id="custom-content-below-tabContent">
-                            <div class="tab-pane fade show active" id="custom-content-below-import" role="tabpanel" aria-labelledby="custom-content-below-home-tab">
-                                <div class="row">
-                                    <div class="col-md-12 mt-3">
-                                        <h4>Import</h4>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <div class="form-group">
-                                            <label for="date_import">Date :</label>
-                                            <input type="date" class="form-control" id="date_import" placeholder="Enter Date">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="shipper_import">Shipper :</label>
-                                            <textarea class="form-control" rows="5" id="shipper_import"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="consignee_import">Consignee :</label>
-                                            <textarea class="form-control" rows="5" id="consignee_import"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mt-3">
-                                        <div class="form-group">
-                                            <label for="port_of_loading_import">Port Of Loading :</label>
-                                            <input type="input" class="form-control" id="port_of_loading_import" placeholder="Enter Port Of Loading">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="port_of_discharge_import">Port Of Discharge :</label>
-                                            <input type="input" class="form-control" id="port_of_discharge_import" placeholder="Enter Port Of Discharge">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="final_destination_import">Final Destination :</label>
-                                            <input type="input" class="form-control" id="final_destination_import" placeholder="Enter Final Destination">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="mode_of_shipment_import">Mode Of Shipment</label>
-                                            <select class="form-control" id="mode_of_shipment_import">
-                                                <option value="null" selected hidden disable>Please Select..</option>
-                                                <option value="Sea">Sea</option>
-                                                <option value="Air">Air</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group" id="form_weight_type_import">
-                                            <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button type="button" value="FCL" class="btn btn-secondary weight_type_import">FCL</button>
-                                                <button type="button" value="LCL" class="btn btn-secondary weight_type_import">LCL</button>
+                </div>
+                <div class="card-body" style="background-color:#F5F5F5;">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="card">
+                                <form class="form-horizontal">
+                                    <div class="card-body">
+                                        <H6>COLLECTION ADDRESS</H6>
+                                        <div class="form-group row align-items-center">
+                                            <small for="inputCollectionCompanyName" class="col-sm-3 text-bold">COMPANY
+                                                NAME</small>
+                                            <div class="col-sm-1">
+                                                <button class="btn btn-default btn-sm">+</button>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control form-control-sm"
+                                                    id="inputCollectionCompanyName" placeholder="Company Name..">
                                             </div>
                                         </div>
-                                        <div class="form-group" id="form_fcl_import">
-                                            <label for="fcl_import">FCL :</label>
-                                            <select class="form-control" id="fcl_import">
-                                                <option value="null" selected hidden disable>Please Select..</option>
-                                                <option value="20'">20'</option>
-                                                <option value="40'">40'</option>
-                                                <option value="40'HC">40'HC</option>
+                                        <div class="form-group row align-items-center">
+                                            <small for="inputCollectionAddress"
+                                                class="col-sm-4 text-bold">ADDRESS</small>
+                                            <div class="col-sm-8">
+                                                <textarea class="form-control form-control-sm" rows="3"
+                                                    id="inputCollectionAddress"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <small for="inputCollectionPic" class="col-sm-4 text-bold">PIC</small>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control form-control-sm"
+                                                    id="inputCollectionPic" placeholder="Pic..">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <small for="inputCollectionNoTel" class="col-sm-4 text-bold">NO
+                                                TEL</small>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control form-control-sm"
+                                                    id="inputCollectionNoTel" placeholder="No Tel..">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="card">
+                                <form class="form-horizontal">
+                                    <div class="card-body">
+                                        <H6>PORT OF LOADING</H6>
+                                        <div class="form-group row align-items-center">
+                                            <small for="inputPortLoading" class="col-sm-4 text-bold">PORT</small>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control form-control-sm"
+                                                    id="inputPortLoading" placeholder="Port..">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <small for="inputStateLoading" class="col-sm-4 text-bold">STATE</small>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control form-control-sm"
+                                                    id="inputStateLoading" placeholder="State..">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <small for="inputCountryLoading" class="col-sm-4 text-bold">COUNTRY</small>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control form-control-sm"
+                                                    id="inputCountryLoading" placeholder="Country..">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="card">
+                                <form class="form-horizontal">
+                                    <div class="card-body">
+                                        <H6>PORT OF DESTINATION</H6>
+                                        <div class="form-group row align-items-center">
+                                            <small for="inputPortDestination" class="col-sm-4 text-bold">PORT</small>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control form-control-sm"
+                                                    id="inputPortDestination" placeholder="Port..">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <small for="inputStateDestination" class="col-sm-4 text-bold">STATE</small>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control form-control-sm"
+                                                    id="inputStateDestination" placeholder="State..">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <small for="inputCountryDestination"
+                                                class="col-sm-4 text-bold">COUNTRY</small>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control form-control-sm"
+                                                    id="inputCountryDestination" placeholder="Country..">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="card">
+                                <form class="form-horizontal">
+                                    <div class="card-body">
+                                        <H6>DELIVER ADDRESS</H6>
+                                        <div class="form-group row align-items-center">
+                                            <small for="inputDeliverCompanyName" class="col-sm-4 text-bold">COMPANY
+                                                NAME</small>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control form-control-sm"
+                                                    id="inputDeliverCompanyName" placeholder="Company Name..">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <small for="inputDeliverAddress" class="col-sm-4 text-bold">ADDRESS</small>
+                                            <div class="col-sm-8">
+                                                <textarea class="form-control form-control-sm" rows="3"
+                                                    id="inputDeliverAddress"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <small for="inputDeliverPic" class="col-sm-4 text-bold">PIC</small>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control form-control-sm"
+                                                    id="inputDeliverPic" placeholder="Pic..">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <small for="inputDeliverNoTel" class="col-sm-4 text-bold">NO
+                                                TEL</small>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control form-control-sm"
+                                                    id="inputDeliverNoTel" placeholder="No Tel..">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="card">
+                                <div class="card-body">
+                                    <H6>CARGO TYPE</H6>
+                                    <div class="form-check-inline align-items-center">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optradio">DANGEROUS
+                                            GOODS
+                                        </label>
+                                    </div>
+                                    <div class="form-check-inline align-items-center">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="optradio">GENERAL
+                                            CARGO
+                                        </label>
+                                    </div>
+                                    <form class="form-horizontal">
+                                        <div class="card-body">
+                                            <div class="form-group row align-items-center align-items-center">
+                                                <small for="inputMsds" class="col-sm-2 text-bold">MSDS :
+                                                </small>
+                                                <div class="col-sm-6">
+                                                    <input type="file" class="" id="inputMsds">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row align-items-center">
+                                                <small for="inputcommodity" class="col-sm-2 text-bold">COMMODITY
+                                                    : </small>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control form-control-sm"
+                                                        id="inputcommodity" placeholder="...">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <H6>CARGO DETAILS</H6>
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="CargoDetail" value="">FCL
+                                        </label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="CargoDetail" value="">LCL
+                                        </label>
+                                    </div>
+                                    <div class="row my-2 text-center">
+                                        <div class="col-md-3">
+                                            <select id="ctype" class="form-control form-control-sm">
+                                                <option value="" disabled selected>CONTAINER TYPE
+                                                </option>
+                                                <optgroup label="Regular Size">
+                                                    <option value="20 GP">20' GP</option>
+                                                    <option value="40 GP">40' GP</option>
+                                                    <option value="40 HC">40' HC</option>
+                                                    <option value="45 HC">45' HC</option>
+                                                </optgroup>
+                                                <optgroup label="Reeter Requirement">
+                                                    <option value="20">20'</option>
+                                                    <option value="40">40'</option>
+                                                </optgroup>
                                             </select>
                                         </div>
-                                        <div class="form-group" id="form_lcl_import">
-                                            <label for="lcl_import">Weight, Dimension (LxWxH) in Meter :</label>
-                                            <input type="input" class="form-control" id="lcl_import">
+                                        <div class="col-md-3">
+                                            <div class="input-group">
+                                                <input type="button" value="-"
+                                                    class="form-control form-control-sm button-minus"
+                                                    data-field="quantity">
+                                                <input type="number" id="quan" step="1" max="" value="1" name="quantity"
+                                                    class="quantity-field form-control form-control-sm ">
+                                                <input type="button" value="+"
+                                                    class="button-plus form-control form-control-sm "
+                                                    data-field="quantity">
+                                            </div>
+
                                         </div>
-                                        <div class="form-group" id="form_air_import">
-                                            <label for="air_import">Weight, Dimension (LxWxH) in Centimeter :</label>
-                                            <input type="input" class="form-control" id="air_import">
+                                        <div class="col-md-2">
+                                            <input type="text" id="weight" class="form-control form-control-sm"
+                                                placeholder="WEIGHT (KG)">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="commodity_import">Commodity :</label>
-                                            <input type="input" class="form-control" id="commodity_import" placeholder="Enter Commodity">
+                                        <div class="col-md-2">
+                                            <button class="add1 btn btn-sm btn-default">ADD</button>
                                         </div>
-                                        <!-- /.card-body -->
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-import">
-                                            Create
-                                        </button>
+                                    </div>
+                                    <div class="form-group row align-items-center">
+                                        <small for="inputTemperature" class="col-sm-3 text-bold">TEMPERATURE</small>
+                                        <div class="col-sm-3">
+                                            <input type="text" class="form-control form-control-sm"
+                                                id="inputTemperature">
+                                        </div>
+                                    </div>
+                                    <div class="table-wrapper-scroll-y"
+                                        style="display: block; position: relative;height: 150px;overflow: auto;">
+                                        <table border="1" width="100%">
+                                            <tbody id="table1">
+                                                <tr>
+                                                    <td width="25%">TYPE</td>
+                                                    <td width="25%">QUANTITY</td>
+                                                    <td width="20%">WEIGHT (KG)</td>
+                                                    <td width="20">TEMP</td>
+                                                    <td width="10%">ACTION</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-3">
+                                            <small class="text-bold">CARGO DIMENSION</small>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group row align-items-center">
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control form-control-sm" id="inputL"
+                                                        placeholder="">
+                                                </div>
+                                                <small for="inputL" class="col-sm-6 text-bold">L X</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group row align-items-center">
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control form-control-sm" id="inputW"
+                                                        placeholder="">
+                                                </div>
+                                                <small for="inputW" class="col-sm-6 text-bold">W X</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group row align-items-center">
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control form-control-sm" id="inputH"
+                                                        placeholder="">
+                                                </div>
+                                                <small for="inputH" class="col-sm-6 text-bold">H
+                                                    (M)</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="add2 btn btn-sm btn-default">ADD</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row align-items-center">
+                                        <small for="inputWeight2" class="col-sm-3 text-bold">Weight</small>
+                                        <div class="col-sm-3">
+                                            <input type="text" class="form-control form-control-sm" id="inputWeight2">
+                                        </div>
+                                    </div>
+                                    <div style="display: block; position: relative;height: 150px;overflow: auto;">
+                                        <table border="1" width="100%">
+                                            <tbody id="table2">
+                                                <tr>
+                                                    <td width="25%">DIMENSION</td>
+                                                    <td width="25%">WEIGHT</td>
+                                                    <td width="20%">M3 (KG)</td>
+                                                    <td width="20%">TYPE</td>
+                                                    <td width="10%">ACTION</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="custom-content-below-export" role="tabpanel" aria-labelledby="custom-content-below-profile-tab">
-                                <div class="row">
-                                    <div class="col-md-12 mt-3">
-                                        <h4>Export</h4>
+                            <div class="card">
+                                <div class="card-body">
+                                    <H6>OTHERS</H6>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="Warehouse">WAREHOUSE
+                                        </label>
                                     </div>
-                                    <div class="col-md-6 mt-3">
-                                        <div class="form-group">
-                                            <label for="date_export">Date :</label>
-                                            <input type="date" class="form-control" id="date_export" placeholder="Enter Date">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="shipper_export">Shipper :</label>
-                                            <textarea class="form-control" rows="5" id="shipper_export"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="consignee_export">Consignee :</label>
-                                            <textarea class="form-control" rows="5" id="consignee_export"></textarea>
-                                        </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" value="Insurance">INSURANCE
+                                        </label>
                                     </div>
-                                    <div class="col-md-6 mt-3">
-                                        <div class="form-group">
-                                            <label for="port_of_loading_export">Port Of Loading :</label>
-                                            <input type="input" class="form-control" id="port_of_loading_export" placeholder="Enter Port Of Loading">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="port_of_discharge_export">Port Of Discharge :</label>
-                                            <input type="input" class="form-control" id="port_of_discharge_export" placeholder="Enter Port Of Discharge">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="final_destination_export">Final Destination :</label>
-                                            <input type="input" class="form-control" id="final_destination_export" placeholder="Enter Final Destination">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="mode_of_shipment_export">Mode Of Shipment</label>
-                                            <select class="form-control" id="mode_of_shipment_export">
-                                                <option value="null" selected hidden disable>Please Select..</option>
-                                                <option value="Sea">Sea</option>
-                                                <option value="Air">Air</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group" id="form_weight_type_export">
-                                            <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button type="button" value="FCL" class="btn btn-secondary weight_type_export">FCL</button>
-                                                <button type="button" value="LCL" class="btn btn-secondary weight_type_export">LCL</button>
+                                    <form class="form-horizontal">
+                                        <div class="card-body">
+                                            <div class="form-group row align-items-center align-items-center">
+                                                <small for="inputExprectedCargoValue"
+                                                    class="col-sm-3 text-bold">EXPECTED CARGO VALUE :
+                                                </small>
+                                                <div class="col-sm-6">
+                                                    <input type="text" class="form-control form-control-sm"
+                                                        id="inputExprectedCargoValue" placeholder="...">
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="form-group" id="form_fcl_export">
-                                            <label for="fcl_export">FCL :</label>
-                                            <select class="form-control" id="fcl_export">
-                                                <option value="null" selected hidden disable>Please Select..</option>
-                                                <option value="20'">20'</option>
-                                                <option value="40'">40'</option>
-                                                <option value="40'HC">40'HC</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group" id="form_lcl_export">
-                                            <label for="lcl_export">Weight, Dimension (LxWxH) in Meter :</label>
-                                            <input type="input" class="form-control" id="lcl_export">
-                                        </div>
-                                        <div class="form-group" id="form_air_export">
-                                            <label for="air_export">Weight, Dimension (LxWxH) in Centimeter :</label>
-                                            <input type="input" class="form-control" id="air_export">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="commodity_export">Commodity :</label>
-                                            <input type="input" class="form-control" id="commodity_export" placeholder="Enter Commodity">
-                                        </div>
-                                        <!-- /.card-body -->
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-export">
-                                            Create
-                                        </button>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
-                <!--/.col -->
             </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
-        <%= render partial: "clients/manage/shipments/shared/modal_export" %>
-        <%= render partial: "clients/manage/shipments/shared/modal_import" %>
+        </div>
+    </div>
 
-</section>
+    <script>
+        $("#table1").on('click', '.rem1', function () {
+            $(this).parent().parent().remove();
+        });
+        $(".add1").click(function () {
+            var ctype = $("#ctype :selected").val();
+            var quan = $("#quan").val();
+            var weight = $("#weight").val();
+            var inputTemperature = $("#inputTemperature").val();
+            var button = "<button class='btn btn-danger btn-sm btn-block rem1'>X</button>"
+            var markup = "<tr><td>" + ctype + "</td><td>" + quan + "</td><td>" + weight + "</td><td>" +
+                inputTemperature + "</td><td>" + button + "</td></tr>";
+            $("table tbody#table1").append(markup);
+        });
 
-<script>
-    <%= render partial: "clients/manage/shipments/shared/new.js" %>
-        <%= render partial: "clients/manage/shipments/shared/new_import.js" %>
-        <%= render partial: "clients/manage/shipments/shared/new_export.js" %>
-</script>
+        $("#table2").on('click', '.rem2', function () {
+            $(this).parent().parent().remove();
+        });
+        $(".add2").click(function () {
+            var inputL = $("#inputL").val();
+            var inputW = $("#inputW").val();
+            var inputH = $("#inputH").val();
+            var dimension = ($("#inputL").val() + " X " + $("#inputW").val() + " X " + $("#inputH").val());
+            var m3 = ($("#inputL").val() * $("#inputW").val() * $("#inputH").val());
+            var type = "";
+            var inputWeight2 = $("#inputWeight2").val();
+            var button = "<button class='btn btn-danger btn-sm btn-block rem2'>X</button>"
+            var markup = "<tr><td>" + dimension + "</td><td>" + inputWeight2 + "</td><td>" + m3 +
+                "</td><td>" + type + "</td><td>" + button + "</td></tr>";
+            $("table tbody#table2").append(markup);
+        });
+
+
+
+
+        function incrementValue(e) {
+            e.preventDefault();
+            var fieldName = $(e.target).data('field');
+            var parent = $(e.target).closest('div');
+            var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
+
+            if (!isNaN(currentVal)) {
+                parent.find('input[name=' + fieldName + ']').val(currentVal + 1);
+            } else {
+                parent.find('input[name=' + fieldName + ']').val(0);
+            }
+        }
+
+        function decrementValue(e) {
+            e.preventDefault();
+            var fieldName = $(e.target).data('field');
+            var parent = $(e.target).closest('div');
+            var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
+
+            if (!isNaN(currentVal) && currentVal > 0) {
+                parent.find('input[name=' + fieldName + ']').val(currentVal - 1);
+            } else {
+                parent.find('input[name=' + fieldName + ']').val(0);
+            }
+        }
+
+        $('.input-group').on('click', '.button-plus', function (e) {
+            incrementValue(e);
+        });
+
+        $('.input-group').on('click', '.button-minus', function (e) {
+            decrementValue(e);
+        });
+    </script>
