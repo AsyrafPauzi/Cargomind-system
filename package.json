@@ -10,7 +10,7 @@
     "bootstrap": "^4.4.1",
     "datatables.net-bs4": "^1.10.20",
     "datatables.net-colreorder-bs4": "^1.5.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "popper.js": "^1.16.0",
     "turbolinks": "^5.2.0"
   },
