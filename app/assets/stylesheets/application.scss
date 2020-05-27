@@ -140,3 +140,20 @@ input[type="number"] {
   -moz-appearance: textfield;
   -webkit-appearance: none;
 }
+
+.login-btn{
+  background: azure;
+  padding: 10px;
+  font-size: larger;
+}
+
+.brand-link-2 {
+  display: block;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  padding: 0.5000rem 0.5rem;
+  -webkit-transition: width 0.3s ease-in-out;
+  transition: width 0.3s ease-in-out;
+  white-space: nowrap;
+  background: white;
+}

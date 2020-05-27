@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   devise_for :clients, controllers: {
-    sessions: 'clients/sessions'
+    sessions: 'clients/sessions',passwords: 'clients/passwords',registrations: 'clients/registrations',confirmations: 'clients/confirmations'
   }
   devise_for :admins, controllers: {
-    sessions: 'admins/sessions'
+    sessions: 'admins/sessions',registrations: 'clients/registrations'
   }
   devise_for :users, controllers: {
     sessions: 'users/sessions'
@@ -93,7 +93,7 @@ Rails.application.routes.draw do
       resources :users
     end
   end
-  resources :clients, only: [:index]
+  resources :clients, only: [:index] 
   namespace :clients do
     namespace :manage do
       resources :shipments do

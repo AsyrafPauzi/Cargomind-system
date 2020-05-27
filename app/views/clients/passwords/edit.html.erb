@@ -1,25 +1,41 @@
-<h2>Change your password</h2>
-
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
-
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
+<div class="login-box">
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <h3>Change your password</h3>
+      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put,class: 'box' }) do |f| %>
+      <small><%= render "devise/shared/error_messages", resource: resource %></small>
+      <%= f.hidden_field :reset_password_token %>
+      <small><% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+          <% end %></small>
+      <div class="input-group mb-3">      
+        <%= f.password_field :password, autofocus: true, autocomplete: "new-password", placeholder: 'Password', class: 'form-control' %>
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-lock"></span>
+          </div>
+        </div>
+      </div>
+      <div class="input-group mb-3">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'Confirm Password', class: 'form-control'  %>
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <span class="fas fa-lock"></span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <!-- /.col -->
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary btn-block">Change password</button>
+        </div>
+        <!-- /.col -->
+      </div>
+      <% end %>
+    </div>
+    <!-- /.login-card-body -->
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
 
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
-
-<%= render " clients/shared/links" %>
