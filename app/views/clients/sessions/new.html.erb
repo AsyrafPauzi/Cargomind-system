@@ -5,7 +5,7 @@
       <div class="login-logo">
     <%= image_tag("cargomind.jpg", height: '75') %>
   </div>
-    <p class="text-center"> <%= link_to "Login" , new_client_session_path,class:"login-btn" %> | <%= link_to "Register", new_client_registration_path,class:"login-btn" %> </p> 
+    <p class="text-center"> <%= link_to "Login" , new_client_session_path,class:"" %> | <%= link_to "Register", new_client_registration_path,class:"" %> </p> 
 
       <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'box'}) do |f| %>
         <div class="input-group mb-3">
