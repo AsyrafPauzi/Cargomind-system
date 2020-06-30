@@ -3,7 +3,7 @@ class Users::Manage::CargoCollectionsController < Users::BaseController
 
      def update
         
-        @cargo_collection = CargoCollection.find_by_quotation_id(@quotation.id)
+        @cargo_collection = CargoCollection.find_by_quotation_code(@quotation.id)
         if @cargo_collection.update(cargo_collections_with_params)
             if @quotation.type_quotation == "Import"
                 if params[:commit] == "Re-Planned"
@@ -20,17 +20,17 @@ class Users::Manage::CargoCollectionsController < Users::BaseController
             end
         end
             if @quotation.type_quotation == "Export"
-                if CargoDeclaration.find_by_quotation_id(@quotation.id).nil?
-                    CargoDeclaration.create!(quotation_id: @quotation.id)
+                if CargoDeclaration.find_by_quotation_code(@quotation.id).nil?
+                    CargoDeclaration.create!(quotation_code: @quotation.id)
                 end
             else
-                if Billing.find_by_quotation_id(@quotation.id).nil?
-                    Billing.create!(quotation_id: @quotation.id)
+                if Billing.find_by_quotation_code(@quotation.id).nil?
+                    Billing.create!(quotation_code: @quotation.id)
                 end
             end
             
             respond_to do |format|
-                format.html { redirect_to users_manage_shipment_path(@quotation.quotation_id), :flash => {:success => 'Successful Update Cargo Collection.'}}
+                format.html { redirect_to users_manage_shipment_path(@quotation.quotation_code), :flash => {:success => 'Successful Update Cargo Collection.'}}
                 format.json { render :json => @quotation }
               end
           else
@@ -43,10 +43,10 @@ class Users::Manage::CargoCollectionsController < Users::BaseController
 
         if @quotation.type_quotation == "Import"
 
-            @cargo_collection = CargoCollection.find_by_quotation_id(@quotation.id)
+            @cargo_collection = CargoCollection.find_by_quotation_code(@quotation.id)
             if @cargo_collection.update(status: "Deliver")
                 respond_to do |format|
-                    format.html { redirect_to users_manage_shipment_path(@quotation.quotation_id), :flash => {:success => 'Successful Update Cargo Delivery.'}}
+                    format.html { redirect_to users_manage_shipment_path(@quotation.quotation_code), :flash => {:success => 'Successful Update Cargo Delivery.'}}
                     format.json { render :json => @quotation }
                 end
             else
@@ -56,10 +56,10 @@ class Users::Manage::CargoCollectionsController < Users::BaseController
 
         else
             if @quotation.weight_type == "FCL"
-                @cargo_collection = CargoCollection.find_by_quotation_id(@quotation.id)
+                @cargo_collection = CargoCollection.find_by_quotation_code(@quotation.id)
                 if @cargo_collection.update(status: "Laden Collected")
                     respond_to do |format|
-                        format.html { redirect_to users_manage_shipment_path(@quotation.quotation_id), :flash => {:success => 'Successful Update Cargo Delivery.'}}
+                        format.html { redirect_to users_manage_shipment_path(@quotation.quotation_code), :flash => {:success => 'Successful Update Cargo Delivery.'}}
                         format.json { render :json => @quotation }
                     end
                 else
@@ -67,10 +67,10 @@ class Users::Manage::CargoCollectionsController < Users::BaseController
                     redirect_to request.referrer
                 end
             else
-                @cargo_collection = CargoCollection.find_by_quotation_id(@quotation.id)
+                @cargo_collection = CargoCollection.find_by_quotation_code(@quotation.id)
                 if @cargo_collection.update(status: "Collected")
                     respond_to do |format|
-                        format.html { redirect_to users_manage_shipment_path(@quotation.quotation_id), :flash => {:success => 'Successful Update Cargo Delivery.'}}
+                        format.html { redirect_to users_manage_shipment_path(@quotation.quotation_code), :flash => {:success => 'Successful Update Cargo Delivery.'}}
                         format.json { render :json => @quotation }
                     end
                 else
@@ -86,10 +86,10 @@ class Users::Manage::CargoCollectionsController < Users::BaseController
      def update_collection_replanned
 
        
-                @cargo_collection = CargoCollection.find_by_quotation_id(@quotation.id)
+                @cargo_collection = CargoCollection.find_by_quotation_code(@quotation.id)
                 if @cargo_collection.update(status: "Re-Planned")
                     respond_to do |format|
-                        format.html { redirect_to users_manage_shipment_path(@quotation.quotation_id), :flash => {:success => 'Successful Update Cargo Collection.'}}
+                        format.html { redirect_to users_manage_shipment_path(@quotation.quotation_code), :flash => {:success => 'Successful Update Cargo Collection.'}}
                         format.json { render :json => @quotation }
                     end
                 else
@@ -102,7 +102,7 @@ class Users::Manage::CargoCollectionsController < Users::BaseController
  
      def get_quotation
  
-        @quotation = Quotation.find_by_quotation_id(params[:id])
+        @quotation = Quotation.find_by_quotation_code(params[:id])
         
      end
 

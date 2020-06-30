@@ -4,21 +4,21 @@ class Users::Manage::CargoDeclarationsController < ApplicationController
 
      def update
         if params[:commit] == "Submit Final Form"
-            @cargo_declaration = CargoDeclaration.find_by_quotation_id(@quotation.id)
+            @cargo_declaration = CargoDeclaration.find_by_quotation_code(@quotation.id)
             if @cargo_declaration.update(cargo_declarations_with_params)
                 @cargo_declaration.update(status: "Cargo Declaration Confirmed")
                 if @quotation.type_quotation == "Export"
-                    if SlblConfirmation.find_by_quotation_id(@quotation.id).nil?
-                        SlblConfirmation.create!(quotation_id: @quotation.id)
+                    if SlblConfirmation.find_by_quotation_code(@quotation.id).nil?
+                        SlblConfirmation.create!(quotation_code: @quotation.id)
                     end
                 else
-                    if CargoCollection.find_by_quotation_id(@quotation.id).nil?
-                        CargoCollection.create!(quotation_id: @quotation.id)
+                    if CargoCollection.find_by_quotation_code(@quotation.id).nil?
+                        CargoCollection.create!(quotation_code: @quotation.id)
                     end
                 end
                       
                 respond_to do |format|
-                    format.html { redirect_to users_manage_shipment_path(@quotation.quotation_id), :flash => {:success => 'Successful Update Final Cargo Declaration.'}}
+                    format.html { redirect_to users_manage_shipment_path(@quotation.quotation_code), :flash => {:success => 'Successful Update Final Cargo Declaration.'}}
                     format.json { render :json => @quotation }
                 end
             else
@@ -26,11 +26,11 @@ class Users::Manage::CargoDeclarationsController < ApplicationController
                 redirect_to request.referrer
             end
         else
-            @cargo_declaration = CargoDeclaration.find_by_quotation_id(@quotation.id)
+            @cargo_declaration = CargoDeclaration.find_by_quotation_code(@quotation.id)
             if @cargo_declaration.update(cargo_declarations_with_params)
                 @cargo_declaration.update(status: "Draft")
                 respond_to do |format|
-                    format.html { redirect_to users_manage_shipment_path(@quotation.quotation_id), :flash => {:success => 'Successful Update Cargo Declaration.'}}
+                    format.html { redirect_to users_manage_shipment_path(@quotation.quotation_code), :flash => {:success => 'Successful Update Cargo Declaration.'}}
                     format.json { render :json => @quotation }
                 end
             else
@@ -42,11 +42,11 @@ class Users::Manage::CargoDeclarationsController < ApplicationController
 
      def client_update
         if params[:commit] == "Submit"
-            @cargo_declaration = CargoDeclaration.find_by_quotation_id(@quotation.id)
+            @cargo_declaration = CargoDeclaration.find_by_quotation_code(@quotation.id)
             if @cargo_declaration.update(cargo_declarations_with_params)
                 @cargo_declaration.update(status: "Rejected")
                 respond_to do |format|
-                    format.html { redirect_to clients_manage_shipment_path(@quotation.quotation_id), :flash => {:success => 'Successful Update Feedback Cargo Declaration.'}}
+                    format.html { redirect_to clients_manage_shipment_path(@quotation.quotation_code), :flash => {:success => 'Successful Update Feedback Cargo Declaration.'}}
                     format.json { render :json => @quotation }
                 end
             else
@@ -54,10 +54,10 @@ class Users::Manage::CargoDeclarationsController < ApplicationController
                 redirect_to request.referrer
             end
         elsif params[:commit] == "Confirm"
-            @cargo_declaration = CargoDeclaration.find_by_quotation_id(@quotation.id)
+            @cargo_declaration = CargoDeclaration.find_by_quotation_code(@quotation.id)
             if @cargo_declaration.update(status: "Confirmed")
                 respond_to do |format|
-                    format.html { redirect_to clients_manage_shipment_path(@quotation.quotation_id), :flash => {:success => 'Successful Update Feedback Cargo Declaration.'}}
+                    format.html { redirect_to clients_manage_shipment_path(@quotation.quotation_code), :flash => {:success => 'Successful Update Feedback Cargo Declaration.'}}
                     format.json { render :json => @quotation }
                 end
             else
@@ -71,7 +71,7 @@ class Users::Manage::CargoDeclarationsController < ApplicationController
  
      def get_quotation
  
-        @quotation = Quotation.find_by_quotation_id(params[:id])
+        @quotation = Quotation.find_by_quotation_code(params[:id])
         
      end
 

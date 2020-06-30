@@ -3,7 +3,7 @@ class Users::Manage::BillingsController < ApplicationController
     before_action :get_quotation, only: [:update]
 
      def update
-            @billing = Billing.find_by_quotation_id(@quotation.id)
+            @billing = Billing.find_by_quotation_code(@quotation.id)
             if @billing.update(billings_with_params.merge(status: "Billing Confirmed"))
                 if BillingDetail.find_by_billing_id(@billing.id).nil?
                     params[:billing][:title].each_with_index  do |data, index|
@@ -29,17 +29,17 @@ class Users::Manage::BillingsController < ApplicationController
                     end
                 end
                 if @quotation.type_quotation == "Export"
-                    if Insurance.find_by_quotation_id(@quotation.id).nil?
-                        Insurance.create!(quotation_id: @quotation.id)
+                    if Insurance.find_by_quotation_code(@quotation.id).nil?
+                        Insurance.create!(quotation_code: @quotation.id)
                     end
                 else
-                    if Insurance.find_by_quotation_id(@quotation.id).nil?
-                        Insurance.create!(quotation_id: @quotation.id)
+                    if Insurance.find_by_quotation_code(@quotation.id).nil?
+                        Insurance.create!(quotation_code: @quotation.id)
                     end
                 end
                 
                 respond_to do |format|
-                    format.html { redirect_to users_manage_shipment_path(@quotation.quotation_id), :flash => {:success => 'Successful Update Billing.'}}
+                    format.html { redirect_to users_manage_shipment_path(@quotation.quotation_code), :flash => {:success => 'Successful Update Billing.'}}
                     format.json { render :json => @quotation }
                 end
             else
@@ -52,7 +52,7 @@ class Users::Manage::BillingsController < ApplicationController
  
      def get_quotation
  
-        @quotation = Quotation.find_by_quotation_id(params[:id])
+        @quotation = Quotation.find_by_quotation_code(params[:id])
         
      end
 

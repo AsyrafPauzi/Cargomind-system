@@ -354,7 +354,7 @@
                 <% end %>
                 <% if @quotation.cargo_collection.status == "On Plan" %>
                 <div class="my-2">
-                    <%= link_to '<span>Collected</span>'.html_safe, update_collection_users_manage_cargo_collections_path(@quotation.quotation_id), :method=> :patch, data: {turbolinks: false}, class: 'btn btn-primary', style:"float:right"%>
+                    <%= link_to '<span>Collected</span>'.html_safe, update_collection_users_manage_cargo_collections_path(@quotation.quotation_code), :method=> :patch, data: {turbolinks: false}, class: 'btn btn-primary', style:"float:right"%>
                 </div>
                 <% elsif @quotation.cargo_collection.status == "Collected" %>
                 <div class="my-2">
@@ -1074,7 +1074,7 @@
         <div class="form-group row">
             <label for="commodity" class="col-sm-3 col-form-label">Date Today :</label>
             <%= f.hidden_field :user_id, value: current_user.id %>
-            <%= f.hidden_field :quotation_id, value: @quotation.id %>
+            <%= f.hidden_field :quotation_code, value: @quotation.id %>
             <div class="col-sm-9">
                 <%= f.text_field :date, class: 'form-control', value: Time.now.strftime("%Y-%d-%m"), readonly: true%>
             </div>
@@ -1107,7 +1107,7 @@
                 </tr>
             </thead>
             <tbody>
-                <% current_user.user_statuses.where(quotation_id: @quotation.id).each do |u|%>
+                <% current_user.user_statuses.where(quotation_code: @quotation.id).each do |u|%>
                 <tr>
                     <td><%= u.created_at.strftime("%Y-%m-%d") %></td>
                     <td><%= u.status %></td>

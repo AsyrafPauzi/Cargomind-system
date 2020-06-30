@@ -364,7 +364,7 @@
                 <% if @quotation.cargo_collection.status == "Planned" || @quotation.cargo_collection.status == "Re-Planned" %>
                 <div class="my-2" style="float:right" >
                      <%= f.submit "Re-Planned", class: "btn btn-primary"%>
-                    <%= link_to '<span>Deliver</span>'.html_safe, update_collection_users_manage_cargo_collections_path(@quotation.quotation_id), :method=> :patch, data: {turbolinks: false}, class: 'btn btn-primary'%>
+                    <%= link_to '<span>Deliver</span>'.html_safe, update_collection_users_manage_cargo_collections_path(@quotation.quotation_code), :method=> :patch, data: {turbolinks: false}, class: 'btn btn-primary'%>
                 </div>
                 <% elsif @quotation.cargo_collection.status == "Deliver" %>
                 <div class="my-2">
@@ -462,8 +462,8 @@
                 <div class="form-group row">
                     <label for="email" class="col-sm-3 col-form-label">Edit BL Confirmation</label>
                     <div class="col-sm-9">
-                        <%= link_to 'Edit Here', bill_of_lading_users_manage_shipments_path(@quotation.quotation_id), target: :_blank  %> |
-                        <%= link_to 'Download PDF', view_bill_of_lading_users_manage_shipments_path(@quotation.quotation_id, format: :pdf) %>
+                        <%= link_to 'Edit Here', bill_of_lading_users_manage_shipments_path(@quotation.quotation_code), target: :_blank  %> |
+                        <%= link_to 'Download PDF', view_bill_of_lading_users_manage_shipments_path(@quotation.quotation_code, format: :pdf) %>
                     </div>
                 </div>
                 <% if @quotation.slbl_confirmation.file_confirmation.present? %>
@@ -1095,7 +1095,7 @@
         <div class="form-group row">
             <label for="commodity" class="col-sm-3 col-form-label">Date Today :</label>
             <%= f.hidden_field :user_id, value: current_user.id %>
-            <%= f.hidden_field :quotation_id, value: @quotation.id %>
+            <%= f.hidden_field :quotation_code, value: @quotation.id %>
             <div class="col-sm-9">
                 <%= f.text_field :date, class: 'form-control', value: Time.now.strftime("%Y-%d-%m"), readonly: true%>
             </div>
@@ -1128,7 +1128,7 @@
                 </tr>
             </thead>
             <tbody>
-                <% current_user.user_statuses.where(quotation_id: @quotation.id).each do |u|%>
+                <% current_user.user_statuses.where(quotation_code: @quotation.id).each do |u|%>
                 <tr>
                     <td><%= u.created_at.strftime("%Y-%m-%d") %></td>
                     <td><%= u.status %></td>

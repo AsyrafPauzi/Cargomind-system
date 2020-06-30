@@ -1,37 +1,218 @@
-<section class="content-header">
-  <div class="container-fluid">
-    <div class="row mb-2">
-      <div class="col-sm-6">
-        <h1>Shipments</h1>
-      </div>
-      <div class="col-sm-6">
-        <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><%= link_to "Dashboard" , users_path %></li>
-          <li class="breadcrumb-item"><%= link_to "Shipments" , users_manage_shipments_path %></li>
-          <li class="breadcrumb-item active"><%= @quotation.quotation_id %></li>
-        </ol>
-      </div>
-    </div>
-  </div><!-- /.container-fluid -->
-</section>
-
 <section class="content">
 
   <div class="row">
-  <div class="col-md-12">
+    <div class="col-md-12">
       <p id="error"><%= flash[:danger] %></p>
       <p id="notice"><%= flash[:success] %></p>
-  </div>
-    <% if @quotation.status == "Request Amendment" %>
-      <%= render partial: "users/manage/shipments/shared/amendment" %>
-    <% else %>
-      <% if @quotation.type_quotation == "Export" %>
-        <%= render partial: "users/manage/shipments/shared/export/order" %>
-      <% else %>
-        <%= render partial: "users/manage/shipments/shared/import/order" %>
-      <% end %>
+    </div>
+
+    <% if @quotation.status == "approved" %>
+    
+    <% elsif @quotation.status  == nil|| @quotation.status  == "rejected"%>
+    <div class="col-md-12">
+      <table class="table table-striped table-bordered" style="width:100%">
+        <thead>
+          <tr>
+            <th width="10%">Name/PIC</th>
+            <th width="10%">Company Name</th>
+            <th width="10%">Remarks</th>
+            <th width="10%">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td><%= @quotation.collection_pic %></td>
+            <td><%= @quotation.collection_company_name %></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+    <div class="container-fluid">
+
+      <div class="row">
+
+        <div class="col-md-12">
+
+
+          <div class="card card-primary">
+            <div class="card-header">
+
+              <div class="row">
+                <div class="col-3">
+                  <h3 class="card-title">MODE OF TRANSPORT: <%= @quotation.mode_of_transport %></span>
+                  </h3>
+                </div>
+                <div class="col-3">
+                  <h3 class="card-title">MODE OF SHIPMENT: <%= @quotation.mode_of_shipment %></h3>
+                </div>
+                <div class="col-3">
+                  <h3 class="card-title">INCOTERM: <%= @quotation.incoterm %></h3>
+                </div>
+                <div class="col-3">
+                  <h3 class="card-title">CURRENCY: <%= @quotation.currency %></h3>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="card-body" style="background-color:#F5F5F5;" id="card-1" style="display:none;">
+            <div class="row">
+              <div class="col-md-5">
+                <% if (@quotation.incoterm == "FOB" && @quotation.mode_of_shipment == "Import") || (@quotation.incoterm == "CIF" && @quotation.mode_of_shipment == "Import") %>
+                <% else %>
+                <div class="card" id="rfq-collection-address">
+                  <div class="form-horizontal">
+                    <div class="card-body">
+                      <H6>COLLECTION ADDRESS</H6>
+                      <div class="form-group row align-items-center">
+                        <%= @quotation.collection_address %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% end %>
+                
+                <% if (@quotation.incoterm == "CIF" && @quotation.mode_of_shipment == "Import") %>
+                <% else %>
+                <div class="card" id="rfq-port-of-loading">
+                  <div class="form-horizontal">
+                    <div class="card-body">
+                      <H6>PORT OF LOADING</H6>
+                      <div class="form-group row align-items-center">
+                        <%= @quotation.port_of_loading_state %>, <%= @quotation.port_of_loading_country %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% end %>
+
+                <div class="card" id="rfq-port-of-destination">
+                  <div class="form-horizontal">
+                    <div class="card-body">
+                      <H6>PORT OF DESTINATION</H6>
+                      <div class="form-group row align-items-center">
+                        <%= @quotation.port_of_destination_state %>, <%= @quotation.port_of_destination_country %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <% if (@quotation.incoterm == "FOB" && @quotation.mode_of_shipment == "Export") || (@quotation.incoterm == "CIF" && @quotation.mode_of_shipment == "Export") %>
+                <% else %>
+                <div class="card" id="rfq-delivery-address">
+                  <div class="form-horizontal">
+                    <div class="card-body">
+                      <H6>DELIVER ADDRESS</H6>
+                      <div class="form-group row align-items-center">
+                        <%= @quotation.deliver_address %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% end %>
+
+              </div>
+              <div class="col-md-7">
+                <div class="card" id="rfq-cargo-details">
+                  <div class="card-body">
+                    <H6>CARGO DETAILS</H6>
+                    <div class="form-group row align-items-center align-items-center">
+                      <small for="inputExprectedCargoValue" class="col-sm-3 text-bold">Cargo Type :
+                      </small>
+                      <div class="col-sm-6">
+                        <%= @quotation.cargo_type %>
+                      </div>
+                    </div>
+
+                    <div class="form-group row align-items-center align-items-center">
+                      <small for="inputExprectedCargoValue" class="col-sm-3 text-bold">Cargo Type MSDS :
+                      </small>
+                      <div class="col-sm-6">
+                        <%= @quotation.cargo_type_msds %>
+                      </div>
+                    </div>
+                    <div class="form-group row align-items-center align-items-center">
+                      <small for="inputExprectedCargoValue" class="col-sm-3 text-bold">Commodity :
+                      </small>
+                      <div class="col-sm-6">
+                        <%= @quotation.cargo_type_commodity %>
+                      </div>
+                    </div>
+                    <div class="form-group row align-items-center align-items-center">
+                      <small for="inputExprectedCargoValue" class="col-sm-3 text-bold">Cargo Details :
+                      </small>
+                      <div class="col-sm-6">
+                        <%= @quotation.cargo_details %>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <table class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                          <tr>
+                            <th width="10%">Name/PIC</th>
+                            <th width="10%">Company Name</th>
+                            <th width="10%">Remarks</th>
+                            <th width="10%">Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                          <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                          </tr>
+
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="Warehouse"
+                          name="quotation[others_warehouse]">WAREHOUSE
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" value="Insurance"
+                          name="quotation[others_insurance]">INSURANCE
+                      </label>
+                    </div>
+                    <div class="form-horizontal">
+                      <div class="card-body">
+                        <div class="form-group row align-items-center align-items-center">
+                          <small for="inputExprectedCargoValue" class="col-sm-3 text-bold">EXPECTED CARGO VALUE :
+                          </small>
+                          <div class="col-sm-6">
+                            <%= @quotation.others_cargo_value %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div style=float:right;>
+                    <%= link_to '<span>Create Quotation</span>'.html_safe, approved_quotation_users_manage_shipments_path(@quotation.quotation_code), :method=> :patch, data: {turbolinks: false}, class: 'btn btn-secondary'%>
+                    <%= link_to '<span>Reject Quotation</span>'.html_safe, rejected_quotation_users_manage_shipments_path(@quotation.quotation_code), :method=> :patch, data: {turbolinks: false}, class: 'btn btn-secondary'%>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+
+
+        </div>
+
+      </div>
+
+    </div>
     <% end %>
-    
-    
 
 </section>

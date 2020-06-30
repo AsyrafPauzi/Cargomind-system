@@ -43,7 +43,7 @@ class UsersController < Users::BaseController
     private
  
     def user_status_with_params
-        params.require(:user_status).permit(:user_id,:description,:status,:quotation_id)
+        params.require(:user_status).permit(:user_id,:description,:status,:quotation_code)
     end
 
 end

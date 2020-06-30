@@ -41,7 +41,7 @@
                             <tbody>
                                 <% @quotation.each do |quotations|%>
                                     <tr>
-                                        <td><%= quotations.quotation_id %></td>
+                                        <td><%= quotations.quotation_code %></td>
                                         <td><%= quotations.created_at.strftime("%Y-%m-%d") %></td>
                                         <td><%= quotations.shipper %></td>
                                         <td><%= quotations.consignee %></td>
@@ -50,8 +50,8 @@
                                         <td><%= quotations.quotation_status.present? ? quotations.quotation_status : ""  %></td>
                                         <td> 
                                         <p class="buttons">
-                                            <%= link_to '<span>View</span>'.html_safe,  clients_manage_shipment_path(quotations.quotation_id), data: {turbolinks: false}, class: 'btn btn-primary'%>
-                                            <%= link_to '<span>Delete</span>'.html_safe,  clients_manage_shipment_path(quotations.quotation_id), :method => :delete, data: { confirm: 'Are you sure you want to delete this quotation?' }, class: 'btn btn-danger'%>
+                                            <%= link_to '<span>View</span>'.html_safe,  clients_manage_shipment_path(quotations.quotation_code), data: {turbolinks: false}, class: 'btn btn-primary'%>
+                                            <%= link_to '<span>Delete</span>'.html_safe,  clients_manage_shipment_path(quotations.quotation_code), :method => :delete, data: { confirm: 'Are you sure you want to delete this quotation?' }, class: 'btn btn-danger'%>
                                         </p>
                                         </td>
                                     </tr>

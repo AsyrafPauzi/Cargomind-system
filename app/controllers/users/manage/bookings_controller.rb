@@ -2,13 +2,13 @@ class Users::Manage::BookingsController < Users::BaseController
     before_action :get_quotation, only: [:update]
 
      def update
-        @booking = Booking.find_by_quotation_id(@quotation.id)
+        @booking = Booking.find_by_quotation_code(@quotation.id)
         if @booking.update(bookings_with_params)
-            if CargoCollection.find_by_quotation_id(@quotation.id).nil?
-                CargoCollection.create!(quotation_id: @quotation.id)
+            if CargoCollection.find_by_quotation_code(@quotation.id).nil?
+                CargoCollection.create!(quotation_code: @quotation.id)
             end
             respond_to do |format|
-                format.html { redirect_to users_manage_shipment_path(@quotation.quotation_id), :flash => {:success => 'Successful Update Booking Confirmation.'}}
+                format.html { redirect_to users_manage_shipment_path(@quotation.quotation_code), :flash => {:success => 'Successful Update Booking Confirmation.'}}
                 format.json { render :json => @quotation }
               end
           else
@@ -21,7 +21,7 @@ class Users::Manage::BookingsController < Users::BaseController
  
      def get_quotation
  
-        @quotation = Quotation.find_by_quotation_id(params[:id])
+        @quotation = Quotation.find_by_quotation_code(params[:id])
         
      end
 

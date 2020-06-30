@@ -16,19 +16,23 @@
 
 <section class="content">
     <div class="container-fluid">
+        <%= form_for(:quotation, url: clients_manage_shipments_path, method: :post) do |f|%>
+        
+        <%= f.hidden_field :client_id, :value => current_client.id %>
+
         <div class="row my-2 text-center">
             <div class="col-md-1">
 
             </div>
             <div class="col-md-2">
-                <select class="form-control form-control-sm" id="rfq-mode-of-shipment">
-                    <option value="" disabled selected >MODE OF SHIPMENT</option>
+                <select class="form-control form-control-sm" id="rfq-mode-of-shipment" name="quotation[mode_of_shipment]">
+                    <option value="" disabled selected>MODE OF SHIPMENT</option>
                     <option value="Import">Import</option>
                     <option value="Export">Export</option>
                 </select>
             </div>
             <div class="col-md-2">
-                <select class="form-control form-control-sm" id="rfq-mode-of-transport"> 
+                <select class="form-control form-control-sm" id="rfq-mode-of-transport" name="quotation[mode_of_transport]">
                     <option value="" disabled selected>MODE OF TRANSPORT</option>
                     <option value="Air">Air</option>
                     <option value="Sea">Sea</option>
@@ -36,7 +40,7 @@
                 </select>
             </div>
             <div class="col-md-2">
-                <select class="form-control form-control-sm" id="rfq-incoterm">
+                <select class="form-control form-control-sm" id="rfq-incoterm" name="quotation[incoterm]">
                     <option value="" disabled selected>INCOTERM</option>
                     <option value="EX-W">EX-Work</option>
                     <option value="FOB">FOB</option>
@@ -45,7 +49,7 @@
                 </select>
             </div>
             <div class="col-md-2">
-                <select class="form-control form-control-sm" id="rfq-currency">
+                <select class="form-control form-control-sm" id="rfq-currency" name="quotation[currency]">
                     <option value="" disabled selected>CURRENCY</option>
                     <option value="MYR">MYR</option>
                     <option value="EUR">EUR</option>
@@ -54,7 +58,7 @@
                 </select>
             </div>
             <div class="col-md-2">
-                <button class="btn btn-sm btn-default" id=rfq-save-1>SAVE</button>
+                <span class="btn btn-sm btn-default" id="rfq-save-1">SAVE</span>
             </div>
             <div class="col-md-1">
 
@@ -63,34 +67,46 @@
         <div class="row">
 
             <div class="col-md-12">
+
+
                 <div class="card card-primary">
                     <div class="card-header">
-                      
-                            <div class="row">
-                                <div class="col-3"><h3 class="card-title">MODE OF TRANSPORT: <span id="result-mode-of-transport"></span> </h3></div>
-                                <div class="col-3"><h3 class="card-title">MODE OF SHIPMENT: <span id="result-mode-of-shipment"></span></h3></div>
-                                <div class="col-3"><h3 class="card-title">INCOTERM: <span id="result-incoterm"></span></h3></div>
-                                <div class="col-3"><h3 class="card-title">CURRENCY: <span id="result-currency"></span></h3></div>
+
+                        <div class="row">
+                            <div class="col-3">
+                                <h3 class="card-title">MODE OF TRANSPORT: <span id="result-mode-of-transport"></span>
+                                </h3>
                             </div>
-                      
+                            <div class="col-3">
+                                <h3 class="card-title">MODE OF SHIPMENT: <span id="result-mode-of-shipment"></span></h3>
+                            </div>
+                            <div class="col-3">
+                                <h3 class="card-title">INCOTERM: <span id="result-incoterm"></span></h3>
+                            </div>
+                            <div class="col-3">
+                                <h3 class="card-title">CURRENCY: <span id="result-currency"></span></h3>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <div class="card-body" style="background-color:#F5F5F5;" id="card-1" style="display:none;">
                     <div class="row">
                         <div class="col-md-5">
-                            <div class="card" id="rfq-collection-address" >
-                                <form class="form-horizontal">
-                                    <div class="card-body" >
+                            <div class="card" id="rfq-collection-address">
+                                <div class="form-horizontal">
+                                    <div class="card-body">
                                         <H6>COLLECTION ADDRESS</H6>
                                         <div class="form-group row align-items-center">
                                             <small for="inputCollectionCompanyName" class="col-sm-3 text-bold">COMPANY
                                                 NAME</small>
                                             <div class="col-sm-1">
-                                                <button class="btn btn-default btn-sm">+</button>
+                                                <span class="btn btn-default btn-sm">+</span>
                                             </div>
                                             <div class="col-sm-8">
                                                 <input type="text" class="form-control form-control-sm"
-                                                    id="inputCollectionCompanyName" placeholder="Company Name..">
+                                                    id="inputCollectionCompanyName" placeholder="Company Name.."
+                                                    name="quotation[collection_company_name]">
                                             </div>
                                         </div>
                                         <div class="form-group row align-items-center">
@@ -98,71 +114,77 @@
                                                 class="col-sm-4 text-bold">ADDRESS</small>
                                             <div class="col-sm-8">
                                                 <textarea class="form-control form-control-sm" rows="3"
-                                                    id="inputCollectionAddress"></textarea>
+                                                    id="inputCollectionAddress" name="quotation[collection_address]"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row align-items-center">
                                             <small for="inputCollectionPic" class="col-sm-4 text-bold">PIC</small>
                                             <div class="col-sm-8">
                                                 <input type="text" class="form-control form-control-sm"
-                                                    id="inputCollectionPic" placeholder="Pic..">
+                                                    id="inputCollectionPic" placeholder="Pic.." name="quotation[collection_pic]">
                                             </div>
                                         </div>
                                         <div class="form-group row align-items-center">
                                             <small for="inputCollectionNoTel" class="col-sm-4 text-bold">NO
                                                 TEL</small>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control form-control-sm"
-                                                    id="inputCollectionNoTel" placeholder="No Tel..">
+                                                <input type="number" class="form-control form-control-sm"
+                                                    id="inputCollectionNoTel" placeholder="No Tel.."
+                                                    name="quotation[collection_no_tel]">
                                             </div>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                             <div class="card" id="rfq-port-of-loading">
-                                <form class="form-horizontal">
+                                <div class="form-horizontal">
                                     <div class="card-body">
                                         <H6>PORT OF LOADING</H6>
                                         <div class="form-group row align-items-center">
                                             <small for="inputPortLoading" class="col-sm-4 text-bold">PORT</small>
                                             <div class="col-sm-8">
                                                 <input type="text" class="form-control form-control-sm"
-                                                    id="inputPortLoading" placeholder="Port..">
+                                                    id="inputPortLoading" placeholder="Port.."
+                                                    name="quotation[port_of_loading_port]">
                                             </div>
                                         </div>
                                         <div class="form-group row align-items-center">
                                             <small for="inputStateLoading" class="col-sm-4 text-bold">STATE</small>
                                             <div class="col-sm-8">
                                                 <input type="text" class="form-control form-control-sm"
-                                                    id="inputStateLoading" placeholder="State..">
+                                                    id="inputStateLoading" placeholder="State.."
+                                                    name="quotation[port_of_loading_state]">
                                             </div>
                                         </div>
                                         <div class="form-group row align-items-center">
                                             <small for="inputCountryLoading" class="col-sm-4 text-bold">COUNTRY</small>
                                             <div class="col-sm-8">
                                                 <input type="text" class="form-control form-control-sm"
-                                                    id="inputCountryLoading" placeholder="Country..">
+                                                    id="inputCountryLoading" placeholder="Country.."
+                                                    name="quotation[port_of_loading_country]">
                                             </div>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                             <div class="card" id="rfq-port-of-destination">
-                                <form class="form-horizontal">
+                                <div class="form-horizontal">
                                     <div class="card-body">
                                         <H6>PORT OF DESTINATION</H6>
                                         <div class="form-group row align-items-center">
                                             <small for="inputPortDestination" class="col-sm-4 text-bold">PORT</small>
                                             <div class="col-sm-8">
                                                 <input type="text" class="form-control form-control-sm"
-                                                    id="inputPortDestination" placeholder="Port..">
+                                                    id="inputPortDestination" placeholder="Port.."
+                                                    name="quotation[port_of_destination_port]">
                                             </div>
                                         </div>
                                         <div class="form-group row align-items-center">
                                             <small for="inputStateDestination" class="col-sm-4 text-bold">STATE</small>
                                             <div class="col-sm-8">
                                                 <input type="text" class="form-control form-control-sm"
-                                                    id="inputStateDestination" placeholder="State..">
+                                                    id="inputStateDestination" placeholder="State.."
+                                                    name="quotation[port_of_destination_state]">
                                             </div>
                                         </div>
                                         <div class="form-group row align-items-center">
@@ -170,73 +192,77 @@
                                                 class="col-sm-4 text-bold">COUNTRY</small>
                                             <div class="col-sm-8">
                                                 <input type="text" class="form-control form-control-sm"
-                                                    id="inputCountryDestination" placeholder="Country..">
+                                                    id="inputCountryDestination" placeholder="Country.."
+                                                    name="quotation[port_of_destination_country]">
                                             </div>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                             <div class="card" id="rfq-delivery-address">
-                                <form class="form-horizontal">
-                                    <div class="card-body" >
+                                <div class="form-horizontal">
+                                    <div class="card-body">
                                         <H6>DELIVER ADDRESS</H6>
                                         <div class="form-group row align-items-center">
                                             <small for="inputDeliverCompanyName" class="col-sm-4 text-bold">COMPANY
                                                 NAME</small>
                                             <div class="col-sm-8">
                                                 <input type="text" class="form-control form-control-sm"
-                                                    id="inputDeliverCompanyName" placeholder="Company Name..">
+                                                    id="inputDeliverCompanyName" placeholder="Company Name.."
+                                                    name="quotation[deliver_company_name]">
                                             </div>
                                         </div>
                                         <div class="form-group row align-items-center">
                                             <small for="inputDeliverAddress" class="col-sm-4 text-bold">ADDRESS</small>
                                             <div class="col-sm-8">
                                                 <textarea class="form-control form-control-sm" rows="3"
-                                                    id="inputDeliverAddress"></textarea>
+                                                    id="inputDeliverAddress" name="quotation[deliver_address]"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row align-items-center">
                                             <small for="inputDeliverPic" class="col-sm-4 text-bold">PIC</small>
                                             <div class="col-sm-8">
                                                 <input type="text" class="form-control form-control-sm"
-                                                    id="inputDeliverPic" placeholder="Pic..">
+                                                    id="inputDeliverPic" placeholder="Pic.." name="quotation[deliver_pic]">
                                             </div>
                                         </div>
                                         <div class="form-group row align-items-center">
                                             <small for="inputDeliverNoTel" class="col-sm-4 text-bold">NO
                                                 TEL</small>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control form-control-sm"
-                                                    id="inputDeliverNoTel" placeholder="No Tel..">
+                                                <input type="number" class="form-control form-control-sm"
+                                                    id="inputDeliverNoTel" placeholder="No Tel.." name="quotation[deliver_no_tel]">
                                             </div>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-7">
                             <div class="card" id="rfq-cargo-type">
-                                <div class="card-body" >
+                                <div class="card-body">
                                     <H6>CARGO TYPE</H6>
                                     <div class="form-check-inline align-items-center">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="optradio">DANGEROUS
+                                            <input type="radio" class="form-check-input" name="quotation[cargo_type]"
+                                                value="dangerous goods">DANGEROUS
                                             GOODS
                                         </label>
                                     </div>
                                     <div class="form-check-inline align-items-center">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="optradio">GENERAL
+                                            <input type="radio" class="form-check-input" name="quotation[cargo_type]"
+                                                value="general cargo">GENERAL
                                             CARGO
                                         </label>
                                     </div>
-                                    <form class="form-horizontal">
+                                    <div class="form-horizontal">
                                         <div class="card-body">
                                             <div class="form-group row align-items-center align-items-center">
                                                 <small for="inputMsds" class="col-sm-2 text-bold">MSDS :
                                                 </small>
                                                 <div class="col-sm-6">
-                                                    <input type="file" class="" id="inputMsds">
+                                                    <input type="file" name="quotation[cargo_type_msds]" id="inputMsds">
                                                 </div>
                                             </div>
                                             <div class="form-group row align-items-center">
@@ -244,86 +270,86 @@
                                                     : </small>
                                                 <div class="col-sm-6">
                                                     <input type="text" class="form-control form-control-sm"
-                                                        id="inputcommodity" placeholder="...">
+                                                        id="inputcommodity" placeholder="..."
+                                                        name="quotation[cargo_type_commodity]">
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card" id="rfq-cargo-details">
-                                <div class="card-body" >
+                                <div class="card-body">
                                     <H6>CARGO DETAILS</H6>
                                     <div class="form-check-inline">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" id="input-fcl" name="CargoDetail" value="fcl">FCL
+                                            <input type="radio" class="form-check-input" id="input-fcl"
+                                                name="quotation[cargo_details]" value="fcl">FCL
                                         </label>
                                     </div>
                                     <div class="form-check-inline">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" id="input-lcl" name="CargoDetail" value="lcl">LCL
+                                            <input type="radio" class="form-check-input" id="input-lcl"
+                                                name="quotation[cargo_details]" value="lcl">LCL
                                         </label>
                                     </div>
                                     <div id="data-fcl">
-                                        <div class="row my-2 text-center">
-                                            <div class="col-md-3">
-                                                <select id="ctype" class="form-control form-control-sm">
-                                                    <option value="" disabled selected>CONTAINER TYPE
-                                                    </option>
-                                                    <optgroup label="Regular Size">
-                                                        <option value="20 GP">20' GP</option>
-                                                        <option value="40 GP">40' GP</option>
-                                                        <option value="40 HC">40' HC</option>
-                                                        <option value="45 HC">45' HC</option>
-                                                    </optgroup>
-                                                    <optgroup label="Reeter Requirement">
-                                                        <option value="20">20'</option>
-                                                        <option value="40">40'</option>
-                                                    </optgroup>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="input-group">
-                                                    <input type="button" value="-"
-                                                        class="form-control form-control-sm button-minus"
-                                                        data-field="quantity">
-                                                    <input type="number" id="quan" step="1" max="" value="1" name="quantity"
-                                                        class="quantity-field form-control form-control-sm ">
-                                                    <input type="button" value="+"
-                                                        class="button-plus form-control form-control-sm "
-                                                        data-field="quantity">
+                                        <a href="javascript:;" id="add-new-person" class="add-new-person">Add! new
+                                            person</a>
+                                        <div id="people-container">
+                                            <div class="row my-1 text-center">
+                                                <div class="col-md-3">
+                                                    <select id="ctype" class="form-control form-control-sm"
+                                                        name="quotation[cargo_details_fcl_data[0][container_type]]">
+                                                        <option value="" disabled selected>CONTAINER TYPE
+                                                        </option>
+                                                        <optgroup label="Regular Size">
+                                                            <option value="20 GP">20' GP</option>
+                                                            <option value="40 GP">40' GP</option>
+                                                            <option value="40 HC">40' HC</option>
+                                                            <option value="45 HC">45' HC</option>
+                                                        </optgroup>
+                                                        <optgroup label="Reefer Requirement">
+                                                            <option value="20">20'</option>
+                                                            <option value="40">40'</option>
+                                                        </optgroup>
+                                                    </select>
                                                 </div>
+                                                <div class="col-md-2">
+                                                    <div class="input-group">
+                                                        <input type="button" value="-"
+                                                            class="form-control form-control-sm button-minus"
+                                                            data-field="quantity">
+                                                        <input type="number" step="1" max="" value="1"
+                                                            class="quantity-field form-control form-control-sm "
+                                                            name="quotation[cargo_details_fcl_data[0][quantity]]">
+                                                        <input type="button" value="+"
+                                                            class="button-plus form-control form-control-sm "
+                                                            data-field="quantity">
+                                                    </div>
 
-                                            </div>
-                                            <div class="col-md-2">
-                                                <input type="text" id="weight" class="form-control form-control-sm"
-                                                    placeholder="WEIGHT (KG)">
-                                            </div>
-                                            <div class="col-md-2">
-                                                <button class="add1 btn btn-sm btn-default">ADD</button>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input type="text" id="weight" class="form-control form-control-sm"
+                                                        placeholder="WEIGHT (KG)"
+                                                        name="quotation[cargo_details_fcl_data[0][weight]]">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group align-items-center">
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            id="inputTemperature" placeholder="TEMPERATURE (°C)"
+                                                            name="quotation[cargo_details_fcl_data[0][temperature]]">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <span class="add1 btn btn-sm btn-default" id=removebutton[0]>Remove</span>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="form-group row align-items-center">
-                                            <small for="inputTemperature" class="col-sm-3 text-bold">TEMPERATURE</small>
-                                            <div class="col-sm-3">
-                                                <input type="text" class="form-control form-control-sm"
-                                                    id="inputTemperature">
-                                            </div>
-                                        </div>
-                                        <div class="table-wrapper-scroll-y"
-                                            style="display: block; position: relative;height: 150px;overflow: auto;">
-                                            <table border="1" width="100%">
-                                                <tbody id="table1">
-                                                    <tr>
-                                                        <td width="25%">TYPE</td>
-                                                        <td width="25%">QUANTITY</td>
-                                                        <td width="20%">WEIGHT (KG)</td>
-                                                        <td width="20">TEMP</td>
-                                                        <td width="10%">ACTION</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
+
+
+
+                                        <input type="hidden" name="cargo_details_lcl_data[]" id="output_table1">
                                     </div>
                                     <div id="data-lcl">
                                         <div class="row mt-3">
@@ -333,8 +359,8 @@
                                             <div class="col-md-2">
                                                 <div class="form-group row align-items-center">
                                                     <div class="col-sm-6">
-                                                        <input type="text" class="form-control form-control-sm" id="inputL"
-                                                            placeholder="">
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            id="inputL" placeholder="">
                                                     </div>
                                                     <small for="inputL" class="col-sm-6 text-bold">L X</small>
                                                 </div>
@@ -342,8 +368,8 @@
                                             <div class="col-md-2">
                                                 <div class="form-group row align-items-center">
                                                     <div class="col-sm-6">
-                                                        <input type="text" class="form-control form-control-sm" id="inputW"
-                                                            placeholder="">
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            id="inputW" placeholder="">
                                                     </div>
                                                     <small for="inputW" class="col-sm-6 text-bold">W X</small>
                                                 </div>
@@ -351,35 +377,23 @@
                                             <div class="col-md-2">
                                                 <div class="form-group row align-items-center">
                                                     <div class="col-sm-6">
-                                                        <input type="text" class="form-control form-control-sm" id="inputH"
-                                                            placeholder="">
+                                                        <input type="text" class="form-control form-control-sm"
+                                                            id="inputH" placeholder="">
                                                     </div>
                                                     <small for="inputH" class="col-sm-6 text-bold">H
                                                         (M)</small>
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
-                                                <button class="add2 btn btn-sm btn-default">ADD</button>
+                                                <span class="add2 btn btn-sm btn-default">ADD</span>
                                             </div>
                                         </div>
                                         <div class="form-group row align-items-center">
-                                            <small for="inputWeight2" class="col-sm-3 text-bold">Weight</small>
+                                            <small for="inputWeight2" class="col-sm-3 text-bold">Weight (KG)</small>
                                             <div class="col-sm-3">
-                                                <input type="text" class="form-control form-control-sm" id="inputWeight2">
+                                                <input type="text" class="form-control form-control-sm"
+                                                    id="inputWeight2">
                                             </div>
-                                        </div>
-                                        <div style="display: block; position: relative;height: 150px;overflow: auto;">
-                                            <table border="1" width="100%">
-                                                <tbody id="table2">
-                                                    <tr>
-                                                        <td width="25%">DIMENSION</td>
-                                                        <td width="25%">WEIGHT</td>
-                                                        <td width="20%">M3 (KG)</td>
-                                                        <td width="20%">TYPE</td>
-                                                        <td width="10%">ACTION</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -389,15 +403,17 @@
                                     <H6>OTHERS</H6>
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" value="Warehouse">WAREHOUSE
+                                            <input type="checkbox" class="form-check-input" value="Warehouse"
+                                                name="quotation[others_warehouse]">WAREHOUSE
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" value="Insurance">INSURANCE
+                                            <input type="checkbox" class="form-check-input" value="Insurance"
+                                                name="quotation[others_insurance]">INSURANCE
                                         </label>
                                     </div>
-                                    <form class="form-horizontal">
+                                    <div class="form-horizontal">
                                         <div class="card-body">
                                             <div class="form-group row align-items-center align-items-center">
                                                 <small for="inputExprectedCargoValue"
@@ -405,26 +421,95 @@
                                                 </small>
                                                 <div class="col-sm-6">
                                                     <input type="text" class="form-control form-control-sm"
-                                                        id="inputExprectedCargoValue" placeholder="...">
+                                                        id="inputExprectedCargoValue" placeholder="..."
+                                                        name="quotation[others_cargo_value]">
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
+                                    <div class="col-md-12" id="button-form">
+                                        <%= f.submit "SUBMIT", class: "btn btn-sm btn-default", style: "float:right;"%>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+
+
             </div>
+
         </div>
+        <% end %>
     </div>
 
     <script>
+        let i = 1;
+        document.getElementById('add-new-person').onclick = function () {
+            let template = `
+
+        <div class="row my-1 text-center">
+                                                <div class="col-md-3">
+                                                    <select id="ctype" class="form-control form-control-sm" name="cargo_details_fcl_data[${i}][container_type]">
+                                                        <option value="" disabled selected>CONTAINER TYPE
+                                                        </option>
+                                                        <optgroup label="Regular Size">
+                                                            <option value="20 GP">20' GP</option>
+                                                            <option value="40 GP">40' GP</option>
+                                                            <option value="40 HC">40' HC</option>
+                                                            <option value="45 HC">45' HC</option>
+                                                        </optgroup>
+                                                        <optgroup label="Reefer Requirement">
+                                                            <option value="20">20'</option>
+                                                            <option value="40">40'</option>
+                                                        </optgroup>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="input-group">
+                                                        <input type="button" value="-"
+                                                            class="form-control form-control-sm button-minus"
+                                                            data-field="cargo_details_fcl_data[${i}][quantity]">
+                                                        <input type="number" step="1" max="" value="1" class="quantity-field form-control form-control-sm " name="cargo_details_fcl_data[${i}][quantity]">
+                                                        <input type="button" value="+"
+                                                            class="button-plus form-control form-control-sm "
+                                                            data-field="cargo_details_fcl_data[${i}][quantity]">
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input type="text" id="weight" class="form-control form-control-sm"
+                                                        placeholder="WEIGHT (KG)" name="cargo_details_fcl_data[${i}][weight]">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group align-items-center">
+                                                            <input type="text" class="form-control form-control-sm"
+                                                                id="inputTemperature" placeholder="TEMPERATURE (°C)" name="cargo_details_fcl_data[${i}][temperature]">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <span class="btn btn-sm btn-default" id="button_fcl_remove[${i}]">Remove</span>
+                                                </div>
+                                            </div>`;
+
+            let container = document.getElementById('people-container');
+            let div = document.createElement('div');
+            div.innerHTML = template;
+            container.appendChild(div);
+
+            i++;
+        }
+
         $("#card-1").hide();
         $("#data-lcl").hide();
         $("#data-fcl").hide();
+        $("#button-form").hide();
+
         $("#rfq-save-1").click(function () {
-            
+
             var rfq_mode_of_shipment = $("#rfq-mode-of-shipment :selected").val();
             var rfq_mode_of_transport = $("#rfq-mode-of-transport :selected").val();
             var rfq_incoterm = $("#rfq-incoterm :selected").val();
@@ -433,144 +518,99 @@
             $("#result-mode-of-transport").html(rfq_mode_of_transport);
             $("#result-incoterm").html(rfq_incoterm);
             $("#result-currency").html(rfq_currency);
-             $("#card-1").show();
-             if (rfq_mode_of_shipment == "Import"){
-                 
-                 if (rfq_mode_of_transport == "Air"){
-                        
-                        if (rfq_incoterm == "EX-W"){
-                            
-                            }
-                        else if (rfq_incoterm == "FOB")
-                            {
-                                
-                                $("#rfq-collection-address").hide();
-                            }
-                        else if (rfq_incoterm == "CIF")
-                            {
-                                
-                                $("#rfq-collection-address").hide();
-                                $("#rfq-port-of-loading").hide();
-                            }
-                        else if (rfq_incoterm == "D2D")
-                            {
-                                
-                            };
-                    }
-                 else if (rfq_mode_of_transport == "Sea")
-                    {
-                        
-                        if (rfq_incoterm == "EX-W"){
-                            
-                            }
-                        else if (rfq_incoterm == "FOB")
-                            {
-                                
-                                $("#rfq-collection-address").hide();
-                            }
-                        else if (rfq_incoterm == "CIF")
-                            {
-                                
-                                $("#rfq-collection-address").hide();
-                                $("#rfq-port-of-loading").hide();
-                            }
-                        else if (rfq_incoterm == "D2D")
-                            {
-                                
-                            };
-                    }
-                else if (rfq_mode_of_transport == "Land")
-                    {
-                        
-                        if (rfq_incoterm == "EX-W"){
-                            
-                            }
-                        else if (rfq_incoterm == "FOB")
-                            {
-                                
-                                $("#rfq-collection-address").hide();
-                            }
-                        else if (rfq_incoterm == "CIF")
-                            {
-                                
-                                $("#rfq-collection-address").hide();
-                                $("#rfq-port-of-loading").hide();
-                            }
-                        else if (rfq_incoterm == "D2D")
-                            {
-                                
-                            };
+            $("#button-form").show();
+            $("#card-1").show();
+            if (rfq_mode_of_shipment == "Import") {
+
+                if (rfq_mode_of_transport == "Air") {
+
+                    if (rfq_incoterm == "EX-W") {
+
+                    } else if (rfq_incoterm == "FOB") {
+
+                        $("#rfq-collection-address").hide();
+                    } else if (rfq_incoterm == "CIF") {
+
+                        $("#rfq-collection-address").hide();
+                        $("#rfq-port-of-loading").hide();
+                    } else if (rfq_incoterm == "D2D") {
+
                     };
+                } else if (rfq_mode_of_transport == "Sea") {
 
-             }
-             else if (rfq_mode_of_shipment == "Export")
-             {
-                
-                if (rfq_mode_of_transport == "Air"){
-                        
-                        if (rfq_incoterm == "EX-W"){
-                            
-                            }
-                        else if (rfq_incoterm == "FOB")
-                            {
-                                
-                                $("#rfq-delivery-address").hide();
+                    if (rfq_incoterm == "EX-W") {
 
-                            }
-                        else if (rfq_incoterm == "CIF")
-                            {
-                                
-                                $("#rfq-delivery-address").hide();
-                            }
-                        else if (rfq_incoterm == "D2D")
-                            {
-                                
-                            };
-                    }
-                 else if (rfq_mode_of_transport == "Sea")
-                    {
-                        
-                        if (rfq_incoterm == "EX-W"){
-                            
-                            }
-                        else if (rfq_incoterm == "FOB")
-                            {
-                                
-                                $("#rfq-delivery-address").hide();
-                            }
-                        else if (rfq_incoterm == "CIF")
-                            {
-                                
-                                $("#rfq-delivery-address").hide();
-                            }
-                        else if (rfq_incoterm == "D2D")
-                            {
-                                
-                            };
-                    }
-                else if (rfq_mode_of_transport == "Land")
-                    {
-                        
-                        if (rfq_incoterm == "EX-W"){
-                            
-                            }
-                        else if (rfq_incoterm == "FOB")
-                            {
-                                
-                                $("#rfq-delivery-address").hide();
-                            }
-                        else if (rfq_incoterm == "CIF")
-                            {
-                                
-                                $("#rfq-delivery-address").hide();
-                            }
-                        else if (rfq_incoterm == "D2D")
-                            {
-                                
-                            };
+                    } else if (rfq_incoterm == "FOB") {
+
+                        $("#rfq-collection-address").hide();
+                    } else if (rfq_incoterm == "CIF") {
+
+                        $("#rfq-collection-address").hide();
+                        $("#rfq-port-of-loading").hide();
+                    } else if (rfq_incoterm == "D2D") {
+
                     };
+                } else if (rfq_mode_of_transport == "Land") {
 
-             };
+                    if (rfq_incoterm == "EX-W") {
+
+                    } else if (rfq_incoterm == "FOB") {
+
+                        $("#rfq-collection-address").hide();
+                    } else if (rfq_incoterm == "CIF") {
+
+                        $("#rfq-collection-address").hide();
+                        $("#rfq-port-of-loading").hide();
+                    } else if (rfq_incoterm == "D2D") {
+
+                    };
+                };
+
+            } else if (rfq_mode_of_shipment == "Export") {
+
+                if (rfq_mode_of_transport == "Air") {
+
+                    if (rfq_incoterm == "EX-W") {
+
+                    } else if (rfq_incoterm == "FOB") {
+
+                        $("#rfq-delivery-address").hide();
+
+                    } else if (rfq_incoterm == "CIF") {
+
+                        $("#rfq-delivery-address").hide();
+                    } else if (rfq_incoterm == "D2D") {
+
+                    };
+                } else if (rfq_mode_of_transport == "Sea") {
+
+                    if (rfq_incoterm == "EX-W") {
+
+                    } else if (rfq_incoterm == "FOB") {
+
+                        $("#rfq-delivery-address").hide();
+                    } else if (rfq_incoterm == "CIF") {
+
+                        $("#rfq-delivery-address").hide();
+                    } else if (rfq_incoterm == "D2D") {
+
+                    };
+                } else if (rfq_mode_of_transport == "Land") {
+
+                    if (rfq_incoterm == "EX-W") {
+
+                    } else if (rfq_incoterm == "FOB") {
+
+                        $("#rfq-delivery-address").hide();
+                    } else if (rfq_incoterm == "CIF") {
+
+                        $("#rfq-delivery-address").hide();
+                    } else if (rfq_incoterm == "D2D") {
+
+                    };
+                };
+
+            };
         });
         $("#input-fcl").click(function () {
             $("#data-lcl").hide();
@@ -581,76 +621,6 @@
             $("#data-fcl").hide();
             $("#data-lcl").show();
         });
-           
-        
-     
-
-
-        $("#table1").on('click', '.rem1', function () {
-            $(this).parent().parent().remove();
-        });
-        $(".add1").click(function () {
-            var ctype = $("#ctype :selected").val();
-            var quan = $("#quan").val();
-            var weight = $("#weight").val();
-            var inputTemperature = $("#inputTemperature").val();
-            var button = "<button class='btn btn-danger btn-sm btn-block rem1'>X</button>"
-            var markup = "<tr><td>" + ctype + "</td><td>" + quan + "</td><td>" + weight + "</td><td>" +
-                inputTemperature + "</td><td>" + button + "</td></tr>";
-            $("table tbody#table1").append(markup);
-        });
-
-        $("#table2").on('click', '.rem2', function () {
-            $(this).parent().parent().remove();
-        });
-        $(".add2").click(function () {
-            var inputL = $("#inputL").val();
-            var inputW = $("#inputW").val();
-            var inputH = $("#inputH").val();
-            var dimension = ($("#inputL").val() + " X " + $("#inputW").val() + " X " + $("#inputH").val());
-            var m3 = ($("#inputL").val() * $("#inputW").val() * $("#inputH").val());
-            var type = "";
-            var inputWeight2 = $("#inputWeight2").val();
-            var button = "<button class='btn btn-danger btn-sm btn-block rem2'>X</button>"
-            var markup = "<tr><td>" + dimension + "</td><td>" + inputWeight2 + "</td><td>" + m3 +
-                "</td><td>" + type + "</td><td>" + button + "</td></tr>";
-            $("table tbody#table2").append(markup);
-        });
-
-
-
-
-        function incrementValue(e) {
-            e.preventDefault();
-            var fieldName = $(e.target).data('field');
-            var parent = $(e.target).closest('div');
-            var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
-
-            if (!isNaN(currentVal)) {
-                parent.find('input[name=' + fieldName + ']').val(currentVal + 1);
-            } else {
-                parent.find('input[name=' + fieldName + ']').val(0);
-            }
-        }
-
-        function decrementValue(e) {
-            e.preventDefault();
-            var fieldName = $(e.target).data('field');
-            var parent = $(e.target).closest('div');
-            var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
-
-            if (!isNaN(currentVal) && currentVal > 0) {
-                parent.find('input[name=' + fieldName + ']').val(currentVal - 1);
-            } else {
-                parent.find('input[name=' + fieldName + ']').val(0);
-            }
-        }
-
-        $('.input-group').on('click', '.button-plus', function (e) {
-            incrementValue(e);
-        });
-
-        $('.input-group').on('click', '.button-minus', function (e) {
-            decrementValue(e);
-        });
+   
+       
     </script>

@@ -31,37 +31,26 @@
                                 <tr>
                                     <th width="6%">Quotation ID</th>
                                     <th width="10%">Date Create</th>
-                                    <th width="17%">Shipper</th>
-                                    <th width="17%">Consignee</th>
-                                    <th width="10%">Quotation Type</th>
+                                    <th width="17%">Colletion Company</th>
+                                    <th width="17%">Deliver Company</th>
+                                    <th width="10%">Mode Of Transport</th>
                                     <th width="10%">Mode Of Shipment</th>
-                                    <th width="10%">Status</th>
-                                    <th width="25%">Staff Status</th>
                                     <th width="10%">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <% @quotation.each do |quotations|%>
                                 <tr>
-                                    <td><%= quotations.quotation_id %></td>
+                                    <td><%= quotations.quotation_code %></td>
                                     <td><%= quotations.created_at.strftime("%Y-%m-%d") %></td>
-                                    <td><%= quotations.shipper %></td>
-                                    <td><%= quotations.consignee %></td>
-                                    <td><%= quotations.type_quotation %></td>
+                                    <td><%= quotations.collection_company_name %></td>
+                                    <td><%= quotations.deliver_company_name %></td>
+                                    <td><%= quotations.mode_of_transport %></td>
                                     <td><%= quotations.mode_of_shipment %></td>
-                                    <td><%= quotations.quotation_status.present? ? quotations.quotation_status : ""  %></td>
-                                    <td>
-                                        <div style="height: 100px;overflow-y: auto; overflow-x: hidden; ">
-                                            <% UserStatus.where(user_id: quotations.user_id , quotation_id: quotations.id).each do |u| %>
-                                            <label><%= u.created_at.strftime("%Y-%m-%d") %></label>
-                                            <label><%= u.status %></label><br />
-                                            <% end %>
-                                        </div>
-                                    </td>
                                     <td>
                                         <div class="btn-group">
-                                            <%= link_to '<span>View</span>'.html_safe,  clients_manage_shipment_path(quotations.quotation_id), data: {turbolinks: false}, class: 'btn btn-primary'%>
-                                            <%= link_to '<span>Delete</span>'.html_safe,  clients_manage_shipment_path(quotations.quotation_id), :method => :delete, data: { confirm: 'Are you sure you want to delete this quotation?' }, class: 'btn btn-danger '%>
+                                            <%= link_to '<span>View</span>'.html_safe,  clients_manage_shipment_path(quotations.quotation_code), data: {turbolinks: false}, class: 'btn btn-primary'%>
+                                            <%= link_to '<span>Delete</span>'.html_safe,  clients_manage_shipment_path(quotations.quotation_code), :method => :delete, data: { confirm: 'Are you sure you want to delete this quotation?' }, class: 'btn btn-danger '%>
                                         </div>
                                     </td>
                                 </tr>

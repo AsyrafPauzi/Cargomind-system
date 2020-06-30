@@ -52,7 +52,7 @@ class Admins::Manage::ShipmentsController < Admins::BaseController
  
      def get_shipment
  
-        @quotation = Quotation.find_by_quotation_id(params[:id])
+        @quotation = Quotation.find_by_quotation_code(params[:id])
         
      end
  

@@ -3,13 +3,13 @@ class Users::Manage::VesselDepartsController < ApplicationController
     before_action :get_quotation, only: [:update]
 
      def update
-            @vessel_depart = VesselDepart.find_by_quotation_id(@quotation.id)
+            @vessel_depart = VesselDepart.find_by_quotation_code(@quotation.id)
             if @vessel_depart.update(status: "Vessel Depart Confirmed")
-                if AttachPreAlert.find_by_quotation_id(@quotation.id).nil?
-                    AttachPreAlert.create!(quotation_id: @quotation.id)
+                if AttachPreAlert.find_by_quotation_code(@quotation.id).nil?
+                    AttachPreAlert.create!(quotation_code: @quotation.id)
                 end
                 respond_to do |format|
-                    format.html { redirect_to users_manage_shipment_path(@quotation.quotation_id), :flash => {:success => 'Successful Update Vessel Depart.'}}
+                    format.html { redirect_to users_manage_shipment_path(@quotation.quotation_code), :flash => {:success => 'Successful Update Vessel Depart.'}}
                     format.json { render :json => @quotation }
                 end
             else
@@ -22,7 +22,7 @@ class Users::Manage::VesselDepartsController < ApplicationController
  
      def get_quotation
  
-        @quotation = Quotation.find_by_quotation_id(params[:id])
+        @quotation = Quotation.find_by_quotation_code(params[:id])
         
      end
 

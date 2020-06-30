@@ -27,16 +27,8 @@ Rails.application.routes.draw do
     namespace :manage do
       resources :shipments do
         collection do
-          patch '/assign_user/:id', to: 'shipments#assign_user', as: 'assign_user'
-          patch '/send_quotation/:id', to: 'shipments#send_quotation', as: 'send_quotation'
-          patch '/client_update/:id', to: 'shipments#client_update', as: 'client_update'
-          get '/booking/', to: 'shipments#booking', as: 'booking'
-          get '/bill_of_lading/:id', to: 'shipments#bill_of_lading', as: 'bill_of_lading'
-          patch '/update_bill_of_lading/:id', to: 'shipments#update_bill_of_lading', as: 'update_bill_of_lading'
-          get '/view_bill_of_lading/:id', to: 'shipments#view_bill_of_lading', as: 'view_bill_of_lading'
-          get '/awb/:id', to: 'shipments#awb', as: 'awb'
-          patch '/update_awb/:id', to: 'shipments#update_awb', as: 'update_awb'
-          get '/view_awb/:id', to: 'shipments#view_awb', as: 'view_awb'
+          patch '/approved_quotation/:id', to: 'shipments#approved_quotation', as: 'approved_quotation'
+          patch '/rejected_quotation/:id', to: 'shipments#rejected_quotation', as: 'rejected_quotation'
         end
       end
       resources :profiles do

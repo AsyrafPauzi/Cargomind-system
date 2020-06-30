@@ -28,41 +28,32 @@
                         <table id="table1" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th width="10%">Quotation ID</th>
-                                    <th width="10%">Date</th>
-                                    <th width="15%">Shipper</th>
-                                    <th width="15%">Consignee</th>
-                                    <th width="10%">Mode Of Shipment</th>
-                                    <th width="10%">Logistic Type</th>
-                                    <th width="20%">Staff Status</th>
+                                    <th width="10%">Code</th>
+                                    <th width="10%">Company Name</th>
+                                    <th width="15%">Mode Of Shipment</th>
+                                    <th width="15%">Tracking</th>
+                                    <th width="10%">Status(Internal)</th>
+                                    <th width="10%">Remarks</th>
                                     <th width="10%">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <% @quotation_2.each do |quotations|%>
                                 <tr>
-                                    <td><%= quotations.quotation_id %></td>
+                                    <td><%= quotations.quotation_code %></td>
                                     <td><%= quotations.created_at.strftime("%Y-%m-%d") %></td>
-                                    <td><%= quotations.shipper %></td>
-                                    <td><%= quotations.consignee %></td>
-                                    <td><%= quotations.mode_of_shipment %></td>
-                                    <td><%= quotations.type_quotation %></td>
-                                    <td>
-                                        <div style="height: 100px;overflow-y: auto; overflow-x: hidden; ">
-                                            <% current_user.user_statuses.where(quotation_id: quotations.id).each do |u| %>
-                                            <label><%= u.created_at.strftime("%Y-%m-%d") %></label>
-                                            <label><%= u.status %></label><br />
-                                            <% end %>
-                                        </div>
-                                    </td>
+                                    <td><%= quotations.collection_company_name %></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                     <td>
                                         <div class="btn-group">
                                             <% if quotations.user_id.present? %>
-                                            <%= link_to '<span>View</span>'.html_safe, users_manage_shipment_path(quotations.quotation_id), data: {turbolinks: false}, class: 'btn btn-primary'%>
+                                            <%= link_to '<span>View</span>'.html_safe, users_manage_shipment_path(quotations.quotation_code), data: {turbolinks: false}, class: 'btn btn-primary'%>
                                             <% else %>
-                                            <%= link_to '<span>Proceed</span>'.html_safe, assign_user_users_manage_shipments_path(quotations.quotation_id), :method=> :patch, data: {turbolinks: false}, class: 'btn btn-secondary'%>
+                                            <%= link_to '<span>View</span>'.html_safe, users_manage_shipment_path(quotations.quotation_code), data: {turbolinks: false}, class: 'btn btn-primary'%>
                                             <% end %>
-                                            <%= link_to '<span>Delete</span>'.html_safe,  users_manage_shipment_path(quotations.quotation_id), :method => :delete, data: { confirm: 'Are you sure you want to delete this quotation?' }, class: 'btn btn-danger'%>
+                                            <%= link_to '<span>Delete</span>'.html_safe,  users_manage_shipment_path(quotations.quotation_code), :method => :delete, data: { confirm: 'Are you sure you want to delete this quotation?' }, class: 'btn btn-danger'%>
                                         </div>
                                     </td>
                                 </tr>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_27_134906) do
+ActiveRecord::Schema.define(version: 2020_06_30_060807) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,30 +142,40 @@ ActiveRecord::Schema.define(version: 2020_05_27_134906) do
   end
 
   create_table "quotations", force: :cascade do |t|
-    t.string "quotation_id"
-    t.string "type_quotation"
-    t.date "date"
-    t.text "shipper"
-    t.text "consignee"
-    t.string "port_of_loading"
-    t.string "port_of_discharge"
-    t.string "final_destination"
-    t.string "mode_of_shipment"
-    t.string "weight_type"
-    t.text "weight_lcl"
-    t.string "commodity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "weight_fcl"
-    t.string "weight_air"
-    t.string "status"
-    t.string "isamendment"
     t.bigint "client_id"
     t.bigint "user_id"
-    t.string "quotation_status"
-    t.string "file_quotation"
+    t.string "quotation_code"
     t.string "remarks"
-    t.string "file_client"
+    t.string "mode_of_shipment"
+    t.string "mode_of_transport"
+    t.string "incoterm"
+    t.string "currency"
+    t.string "collection_company_name"
+    t.string "collection_address"
+    t.string "collection_pic"
+    t.string "collection_no_tel"
+    t.string "port_of_loading_port"
+    t.string "port_of_loading_state"
+    t.string "port_of_loading_country"
+    t.string "port_of_destination_port"
+    t.string "port_of_destination_state"
+    t.string "port_of_destination_country"
+    t.string "deliver_company_name"
+    t.string "deliver_address"
+    t.string "deliver_pic"
+    t.string "deliver_no_tel"
+    t.string "cargo_type"
+    t.string "cargo_type_msds"
+    t.string "cargo_type_commodity"
+    t.string "cargo_details"
+    t.string "cargo_details_fcl_data"
+    t.string "cargo_details_lcl_data"
+    t.string "others_warehouse"
+    t.string "others_insurance"
+    t.string "others_cargo_value"
+    t.string "status"
     t.index ["client_id"], name: "index_quotations_on_client_id"
     t.index ["user_id"], name: "index_quotations_on_user_id"
   end

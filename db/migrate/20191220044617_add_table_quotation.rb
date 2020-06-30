@@ -1,7 +1,7 @@
 class AddTableQuotation < ActiveRecord::Migration[6.0]
   def change
     create_table :quotations do |t|
-      t.string  :quotation_id
+      t.string  :quotation_code
       t.string  :type
       t.date  :date
       t.string  :attn
